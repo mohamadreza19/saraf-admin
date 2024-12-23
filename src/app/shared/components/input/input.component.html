@@ -1,6 +1,7 @@
+
 <section
-*ngIf="show"
-  class="relative col-span-1 w-full"
+
+  class="relative col-span-1 w-full {{control.type == 'checkbox'&&'flex-row-reverse justify-end'}}"
   [ngClass]="{
     ' flex items-center pt-[30px]': control.type == 'radio' || control.type == 'checkbox'
   }">
@@ -10,21 +11,37 @@
 
   <!-- Text Input Template -->
   <ng-template #textInput>
-    <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
+
+    <input   type="text" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
   </ng-template>
+  <ng-template #amount>
+
+    <app-amount-input [control]="control"></app-amount-input>
+  </ng-template>
+<ng-template #phoneNumber>
+  <app-phone-number-input  [control]="control"></app-phone-number-input>
+</ng-template>
+<ng-template #amount>
+  <app-phone-number-input  [control]="control"></app-phone-number-input>
+</ng-template>
+<ng-template #searchSelect>
+  <app-search-select-input [control]="control"></app-search-select-input>
+</ng-template>
+
   <ng-template #searchInput>
 
     <div class="relative">
       <div class="flex h-full w-fit absolute items-center">
 
-        <svg-icon  svgClass="w-5 h-5 " src="assets/icons/material-icons/outline/search.svg" class="h-4 w-4 mr-2"></svg-icon>
+
+      <ng-icon class="text-muted-foreground text-xl ms-4"  name="matSearchOutline"></ng-icon>
+
       </div>
 
 
-        <input class="w-full rounded-md border border-border px-3 ps-8 py-3"  type="text"  [formControl]="control" />
+        <input class="w-full rounded-md border border-border px-3 ps-10 py-3"  type="text"  [formControl]="control" />
     </div>
   </ng-template>
-
 
   <ng-template #filesInput>
     <app-files-input [control]="control"/>
@@ -32,7 +49,7 @@
 
   <ng-template #multiSelectInput>
     <div (clickOutside)="closeCustomBox()">
-      <div class="flex w-full gap-2 overflow-x-auto rounded-md border border-border px-5 py-2 scrollbar-none">
+      <div class="flex w-full gap-2 flex-wrap rounded-md border border-border px-5 py-2 ">
         <p
           (click)="openCustomBox()"
           class="cursor-pointer border-e border-muted-foreground py-[2px] pe-5 text-sm text-muted-foreground">
@@ -73,19 +90,21 @@
       </label>
     </div>
   </ng-template>
-  <!-- Radio Button Template -->
+  <!-- Checkbox Button Template -->
   <ng-template #checkbox>
-    <div class="ms-2 flex items-center gap-2" *ngFor="let option of control.options; index as i">
+    <div class="ms-2 flex items-center gap-2" >
       <input type="checkbox" class="scale-[.70] rounded-md border border-border px-3 py-3" [formControl]="control" />
-      <label class="text-sm text-muted-foreground">
-        {{ option }}
-      </label>
+    
     </div>
   </ng-template>
 
   <!-- Select Template -->
   <ng-template #selectInput>
     <select class="w-full rounded-md border border-border px-3 ps-6 py-3" [formControl]="control">
+
+      <option *ngIf="!control.value">
+        انتخاب کنید
+      </option>
       <option *ngFor="let option of control.options">
         {{option}}
       </option>
@@ -98,10 +117,16 @@
       <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
     </ng-persian-datepicker>
   </ng-template>
+  <ng-template #financialRateInput>
+  <app-financial-rate [control]="control"></app-financial-rate>
+  </ng-template>
 
   <!-- Render the Appropriate Template -->
   <ng-container [ngSwitch]="control.type">
     <ng-container *ngSwitchCase="'text'" [ngTemplateOutlet]="textInput"></ng-container>
+    <ng-container *ngSwitchCase="'phone-number'" [ngTemplateOutlet]="phoneNumber"></ng-container>
+    <ng-container *ngSwitchCase="'amount'" [ngTemplateOutlet]="amount"></ng-container>
+    <ng-container *ngSwitchCase="'search-select'" [ngTemplateOutlet]="searchSelect"></ng-container>
     <ng-container *ngSwitchCase="'search'" [ngTemplateOutlet]="searchInput"></ng-container>
     <ng-container *ngSwitchCase="'files'" [ngTemplateOutlet]="filesInput"></ng-container>
     <ng-container *ngSwitchCase="'multi-select'" [ngTemplateOutlet]="multiSelectInput"></ng-container>
@@ -110,6 +135,7 @@
     <ng-container *ngSwitchCase="'checkbox'" [ngTemplateOutlet]="checkbox"></ng-container>
     <ng-container *ngSwitchCase="'select'" [ngTemplateOutlet]="selectInput"></ng-container>
     <ng-container *ngSwitchCase="'date'" [ngTemplateOutlet]="dateInput"></ng-container>
+    <ng-container *ngSwitchCase="'financial-rate'" [ngTemplateOutlet]="financialRateInput"></ng-container>
     <ng-container *ngSwitchDefault>
       <p class="text-red-500">Unknown input type</p>
     </ng-container>

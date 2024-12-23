@@ -1,10 +1,10 @@
-<div class="rounded-md bg-background">
+<div class="overflow-auto rounded-md bg-background">
   <div class="w-full border-b border-b-border p-3">
     <section class="p-4">
       <p *ngIf="tableConfig.title">{{ tableConfig.title }}</p>
     </section>
-    <form [formGroup]="tableConfig.inputs" class="grid w-full grid-cols-4 gap-2 p-3">
-      <div *ngFor="let controlInput of _getFormCroupControlsAsArray(tableConfig.inputs.controls)">
+    <form [formGroup]="tableConfig.form" class="grid w-full grid-cols-4 gap-2 p-3">
+      <div *ngFor="let controlInput of _getFormCroupControlsAsArray(tableConfig.form.controls)">
         <app-input [control]="controlInput"></app-input>
       </div>
     </form>
@@ -13,36 +13,53 @@
     </div>
   </div>
 
-  <table class="w-full overflow-x-auto">
+  <table class="w-full">
     <thead>
       <th
         *ngFor="let headerKey of tableConfig.tableHeader; index as tableHeaderIndex"
         class="px-3 py-4 text-start text-sm font-light text-muted-foreground">
-        <div class="inline-block" *ngIf="tableHeaderIndex == 0">
-          <input type="checkbox" (change)="onAllCheckboxChange($event)" />
+        <div class="flex gap-1">
+          <input *ngIf="tableHeaderIndex == 0" type="checkbox" (change)="onAllCheckboxChange($event)" />
+
+          <p class="text-nowrap">
+            {{ headerKey }}
+          </p>
         </div>
-        {{ headerKey }}
       </th>
     </thead>
     <tbody>
-      <tr *ngFor="let bodyItem of tableConfig.tableBody; index as bodyItemIndex">
+      <tr *ngFor="let row of tableConfig.tableBody; index as bodyItemIndex">
         <td
           class="border-t border-t-border px-3 py-4 text-sm font-light text-muted-foreground"
-          *ngFor="let value of getObjectValues(bodyItem); index as i">
-          <div class="me-1 inline-block" *ngIf="i == 0">
-            <input #checkboxChild type="checkbox" (change)="onCheckboxChange($event, bodyItemIndex)" />
+          *ngFor="let value of getObjectValues(row); index as i">
+          <div class="flex gap-1">
+            <input *ngIf="i == 0" #checkboxChild type="checkbox" (change)="onCheckboxChange($event, bodyItemIndex)" />
+
+            <p
+              *ngIf="i !== tableConfig.assetIndexFromBody"
+              class="w-fit"
+              [class]="'inline-block max-w-36 text-nowrap' + _choseClassBasedCustomStyleForVal(value)">
+              {{ value }}
+            </p>
+            <img *ngIf="i == tableConfig.assetIndexFromBody" [src]="value" class="inline-block h-10 w-10 rounded-md" />
           </div>
-          <p
-            *ngIf="i !== tableConfig.assetIndexFromBody"
-            class="w-fit"
-            [class]="'inline-block ' + _choseClassBasedCustomStyleForVal(value)">
-            {{ _textTruncate(value) }}
-          </p>
-          <img *ngIf="i == tableConfig.assetIndexFromBody" [src]="value" class="h-10 w-10 rounded-md" />
         </td>
-        <td class="border-t border-b-border px-3 py-4 text-sm font-light text-muted-foreground">
-          <app-button>بیشتر</app-button>
-          <app-button tone="warning">ویرایش</app-button>
+        <td
+          *ngIf="tableConfig.actions"
+          class="border-t border-b-border px-3 py-4 text-sm font-light text-muted-foreground">
+          <div class="flex gap-2">
+            <app-button
+              *ngFor="let action of tableConfig.actions"
+              [disabled]="action.styleProps?.disabled || false"
+              [impact]="action.styleProps?.impact || 'none'"
+              [size]="action.styleProps?.size || 'medium'"
+              [shape]="action.styleProps?.shape || 'rounded'"
+              [tone]="action.styleProps?.tone || 'primary'"
+              [shadow]="action.styleProps?.shadow || 'none'"
+              (click)="action.callback(row)">
+              <p class="text-nowrap">{{ action.label }}</p></app-button
+            >
+          </div>
         </td>
       </tr>
     </tbody>

@@ -1,0 +1,15 @@
+<div class="relative flex w-full">
+  <input
+    style="direction: ltr"
+    type="text"
+    class="w-full rounded-md border border-border px-3 py-3 ps-[100px]"
+    [formControl]="control" />
+
+  <select
+    class="absolute end-0 z-10 w-24 ps-7"
+    [formControl]="TypeSelectCurrencyControlRefAsFormControl(control.selectCurrencyControlRef)">
+    <option class="" *ngFor="let currency of control.selectCurrencyControlRef?.options" [value]="currency">
+      {{ currency }}
+    </option>
+  </select>
+</div>

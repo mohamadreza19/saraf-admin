@@ -1,0 +1,38 @@
+<div (click)="openCustomBox()" (clickOutside)="closeCustomBox()">
+  <div>
+    <div class="flex h-[42px] w-full items-center rounded-md border border-border px-3">
+      <div class="cursor-default text-nowrap border-e border-muted-foreground pe-1 text-sm">انتخاب کنید</div>
+      <div class="flex w-full gap-3 overflow-x-scroll ps-3 scrollbar-none">
+        <section
+          *ngFor="let option of _getMultiSelectSelectedItemAsArray(control.value)"
+          (click)="_handleRemoveMultiSelectItem(option)"
+          class="flex h-fit w-fit cursor-pointer gap-1 text-nowrap rounded-md bg-border p-1 text-xs font-light text-muted-foreground">
+          <span class="font-bold">x</span>
+          {{ option }}
+        </section>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div
+      *ngIf="isCustomBoxOpen"
+      class="absolute top-[110%] z-[2] flex min-h-20 w-full flex-wrap gap-1 rounded-b-md border border-border bg-background p-2">
+      <div class="flex w-full flex-col gap-3 p-2">
+        <div class="flex w-full">
+          <input
+            [formControl]="searchControl"
+            class="w-full rounded-md border-b border-border px-3 py-[6px]"
+            placeholder="جستوجو" />
+        </div>
+        <div class="flex w-full flex-wrap gap-2">
+          <section
+            *ngFor="let option of searchResults"
+            (click)="_handleSetMultiSelectItem(option)"
+            class="flex h-fit w-fit cursor-pointer gap-1 text-nowrap rounded-md bg-border p-1 text-xs font-light text-muted-foreground">
+            {{ option }}
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

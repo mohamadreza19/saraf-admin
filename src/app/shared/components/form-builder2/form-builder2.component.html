@@ -1,0 +1,56 @@
+<div class="flex w-full flex-col rounded-t-sm bg-border pt-5">
+  <div class="flex w-full flex-col gap-4 p-4">
+    <p class="text-2xl font-bold">{{ label }}</p>
+    <com-stepper
+      (clickStep)="handleStepClick($event)"
+      [steps]="steps"
+      [currentStepIndex]="currentStepIndex"></com-stepper>
+  </div>
+
+  <div class="min-h-[200px] w-full rounded-md bg-background">
+    <div class="w-full">
+      <ng-container *ngFor="let form of forms; index as formIndex">
+        <form
+          (ngSubmit)="form._onSubmit && form._onSubmit(form)"
+          [formGroup]="form"
+          class="grid w-full grid-cols-2 gap-3 p-6 {{ formIndex !== currentStepIndex && 'hidden' }}">
+          <ng-container *ngFor="let control of _getFormControlsAsArray(form)">
+            <ng-container *ngIf="_isFormControl(control)">
+              <app-input [control]="_getControlAsFormControl2(control)"></app-input>
+            </ng-container>
+
+            <ng-container *ngIf="_isCardControl(control)">
+              <com-card [cardControl_]="_getControlAsFormControl(control)"></com-card>
+            </ng-container>
+
+            <!-- <ng-container *ngIf="_isReceiptControl(control)">
+              <com-receipt [control]="_getControlAsFormControl(control)"></com-receipt>
+            </ng-container> -->
+            <ng-container *ngIf="_isBankCheckbookControl(control)">
+              <com-bank-checkbook [control]="_getControlAsFormControl(control)"></com-bank-checkbook>
+            </ng-container>
+            <ng-container *ngIf="_isReceiveReceiptControl(control)">
+              <com-receive-receipt [control]="_getControlAsFormControl(control)"></com-receive-receipt>
+            </ng-container>
+            <ng-container *ngIf="_isPayReceiptControl(control)">
+              <com-pay-receipt [control]="_getControlAsFormControl(control)"></com-pay-receipt>
+            </ng-container>
+          </ng-container>
+          <div class="col-span-2 mt-auto flex w-full justify-between">
+            <app-button (buttonClick)="nextStep(forms[formIndex], formIndex)" impact="bold" tone="primary">
+              {{ form.submitText }}
+            </app-button>
+            <app-button
+              class="ms-auto"
+              *ngIf="formIndex > 0"
+              (buttonClick)="prevStep(formIndex)"
+              impact="light"
+              tone="light">
+              {{ 'قبلی' }}
+            </app-button>
+          </div>
+        </form>
+      </ng-container>
+    </div>
+  </div>
+</div>

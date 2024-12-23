@@ -1,4 +1,13 @@
-import { NgClass, NgFor, NgIf, NgSwitch, NgSwitchCase, NgSwitchDefault, NgTemplateOutlet } from '@angular/common';
+import {
+  CommonModule,
+  NgClass,
+  NgFor,
+  NgIf,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+  NgTemplateOutlet,
+} from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
 import { FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
@@ -6,9 +15,16 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 import { ButtonComponent } from '../button/button.component';
 import { CustomFormControl } from '../../form-builder/form-builder.component';
 import { NgxFileDropEntry, NgxFileDropModule } from 'ngx-file-drop';
-import { AngularSvgIconModule } from 'angular-svg-icon';
+import { AngularSvgIconModule, SvgIconRegistryService } from 'angular-svg-icon';
 import { FilesInputComponent } from './files-input/files-input.component';
 
+import { NgIcon, provideIcons } from '@ng-icons/core';
+import { IconsModule } from '../icons/icons.module';
+import { PhoneNumberInputComponent } from './phone-number-input/phone-number-input.component';
+import { FormControl2 } from '../form-builder2/form-builder2.component';
+import { AmountInputComponent } from './amount-input/amount-input.component';
+import { SearchSelectInputComponent } from './search-select-input/search-select-input.component';
+import { FinancialRateComponent } from '../../../modules/project/components/financial-rate/financial-rate.component';
 @Component({
   selector: 'app-input',
   standalone: true,
@@ -21,65 +37,57 @@ import { FilesInputComponent } from './files-input/files-input.component';
     NgSwitchCase,
     NgSwitchDefault,
     NgTemplateOutlet,
-    AngularSvgIconModule,
+    IconsModule,
     NgClass,
     ButtonComponent,
     NgClickOutsideDirective,
     NgxFileDropModule,
     FilesInputComponent,
+    PhoneNumberInputComponent,
+    AmountInputComponent,
+    SearchSelectInputComponent,
+    CommonModule,
+    FinancialRateComponent,
   ],
   templateUrl: './input.component.html',
+  styleUrl: './input.component.css',
 })
 export class InputComponent {
+  constructor(private el: ElementRef<HTMLElement>) {
+    el.nativeElement.className = 'flex items-center ';
+  }
   _iconUrl = '/assets/icons/material-icons/solid/download.svg';
   _iconUrlImage = '/assets/icons/material-icons/solid/image.svg';
-  show: boolean = true;
 
-  @Input() control!: CustomFormControl; // Pass the actual FormControl
+  // @Input() control!: FormControl2; // Pass the actual FormControl
+  @Input()
+  control!: FormControl2;
+
   @Input() className?: string; // Allow dynamic styling
 
   isCustomBoxOpen = false;
 
-  constructor(private formGroupDirective: FormGroupDirective, el: ElementRef<HTMLElement>) {
-    el.nativeElement.className = 'flex items-center ';
-  }
   ngOnInit(): void {
-    console.log();
     // Set the default value (select the first option by default)
-    if (this.control.type && this.control.options && typeof this.control.selectedOptionIndex === 'number') {
-      switch (this.control.type) {
-        case 'select':
-          this.control.setValue(this.control.options[this.control.selectedOptionIndex]);
-          break;
-
-        default:
-          break;
-      }
-      // this.control.setValue(this.control.options[0]);
-    }
     // console.log(this.formGroupDirective);
-    const showIf = this.control.showIf; // [controlKey, value]
-    if (showIf && showIf.length) {
-      this.show = false;
-      const controlKey = showIf[0];
-      const valueIfBe = showIf[1];
-
-      const control = this.formGroupDirective.form.get(controlKey);
-
-      if (control && control.value) {
-        if (control.value === valueIfBe) {
-          this.show = true;
-        }
-        control.valueChanges.subscribe((controlValue) => {
-          if (controlValue === valueIfBe) {
-            this.show = true;
-          } else {
-            this.show = false;
-          }
-        });
-      }
-    }
     // console.log(this.control);
+
+    this.control.show$.subscribe((val) => {
+      this.onShowChange(val);
+    });
+
+    if (typeof this.control.selectedOptionIndex === 'number' && this.control.options) {
+      if (!this.control.value) this.control.setValue(this.control.options[0]);
+    }
+  }
+
+  onShowChange(show: boolean) {
+    // Handle logic for changes in `show`
+    if (show) {
+      this.el.nativeElement.classList.remove('hidden');
+    } else {
+      this.el.nativeElement.classList.add('hidden');
+    }
   }
 
   openCustomBox() {
@@ -92,11 +100,10 @@ export class InputComponent {
     const formControlArrValue = this.control.value;
 
     if (Array.isArray(formControlArrValue)) {
-      this.control.setValue([...formControlArrValue, val]);
+      if (!formControlArrValue.includes(val)) this.control.setValue([...formControlArrValue, val]);
     } else {
       this.control.setValue([val]);
     }
-    console.log(this.control);
   }
   _handleRemoveMultiSelectItem(val: string) {
     const formControlArrValue = this.control.value;

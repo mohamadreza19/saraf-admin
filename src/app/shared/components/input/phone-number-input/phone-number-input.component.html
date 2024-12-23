@@ -1,0 +1,16 @@
+<div class="relative flex w-full">
+  <input
+    style="direction: ltr"
+    type="text"
+    class="w-full rounded-md border border-border px-3 py-3 ps-[100px]"
+    [formControl]="control" />
+
+  <select class="absolute end-0 z-10 w-24 ps-7" (change)="onCountryChange($event)">
+    <option class="" *ngFor="let country of countryList" [value]="country.code">
+      <span class="flag:{{ country.code }}"></span>
+      <ng-container *ngIf="selectedCountryCode !== country.code"> {{ country.name }}</ng-container>
+
+      ({{ country.dialCode }}+)
+    </option>
+  </select>
+</div>

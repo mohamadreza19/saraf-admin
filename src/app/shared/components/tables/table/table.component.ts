@@ -1,16 +1,26 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { InputComponent } from '../../input/input.component';
 import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.component';
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { ButtonComponent } from '../../button/button.component';
 import { TableConfig } from 'src/app/shared/models/table-config';
 import { ReactiveFormsModule } from '@angular/forms';
-const logo =
-  'https://daftarensha.ir/wp-content/uploads/2024/09/%D9%BE%D8%B3%D8%B1-%D8%A8%DA%86%D9%87-%D8%AE%D9%88%D8%B4%DA%AF%D9%84-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%BE%D8%B1%D9%88%D9%81%D8%A7%DB%8C%D9%84-.jpeg';
+import { CustomBtnComponent } from './components/custom-btn/custom-btn.component';
+import { FormControl2 } from '../../form-builder2/form-builder2.component';
+
 @Component({
   selector: 'app-table1',
   standalone: true,
-  imports: [InputComponent, NgFor, NgIf, NgClass, ButtonComponent, ReactiveFormsModule],
+  imports: [
+    InputComponent,
+    NgFor,
+    NgIf,
+    NgClass,
+    ButtonComponent,
+    ReactiveFormsModule,
+    CustomBtnComponent,
+    CommonModule,
+  ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
 })
@@ -34,13 +44,13 @@ export class TableComponent implements OnInit {
     return str.length > 18 ? str.slice(0, 18) + '...' : str;
   }
   _choseClassBasedCustomStyleForVal(value: string | number) {
-    if (!this.tableConfig.customStyleForVal) return '';
-    const stringVal = String(value) as keyof typeof this.tableConfig.customStyleForVal;
+    if (!this.tableConfig.customStylePerColumnVal) return '';
+    const stringVal = String(value) as keyof typeof this.tableConfig.customStylePerColumnVal;
 
-    return this.tableConfig.customStyleForVal[stringVal] || '';
+    return this.tableConfig.customStylePerColumnVal[stringVal] || '';
   }
-  _getFormCroupControlsAsArray(controls: object): CustomFormControl[] {
-    return Object.values(controls) as CustomFormControl[];
+  _getFormCroupControlsAsArray(controls: object): FormControl2[] {
+    return Object.values(controls);
   }
   onCheckboxChange(event: Event, index: number) {
     const inputElement = event.target as HTMLInputElement;

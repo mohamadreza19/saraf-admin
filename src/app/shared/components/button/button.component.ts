@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { cx } from '../../utils/ckassnames';
 
-type ButtonProps = {
+export type ButtonProps = {
   impact: 'bold' | 'light' | 'none';
   size: 'small' | 'medium' | 'large';
   shape: 'square' | 'rounded' | 'pill';

@@ -1,60 +1,60 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import {
   CustomFormControl,
   CustomFormGroup,
   FormBuilderComponent,
 } from '../../../../../shared/form-builder/form-builder.component';
 import { FormBuilderConfig, FormConfig } from 'src/app/shared/models/form-builder-config.interface';
+import { FormControl2, FormBuilder2Component } from 'src/app/shared/components/form-builder2/form-builder2.component';
 
 @Component({
   selector: 'app-bank-mutate',
   standalone: true,
-  imports: [FormBuilderComponent],
+  imports: [FormBuilderComponent, FormBuilder2Component],
   templateUrl: './bank-mutate.component.html',
   styleUrl: './bank-mutate.component.scss',
 })
-export class BankMutateComponent {
-  forms: CustomFormGroup[] = [];
+export class BankMutateComponent implements AfterViewInit {
+  form!: CustomFormGroup;
 
-  constructor() {
+  ngAfterViewInit(): void {
     const controls = {
-      name: new CustomFormControl('', {
+      name: new FormControl2('', {
         type: 'text',
         label: 'نام',
-        showIf: [],
+
         validators: [],
       }),
-      logo: new CustomFormControl([], {
+      logo: new FormControl2([], {
         type: 'files',
         filesLength: 1,
         label: 'لوگو',
         validators: [],
-        showIf: [],
+
         allowedFileTypes: ['pdf', 'jpeg', 'png', 'jpg'],
       }),
-      city: new CustomFormControl('', {
+      city: new FormControl2('', {
         type: 'select',
         label: 'شهر',
         validators: [],
         options: ['تهران', 'بوشهر'],
-        showIf: [],
       }),
-      title: new CustomFormControl('', {
+      title: new FormControl2('', {
         type: 'text',
         label: 'عنوان',
         validators: [],
-        showIf: [],
       }),
-      isActive: new CustomFormControl('', {
+      isActive: new FormControl2('', {
         type: 'checkbox',
         label: '',
         validators: [],
         options: ['فعال'],
-        showIf: [],
       }),
     };
     const form1 = new CustomFormGroup(controls, 'افزودن بانک', 'افزودن');
 
-    this.forms.push(form1);
+    this.form = form1;
   }
+
+  constructor() {}
 }

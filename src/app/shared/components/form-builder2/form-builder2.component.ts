@@ -1,23 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 
 import { StepperComponent } from '../steppers/stepper/stepper.component';
 import { InputComponent } from '../input/input.component';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Input as FormInput, InputType } from '../../models/form-builder-config.interface';
+import { Input as FormInput, Input2, InputType2 } from '../../models/form-builder-config.interface';
 import { CardComponent } from '../cards/card/card.component';
 import { CardControl_ } from '../cards/card/models/cardControl';
 import { CustomFormGroup } from '../../form-builder/form-builder.component';
-import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { BehaviorSubject } from 'rxjs';
-
-import { BankCheckbookComponent } from '../../../modules/financial/components/bank-checkbook/bank-checkbook.component';
-import { BankCheckBookControl_ } from 'src/app/modules/financial/models/bank-checkbook-control';
-import { ReceiveReceiptControl_ } from 'src/app/modules/financial/models/receive-receipt.control';
-import { ReceiveReceiptComponent } from '../../../modules/financial/components/receive-receipt/receive-receipt.component';
-
-import { PayReceiptControl_ } from 'src/app/modules/financial/models/pay-receipt.control';
-import { PayReceiptComponent } from 'src/app/modules/financial/components/pay-receipt/pay-receipt.component';
 
 @Component({
   selector: 'app-form-builder2',
@@ -25,15 +17,14 @@ import { PayReceiptComponent } from 'src/app/modules/financial/components/pay-re
   imports: [
     NgFor,
     NgIf,
+
     NgClass,
     StepperComponent,
     InputComponent,
     ReactiveFormsModule,
     CardComponent,
     ButtonComponent,
-    BankCheckbookComponent,
-    ReceiveReceiptComponent,
-    PayReceiptComponent,
+    NgTemplateOutlet,
   ],
   templateUrl: './form-builder2.component.html',
   styleUrl: './form-builder2.component.css',
@@ -74,19 +65,13 @@ export class FormBuilder2Component implements OnInit {
   _isFormControl(control: any) {
     return control instanceof FormControl2;
   }
+  _isFormControl2(control: any) {
+    return control instanceof FormControl2;
+  }
   _isCardControl(control: any) {
     return control instanceof CardControl_;
   }
 
-  _isBankCheckbookControl(control: any) {
-    return control instanceof BankCheckBookControl_;
-  }
-  _isReceiveReceiptControl(control: any) {
-    return control instanceof ReceiveReceiptControl_;
-  }
-  _isPayReceiptControl(control: any) {
-    return control instanceof PayReceiptControl_;
-  }
   _getControlAsFormControl2(control: any): FormControl2 {
     return control;
   }
@@ -99,12 +84,13 @@ export class FormBuilder2Component implements OnInit {
 }
 
 export class FormControl2 extends FormControl {
-  type?: InputType;
+  type?: InputType2;
   label?: string;
   placeholder?: string;
   options?: string[];
   selectOptionsLength?: number;
   selectedOptionIndex?: number;
+  templateRef?: TemplateRef<any>;
 
   private _show = new BehaviorSubject<boolean>(true);
   show$ = this._show.asObservable();
@@ -116,7 +102,7 @@ export class FormControl2 extends FormControl {
   set show(value: boolean) {
     this._show.next(value); // Notify subscribers of the change
   }
-  constructor(formState: any, inputConf: FormInput) {
+  constructor(formState: any, inputConf: Input2) {
     super(formState, inputConf.validators);
 
     this.type = inputConf.type;
@@ -125,6 +111,7 @@ export class FormControl2 extends FormControl {
     this.options = inputConf.options;
     this.selectOptionsLength = inputConf.selectOptionsLength;
     this.selectedOptionIndex = inputConf.selectedOptionIndex;
+    this.templateRef = inputConf.templateRef;
     if (typeof inputConf.show === 'boolean') {
       this.show = inputConf.show;
     } else {
@@ -135,7 +122,7 @@ export class FormControl2 extends FormControl {
 
 export class AmountFormControl extends FormControl2 {
   selectCurrencyControlRef?: FormControl2;
-  constructor(formState: any, inputConf: FormInput, selectCurrencyControlRef: FormControl2) {
+  constructor(formState: any, inputConf: Input2, selectCurrencyControlRef: FormControl2) {
     super(formState, inputConf);
     this.selectCurrencyControlRef = selectCurrencyControlRef;
   }

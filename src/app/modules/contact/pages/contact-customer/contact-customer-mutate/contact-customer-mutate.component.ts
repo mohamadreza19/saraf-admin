@@ -1,71 +1,96 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import {
   CustomFormControl,
   CustomFormGroup,
   FormBuilderComponent,
 } from '../../../../../shared/form-builder/form-builder.component';
+import { FormControl2, FormBuilder2Component } from 'src/app/shared/components/form-builder2/form-builder2.component';
+import { Controls } from './controls';
 
 @Component({
   selector: 'app-contact-customer-mutate',
   standalone: true,
-  imports: [FormBuilderComponent],
+  imports: [FormBuilderComponent, FormBuilder2Component],
   templateUrl: './contact-customer-mutate.component.html',
   styleUrl: './contact-customer-mutate.component.scss',
 })
-export class ContactCustomerMutateComponent {
-  forms: CustomFormGroup[] = [];
+export class ContactCustomerMutateComponent implements AfterViewInit {
+  form!: CustomFormGroup;
 
-  constructor() {
-    const controls = {
-      userType: new CustomFormControl('', {
+  ngAfterViewInit(): void {
+    const controls = this.initiateControls();
+
+    const form1 = new CustomFormGroup(controls, 'ثبت تماس با مشتری', 'ثبت');
+    this.form = form1;
+    this.handleFormControlsValuesChange(this.form);
+  }
+
+  initiateControls(): Controls {
+    return {
+      userType: new FormControl2('', {
         label: 'انتخاب مخاطب',
         type: 'select',
         options: ['همه کارمندان', ' همه صرافی ها', 'انتخاب کارمند', 'انتخاب صراف'],
         selectedOptionIndex: 0,
-        showIf: [],
+
         validators: [],
       }),
-      files: new CustomFormControl([], {
+      files: new FormControl2([], {
         label: 'بارگزاری فایل',
         type: 'files',
         filesLength: 1,
         allowedFileTypes: ['jpeg', 'jpg', 'png'],
-        showIf: [],
+
         validators: [],
       }),
-      employee: new CustomFormControl('', {
+      employee: new FormControl2('', {
         label: 'انتخاب کارمند',
         type: 'multi-select',
+        show: false,
         options: ['علی رضایی', 'رضا مرادی'],
-        showIf: ['userType', 'انتخاب کارمند'],
+        // showIf: ['userType', 'انتخاب کارمند'],
         validators: [],
       }),
-      exchangeOffice: new CustomFormControl('', {
+      exchangeOffice: new FormControl2('', {
         label: 'انتخاب صراف',
         type: 'multi-select',
         options: ['نوا ', 'تبدیل'],
-        showIf: ['userType', 'انتخاب صراف'],
+        show: false,
+        // showIf: ['userType', 'انتخاب صراف'],
         validators: [],
       }),
 
-      subject: new CustomFormControl('', {
+      subject: new FormControl2('', {
         label: 'موضوع',
         type: 'text',
         options: [],
-        showIf: [],
+
         validators: [],
       }),
-      priority: new CustomFormControl('', {
+      priority: new FormControl2('', {
         label: 'درجه اهمیت',
         type: 'select',
         options: ['بالا', 'متوسط', 'کم'],
-        showIf: [],
+
         validators: [],
       }),
     };
+  }
+  handleFormControlsValuesChange(form: CustomFormGroup) {
+    const controls: Controls = form.controls as any;
 
-    const form1 = new CustomFormGroup(controls, 'ثبت تماس با مشتری', 'ثبت');
+    controls.userType.valueChanges.subscribe((val) => {
+      switch (val) {
+        case 'انتخاب کارمند':
+          controls.employee.show = true;
+          break;
+        case 'انتخاب صراف':
+          controls.exchangeOffice.show = true;
+          break;
 
-    this.forms.push(form1);
+        default:
+          break;
+      }
+    });
   }
 }

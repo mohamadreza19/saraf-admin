@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
+import { FormControl2, FormBuilder2Component } from 'src/app/shared/components/form-builder2/form-builder2.component';
 import {
   CustomFormControl,
   CustomFormGroup,
@@ -8,49 +9,46 @@ import {
 @Component({
   selector: 'app-currency-mutate',
   standalone: true,
-  imports: [FormBuilderComponent],
+  imports: [FormBuilderComponent, FormBuilder2Component],
   templateUrl: './currency-mutate.component.html',
 })
-export class CurrencyMutateComponent {
-  forms: CustomFormGroup[] = [];
+export class CurrencyMutateComponent implements AfterViewInit {
+  form!: CustomFormGroup;
 
-  constructor() {
+  ngAfterViewInit(): void {
     const controls = {
-      name: new CustomFormControl('', {
+      name: new FormControl2('', {
         type: 'text',
         label: 'نام',
-        showIf: [],
+
         validators: [],
       }),
-      logo: new CustomFormControl([], {
+      logo: new FormControl2([], {
         type: 'files',
         filesLength: 1,
         label: 'لوگو',
         allowedFileTypes: ['jpeg', 'png'],
         validators: [],
-        showIf: [],
       }),
-      acronym: new CustomFormControl('', {
+      acronym: new FormControl2('', {
         type: 'text',
         label: 'اختصار',
-        showIf: [],
+
         validators: [],
       }),
-      baseCurrency: new CustomFormControl('', {
+      baseCurrency: new FormControl2('', {
         type: 'text',
         label: 'ارز پایه',
-        showIf: [],
+
         validators: [],
       }),
-      rateToBaseCurrency: new CustomFormControl('', {
+      rateToBaseCurrency: new FormControl2('', {
         type: 'text',
         label: 'ضریب نسبت به ارز مبنا',
-        showIf: [],
+
         validators: [],
       }),
     };
-    const form1 = new CustomFormGroup(controls, 'افزودن ارز', 'افزودن');
-
-    this.forms.push(form1);
+    this.form = new CustomFormGroup(controls, 'افزودن ارز', 'افزودن');
   }
 }

@@ -1,3 +1,10 @@
 <div>
-  <app-form-builder [forms]="forms"></app-form-builder>
+  @if(form1&&form2&&form3){
+
+  <app-form-builder2 label="ثبت صرافی" [forms]="[form1, form2, form3]"></app-form-builder2>
+  }
 </div>
+
+<ng-template #receiptComRef>
+  <app-receipt [control]="receipt_"></app-receipt>
+</ng-template>

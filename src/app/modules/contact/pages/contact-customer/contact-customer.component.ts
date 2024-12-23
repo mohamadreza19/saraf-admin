@@ -4,7 +4,7 @@ import { ExchangeTableComponent } from 'src/app/modules/dashboard/components/vie
 import { Ticket } from 'src/app/shared/models/ticket-interface';
 
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
-import { TableConfig } from 'src/app/shared/models/table-config';
+import { TableConfig, TableConfig2 } from 'src/app/shared/models/table-config';
 import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.component';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -18,7 +18,7 @@ const logo =
   styleUrl: './contact-customer.component.scss',
 })
 export class ContactCustomerComponent {
-  tableConfig!: TableConfig;
+  tableConfig!: TableConfig2;
 
   dummyData = [
     {
@@ -81,9 +81,9 @@ export class ContactCustomerComponent {
     this.tableConfig = {
       title: 'تیکت ها ',
       tableHeader: ['شماره تیکت', 'آواتار', 'نوع کاربر', ' درجه اهمیت', 'پاسخ', 'وضعیت'],
-      inputs: new FormGroup(controls),
+      form: new FormGroup(controls),
       tableBody: this.dummyData,
-      customStyleForVal: {
+      customStylePerColumnVal: {
         مهم: 'text-red-500 bg-red-100 rounded-lg p-1',
         متوسط: 'text-orange-500 bg-orange-100  rounded-lg p-1',
       },

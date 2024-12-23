@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { InputComponent } from '../components/input/input.component';
 import { ButtonComponent } from '../components/button/button.component';
+import { FormControl2 } from '../components/form-builder2/form-builder2.component';
 
 @Component({
   selector: 'app-form-builder',
@@ -50,6 +51,9 @@ export class FormBuilderComponent implements AfterViewChecked {
     //     type: felid.type,
     //   },
     // };
+  }
+  _getControlAsFormControl2(control: any): FormControl2 {
+    return control;
   }
   _getFormControllers(obj: any): CustomFormControl[] {
     return Object.values(obj);
@@ -113,10 +117,14 @@ export class CustomFormControl extends FormControl {
 export class CustomFormGroup extends FormGroup {
   rootLabel?: string;
   submitText?: string;
-  constructor(controls: any, rootLabel?: string, submitText?: string) {
+
+  _onSubmit?: (form: this) => void;
+  constructor(controls: any, rootLabel?: string, submitText?: string, _onSubmit?: (form: CustomFormGroup) => void) {
     super(controls);
 
     this.rootLabel = rootLabel;
     this.submitText = submitText;
+
+    this._onSubmit = _onSubmit || function () {};
   }
 }

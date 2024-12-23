@@ -1,0 +1,30 @@
+<div class="w-full">
+  <div class="flex min-h-screen flex-col items-center bg-gray-100 p-6">
+    <h1 class="mb-6 text-2xl font-bold text-muted-foreground">مدیریت صرافی‌ها</h1>
+
+    <div class="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
+      <!-- Customers List -->
+      <a routerLink="customer" class="flex flex-col items-center rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+        <div class="mb-4 text-4xl text-blue-500">👥</div>
+        <h2 class="text-xl font-bold text-muted-foreground">لیست مشتریان</h2>
+        <p class="mt-2 text-center text-muted-foreground">مشاهده و مدیریت لیست مشتریان</p>
+      </a>
+
+      <!-- Transactions Report -->
+      <a routerLink="transaction" class="flex flex-col items-center rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+        <div class="mb-4 text-4xl text-green-500">💰</div>
+        <h2 class="text-xl font-bold text-muted-foreground">گزارش معاملات</h2>
+        <p class="mt-2 text-center text-muted-foreground">مشاهده گزارش خرید، فروش و انتقالات</p>
+      </a>
+
+      <!-- Debtors and Creditors Report -->
+      <a
+        routerLink="debtor-creditor"
+        class="flex flex-col items-center rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+        <div class="mb-4 text-4xl text-red-500">📊</div>
+        <h2 class="text-xl font-bold text-muted-foreground">گزارش بدهکاران و بستانکاران</h2>
+        <p class="mt-2 text-center text-muted-foreground">پیگیری وضعیت مالی مشتریان</p>
+      </a>
+    </div>
+  </div>
+</div>

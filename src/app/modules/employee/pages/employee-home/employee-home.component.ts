@@ -4,23 +4,30 @@ import { ExchangeTableComponent } from 'src/app/modules/dashboard/components/vie
 import { exchangeOffice } from 'src/app/modules/dashboard/models/exchange-office';
 import { Router } from '@angular/router';
 import { InputComponent } from '../../../../shared/components/input/input.component';
-import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.component';
+import { CustomFormControl, CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { SearchInputComponent } from '../../../../shared/components/input/search-input/search-input.component';
+import { TableConfig2 } from 'src/app/shared/models/table-config';
+import { EMPLOYEES } from './constants';
+import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
+import { TableComponent } from '../../../../shared/components/tables/table/table.component';
 
 @Component({
   selector: 'app-employee-home',
   standalone: true,
-  imports: [HeaderButtonsComponent, ExchangeTableComponent, InputComponent, ButtonComponent, SearchInputComponent],
+  imports: [
+    HeaderButtonsComponent,
+    ExchangeTableComponent,
+    InputComponent,
+    ButtonComponent,
+    SearchInputComponent,
+    TableComponent,
+  ],
   templateUrl: './employee-home.component.html',
   styleUrl: './employee-home.component.scss',
 })
 export class EmployeeHomeComponent {
-  table1Keys: string[];
-  table1Label = 'لیست کارمند ها';
-  table1Body: any[];
-  table1ForbiddenKeysInItem: string[];
-  table1IconsUrl!: string[];
+  tableConfig!: TableConfig2;
 
   @Input()
   searchControl = new CustomFormControl(null, {
@@ -31,30 +38,23 @@ export class EmployeeHomeComponent {
   });
 
   constructor(private router: Router) {
-    this.table1Keys = ['اسم', 'شماره تماس', 'وضعیت', 'تاریخ انقضاء', 'ID'];
-    this.table1Body = [
-      {
-        name: 'نوبیتکس',
-        phoneNumber: '09032446913',
-        iconUrl: 'assets/avatars/exchange-office1.jpg',
-        status: 'فعال',
-        expireDate: '1403/12/12',
-        id: '123456789',
-      },
-      {
-        name: 'ای او',
-        phoneNumber: '09032446913',
-        iconUrl: 'assets/avatars/exchange-office2.jpg',
-        status: 'فعال',
-        expireDate: '1403/12/12',
-        id: '123456789',
-      },
-    ];
-    this.table1ForbiddenKeysInItem = ['iconUrl'];
-    this.table1IconsUrl = this.table1Body.map((item) => item.iconUrl);
+    const controls = {
+      search: new FormControl2('', {
+        type: 'search',
+        label: 'جستوجو',
+        validators: [],
+      }),
+    };
+    this.tableConfig = {
+      title: 'لیست کارمند ها',
+      tableHeader: ['اسم', 'شماره تماس', 'نماد', 'وضعیت', 'تاریخ انقضاء', 'ID'],
+      assetIndexFromBody: 2,
+      tableBody: EMPLOYEES,
+      form: new CustomFormGroup(controls),
+    };
   }
   navigate() {
-    this.router.navigate(['/financial/exchange-office/add']);
+    this.router.navigate(['/employee/add']);
   }
   navigateToDashboard() {
     this.router.navigate(['/dashboard']);

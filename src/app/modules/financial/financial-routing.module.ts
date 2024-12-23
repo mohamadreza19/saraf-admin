@@ -5,6 +5,7 @@ import { ExchangeOfficeComponent } from './pages/exchange-office/exchange-office
 import { ExchangeOfficeMutateComponent } from './pages/exchange-office/exchange-office-mutate/exchange-office-mutate.component';
 import { CurrencyComponent } from './pages/currency/currency.component';
 import { CurrencyMutateComponent } from './pages/currency/currency-mutate/currency-mutate.component';
+import { BankAccountComponent } from './pages/bank-account/bank-account.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'exchange-office/add', component: ExchangeOfficeMutateComponent },
       { path: 'currency', component: CurrencyComponent },
       { path: 'currency/add', component: CurrencyMutateComponent },
+      { path: 'bank-account', component: BankAccountComponent },
 
       { path: '**', redirectTo: 'errors/404' },
     ],

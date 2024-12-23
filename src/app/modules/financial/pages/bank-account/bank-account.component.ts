@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CustomFormControl, CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
-import { TableConfig } from 'src/app/shared/models/table-config';
+import { TableConfig, TableConfig2 } from 'src/app/shared/models/table-config';
 import { HeaderButtonsComponent } from '../../components/header-buttons/header-buttons.component';
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
 import { Router } from '@angular/router';
+import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 
 @Component({
   selector: 'app-bank-account',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './bank-account.component.css',
 })
 export class BankAccountComponent {
-  tableConfig!: TableConfig;
+  tableConfig!: TableConfig2;
 
   constructor(private router: Router) {
     this.tableConfig = {
@@ -86,13 +87,13 @@ export class BankAccountComponent {
   }
   generateForm() {
     const controls = {
-      search: new CustomFormControl('', {
+      search: new FormControl2('', {
         label: 'جستجو',
         type: 'search',
 
         validators: [],
       }),
-      isActive: new CustomFormControl(false, {
+      isActive: new FormControl2(false, {
         type: 'checkbox',
         label: '',
         options: ['فعال'],

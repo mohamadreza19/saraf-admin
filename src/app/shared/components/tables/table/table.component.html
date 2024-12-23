@@ -1,5 +1,5 @@
 <div class="overflow-auto rounded-md bg-background">
-  <div class="w-full border-b border-b-border p-3">
+  <div class="w-full p-3">
     <section class="p-4">
       <p *ngIf="tableConfig.title">{{ tableConfig.title }}</p>
     </section>
@@ -14,7 +14,7 @@
   </div>
 
   <table class="w-full">
-    <thead>
+    <thead class="border-t border-border">
       <th
         *ngFor="let headerKey of tableConfig.tableHeader; index as tableHeaderIndex"
         class="px-3 py-4 text-start text-sm font-light text-muted-foreground">

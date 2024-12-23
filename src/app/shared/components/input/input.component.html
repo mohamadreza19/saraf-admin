@@ -117,9 +117,7 @@
       <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
     </ng-persian-datepicker>
   </ng-template>
-  <ng-template #financialRateInput>
-  <app-financial-rate [control]="control"></app-financial-rate>
-  </ng-template>
+
 
   <!-- Render the Appropriate Template -->
   <ng-container [ngSwitch]="control.type">
@@ -135,7 +133,7 @@
     <ng-container *ngSwitchCase="'checkbox'" [ngTemplateOutlet]="checkbox"></ng-container>
     <ng-container *ngSwitchCase="'select'" [ngTemplateOutlet]="selectInput"></ng-container>
     <ng-container *ngSwitchCase="'date'" [ngTemplateOutlet]="dateInput"></ng-container>
-    <ng-container *ngSwitchCase="'financial-rate'" [ngTemplateOutlet]="financialRateInput"></ng-container>
+
     <ng-container *ngSwitchDefault>
       <p class="text-red-500">Unknown input type</p>
     </ng-container>

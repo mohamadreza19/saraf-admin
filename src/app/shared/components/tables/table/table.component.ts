@@ -3,7 +3,7 @@ import { InputComponent } from '../../input/input.component';
 import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.component';
 import { CommonModule, NgClass, NgFor, NgIf } from '@angular/common';
 import { ButtonComponent } from '../../button/button.component';
-import { TableConfig } from 'src/app/shared/models/table-config';
+import { TableConfig, TableConfig2 } from 'src/app/shared/models/table-config';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomBtnComponent } from './components/custom-btn/custom-btn.component';
 import { FormControl2 } from '../../form-builder2/form-builder2.component';
@@ -30,7 +30,7 @@ export class TableComponent implements OnInit {
   checkboxChildren!: QueryList<ElementRef<HTMLInputElement>>;
 
   @Input()
-  tableConfig!: TableConfig;
+  tableConfig!: TableConfig2;
   constructor() {}
 
   ngOnInit(): void {

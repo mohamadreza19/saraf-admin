@@ -62,7 +62,7 @@ export class Menu {
         {
           icon: 'assets/icons/material-icons/outline/clipboard.svg',
           label: 'گزارش ها',
-          route: '/reports',
+          route: '/report',
         },
         {
           icon: 'assets/icons/font-awesome/outline/comment.svg',
@@ -82,7 +82,7 @@ export class Menu {
         },
         {
           label: 'ثبت شماره حسابهای ادمین',
-          route: '/registering-admin-account-numbers',
+          route: '/financial/bank-account',
         },
       ],
     },

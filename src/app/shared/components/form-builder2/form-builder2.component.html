@@ -16,7 +16,14 @@
           class="grid w-full grid-cols-2 gap-3 p-6 {{ formIndex !== currentStepIndex && 'hidden' }}">
           <ng-container *ngFor="let control of _getFormControlsAsArray(form)">
             <ng-container *ngIf="_isFormControl(control)">
-              <app-input [control]="_getControlAsFormControl2(control)"></app-input>
+              <!--  -->
+              <ng-container *ngIf="_getControlAsFormControl2(control).templateRef as template; else elseBlock">
+                <ng-container [ngTemplateOutlet]="template"></ng-container>
+              </ng-container>
+              <!-- -->
+              <ng-template #elseBlock>
+                <app-input [control]="_getControlAsFormControl2(control)"></app-input>
+              </ng-template>
             </ng-container>
 
             <ng-container *ngIf="_isCardControl(control)">
@@ -26,15 +33,6 @@
             <!-- <ng-container *ngIf="_isReceiptControl(control)">
               <com-receipt [control]="_getControlAsFormControl(control)"></com-receipt>
             </ng-container> -->
-            <ng-container *ngIf="_isBankCheckbookControl(control)">
-              <com-bank-checkbook [control]="_getControlAsFormControl(control)"></com-bank-checkbook>
-            </ng-container>
-            <ng-container *ngIf="_isReceiveReceiptControl(control)">
-              <com-receive-receipt [control]="_getControlAsFormControl(control)"></com-receive-receipt>
-            </ng-container>
-            <ng-container *ngIf="_isPayReceiptControl(control)">
-              <com-pay-receipt [control]="_getControlAsFormControl(control)"></com-pay-receipt>
-            </ng-container>
           </ng-container>
           <div class="col-span-2 mt-auto flex w-full justify-between">
             <app-button (buttonClick)="nextStep(forms[formIndex], formIndex)" impact="bold" tone="primary">

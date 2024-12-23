@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ExchangeTableComponent } from '../../dashboard/components/view/exchange-table/exchange-table.component';
-import { HeaderButtonsComponent } from '../../financial/components/header-buttons/header-buttons.component';
+import { ExchangeTableComponent } from '../../../dashboard/components/view/exchange-table/exchange-table.component';
+import { HeaderButtonsComponent } from '../../../financial/components/header-buttons/header-buttons.component';
 import { Panel } from 'src/app/shared/models/panel.interface';
 import { Router } from '@angular/router';
 

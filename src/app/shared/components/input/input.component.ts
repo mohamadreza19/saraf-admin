@@ -24,7 +24,7 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
 import { FormControl2 } from '../form-builder2/form-builder2.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { SearchSelectInputComponent } from './search-select-input/search-select-input.component';
-import { FinancialRateComponent } from '../../../modules/project/components/financial-rate/financial-rate.component';
+
 @Component({
   selector: 'app-input',
   standalone: true,
@@ -47,7 +47,6 @@ import { FinancialRateComponent } from '../../../modules/project/components/fina
     AmountInputComponent,
     SearchSelectInputComponent,
     CommonModule,
-    FinancialRateComponent,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
@@ -72,9 +71,11 @@ export class InputComponent {
     // console.log(this.formGroupDirective);
     // console.log(this.control);
 
-    this.control.show$.subscribe((val) => {
-      this.onShowChange(val);
-    });
+    if (this.control.show$) {
+      this.control.show$.subscribe((val) => {
+        this.onShowChange(val);
+      });
+    }
 
     if (typeof this.control.selectedOptionIndex === 'number' && this.control.options) {
       if (!this.control.value) this.control.setValue(this.control.options[0]);

@@ -1,5 +1,4 @@
 import { FormControl2 } from '../components/form-builder2/form-builder2.component';
-import { FormConfig2 } from '../models/form-builder-config.interface';
 
 export interface ExchangeOfficeEmployCommonControls {
   phoneNumber: FormControl2;

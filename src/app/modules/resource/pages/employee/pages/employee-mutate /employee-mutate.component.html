@@ -1,0 +1,27 @@
+<div>
+  @if(forms.length){
+
+  <app-form-builder2 label="ثبت کارمند" [forms]="forms"></app-form-builder2>
+  }
+</div>
+
+<ng-template #addDocsTemplate let-control="control">
+  <div class="col-span-full">
+    <p class="mb-10 w-full border-b border-border pb-5 text-lg text-muted-foreground">لیست مدارک</p>
+    <div>
+      <section
+        class="w-full max-w-[600px] border-b border-border py-5"
+        *ngFor="let docControls of docs; index as docIndex">
+        <div class="grid w-full grid-cols-2 gap-5">
+          <app-input *ngFor="let control of _valuesOfObject(docControls)" [control]="control"></app-input>
+        </div>
+        <div class="ms-auto w-fit pt-5">
+          <app-button (buttonClick)="deleteDoc(docIndex)" tone="danger">حذف</app-button>
+        </div>
+      </section>
+    </div>
+    <div class="pt-5">
+      <app-button (buttonClick)="addDoc()">افزودن مدرک</app-button>
+    </div>
+  </div>
+</ng-template>

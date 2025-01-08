@@ -12,66 +12,71 @@ import {
 import { FormBuilderConfig, FormConfig, Input as FormInput } from 'src/app/shared/models/form-builder-config.interface';
 import { ExchangeOfficeControls, ExchangeOfficeControls2, ExchangeOfficeControls3 } from './controls';
 import { FormControl } from '@angular/forms';
-import { NgTemplateOutlet } from '@angular/common';
+import { NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ReceiptComponent } from '../../../components/receipt/receipt.component';
 import { Receipt } from '../../../components/receipt/types';
 import { last } from 'rxjs';
 import { Currency, DOC_TYPES, MODULE_PERIOD } from 'src/app/shared/constants/constants';
+import { ButtonComponent } from '../../../../../shared/components/button/button.component';
+import { InputComponent } from '../../../../../shared/components/input/input.component';
+import { DocCombinedControls } from 'src/app/shared/models/doc-combined-controls.interface';
+import { ModuleService } from './module.service';
+import { ModuleControls, ModuleControlStrings } from './types/module.interface';
+import { FormService } from './form.service';
+import { ModalService } from 'src/app/core/services/modal.service';
+import { ReceiptModalComponent } from './components/receipt-modal/receipt-modal.component';
 
 @Component({
   selector: 'app-exchange-office-mutate',
   standalone: true,
-  imports: [FormBuilderComponent, FormBuilder2Component, NgTemplateOutlet, ReceiptComponent],
+  imports: [
+    NgFor,
+    NgIf,
+    FormBuilderComponent,
+    FormBuilder2Component,
+    NgTemplateOutlet,
+    ReceiptComponent,
+    ButtonComponent,
+    InputComponent,
+  ],
   templateUrl: './exchange-office-mutate.component.html',
+  providers: [ModuleService, FormService],
 })
 export class ExchangeOfficeMutateComponent implements AfterViewInit {
   // receipt
-  receipt_!: FormControl2;
-  @ViewChild('receiptComRef') receiptComRef!: TemplateRef<any>;
+
+  docs: DocCombinedControls[] = [];
+
+  @ViewChild('addDocsTemplate') addDocsTemplate!: TemplateRef<any>;
+  @ViewChild('addModuleTemplate') addModuleTemplate!: TemplateRef<any>;
   //
-  form1!: CustomFormGroup;
-  form2!: CustomFormGroup;
-  form3!: CustomFormGroup;
+  forms: CustomFormGroup[] = [];
 
   timeoutId: any;
-  constructor() {
-    const controls3 = {
-      documentType: new CustomFormControl('', {
-        type: 'select',
-        label: 'انواع مدارک',
-        validators: [],
-        options: ['تاریخ دار', 'همیشگی'],
-        showIf: [],
-      }),
-      docs: new CustomFormControl([], {
-        type: 'files',
-        filesLength: 10,
-        label: ' بارگزاری مدارک',
-        validators: [],
-        showIf: [],
-        allowedFileTypes: ['pdf', 'png', 'jpg', 'jpeg'],
-      }),
-      activeStatus: new CustomFormControl([], {
-        type: 'checkbox',
-        label: '',
-        validators: [],
-        options: ['فعال'],
-        showIf: [],
-      }),
-    };
-  }
+  constructor(public module: ModuleService, public form: FormService, private modal: ModalService) {}
   ngAfterViewInit(): void {
     const controls = this.initiateControls();
-    this.form1 = new CustomFormGroup(controls, 'اطلاعات شخصی', 'بعدی');
-    this.handleForm1ControlsValuesChange(this.form1);
+    const form1 = new CustomFormGroup(controls, 'اطلاعات شخصی', 'ادامه');
+    this.handleForm1ControlsValuesChange(form1);
 
     const controls2 = this.initiateControls2();
-    this.form2 = new CustomFormGroup(controls2, 'اطلاعات مالی', 'بعدی');
-    this.handleForm2ControlsValuesChange(this.form2);
+    const form2 = new CustomFormGroup(controls2, 'انتخاب ماژول', 'ادامه و چاپ پیش رسید', () =>
+      this.calculateAndOpenReceiptModal(),
+    );
+
+    // this.handleForm2ControlsValuesChange(form2);
 
     const controls3 = this.initiateControls3();
-    this.form3 = new CustomFormGroup(controls3, 'ثبت مدارک', 'ثبت');
-    this.handleForm3ControlsValuesChange(this.form3);
+    const form3 = new CustomFormGroup(controls3, ' واریز', 'ادامه');
+    this.handleForm3ControlsValuesChange(form3);
+
+    const controls4 = this.initiateDocControls();
+    const form4 = new CustomFormGroup(controls4, 'ثبت مدارک', 'ثبت');
+
+    this.forms.push(form1);
+    this.forms.push(form2);
+    this.forms.push(form3);
+    this.forms.push(form4);
   }
 
   initiateControls(): ExchangeOfficeControls {
@@ -136,6 +141,7 @@ export class ExchangeOfficeMutateComponent implements AfterViewInit {
       panelLanguage: new FormControl2('', {
         label: 'زبان پنل',
         type: 'select',
+        options: ['فارسی', 'انگلیسی'],
         validators: [],
       }),
       email: new FormControl2('', {
@@ -238,50 +244,29 @@ export class ExchangeOfficeMutateComponent implements AfterViewInit {
       }
     });
   }
-  initiateControls2(): ExchangeOfficeControls2 {
-    this.receipt_ = new FormControl2('', {
-      type: 'text',
-      label: '',
-      validators: [],
-      templateRef: this.receiptComRef,
-    });
-    const currencyUnit = new FormControl2('', {
-      type: 'select',
-      label: '',
-      show: false,
-      options: Object.values(Currency),
-      validators: [],
-    });
-
+  initiateControls2() {
     return {
       requestedModules: new FormControl2('', {
         label: 'ماژول های درخواستی',
         type: 'select',
         options: ['خرید فروش ارز'],
         validators: [],
+        templateRef: this.addModuleTemplate,
       }),
-      extensionPeriod: new FormControl2('', {
-        label: 'مدت تمدید',
-        type: 'select',
-        options: MODULE_PERIOD,
-        validators: [],
-      }),
-      amount: new AmountFormControl(
-        '',
-        {
-          label: 'مبلغ قابل واریز',
-          type: 'amount',
-          validators: [],
-        },
-        currencyUnit,
-      ),
-      currencyUnit: currencyUnit,
+
       discount: new FormControl2('', {
         label: 'تخفیف',
         type: 'text',
         validators: [],
       }),
-      receipt_: this.receipt_,
+      // receipt_: this.receipt_,
+
+      // receipt: false,
+    };
+  }
+
+  initiateControls3() {
+    return {
       bankAccount: new FormControl2('', {
         label: 'به حساب',
         type: 'select',
@@ -305,11 +290,10 @@ export class ExchangeOfficeMutateComponent implements AfterViewInit {
         show: false,
         validators: [],
       }),
-      // receipt: false,
     };
   }
-  handleForm2ControlsValuesChange(form2: CustomFormGroup) {
-    const controls: ExchangeOfficeControls2 = form2.controls as any;
+  handleForm3ControlsValuesChange(form: CustomFormGroup) {
+    const controls: ExchangeOfficeControls2 = form.controls as any;
 
     controls.hasDepositMade.valueChanges.subscribe((val) => {
       if (val) {
@@ -332,7 +316,7 @@ export class ExchangeOfficeMutateComponent implements AfterViewInit {
       }
     });
 
-    form2.valueChanges.subscribe(() => {
+    form.valueChanges.subscribe(() => {
       if (this.timeoutId) {
         clearTimeout(this.timeoutId);
       }
@@ -342,7 +326,7 @@ export class ExchangeOfficeMutateComponent implements AfterViewInit {
       }, 600);
     });
   }
-  initiateControls3(): ExchangeOfficeControls3 {
+  initiateControls4(): ExchangeOfficeControls3 {
     return {
       docType: new FormControl2('', {
         label: 'نوع مدرک',
@@ -365,7 +349,22 @@ export class ExchangeOfficeMutateComponent implements AfterViewInit {
       }),
     };
   }
-  handleForm3ControlsValuesChange(form3: CustomFormGroup) {
+  initiateDocControls() {
+    this.addDoc();
+    const controls4 = {
+      docs: new FormControl2([], {
+        type: 'files',
+
+        label: '',
+        validators: [],
+
+        templateRef: this.addDocsTemplate,
+      }),
+    };
+
+    return controls4;
+  }
+  handleForm4ControlsValuesChange(form3: CustomFormGroup) {
     const controls: ExchangeOfficeControls3 = form3.controls as any;
 
     controls.docType.valueChanges.subscribe((val) => {
@@ -383,23 +382,83 @@ export class ExchangeOfficeMutateComponent implements AfterViewInit {
     });
   }
   handleCalculateReceipt(controls: ExchangeOfficeControls2) {
-    const { currencyUnit, amount, discount, receipt_ } = controls;
+    const { discount, receipt_ } = controls;
 
-    const percentage = calculatePercentage(Number(discount.value), Number(amount.value));
+    // const percentage = calculatePercentage(Number(discount.value), Number(amount.value));
 
-    const totalAmount = Number(amount.value) - Number(discount.value);
-    const receipt: Receipt = {
-      currencyUnit: currencyUnit.value || '0',
-      amount: amount.value || '0',
-      discount: discount.value || '0',
-      discountPercent: String(percentage),
-      totalAmount: String(totalAmount),
+    // const totalAmount = Number(amount.value) - Number(discount.value);
+    // const receipt: Receipt = {
+    //   currencyUnit: currencyUnit.value || '0',
+    //   amount: amount.value || '0',
+    //   discount: discount.value || '0',
+    //   discountPercent: String(percentage),
+    //   totalAmount: String(totalAmount),
+    // };
+
+    // receipt_.setValue(receipt);
+
+    // function calculatePercentage(part: number, whole: number): number {
+    //   return (part / whole) * 100;
+    // }
+  }
+
+  addDoc() {
+    const controls = {
+      selectDocTypes: new FormControl2('', {
+        type: 'select',
+        label: 'انواع مدارک',
+        validators: [],
+        options: ['پشت و روی کارت ملی', 'صفحه شناسنامه', 'گواهینامه', 'پاسپورت'],
+        // showIf: [],
+      }),
+      filesControl: new FormControl2(null, {
+        type: 'files',
+        filesLength: 10,
+        label: ' بارگزاری مدارک',
+
+        validators: [],
+      }),
+      HasExpire: new FormControl2(false, {
+        label: 'تاریخ دار',
+        type: 'checkbox',
+        validators: [],
+      }),
+      expireDate: new FormControl2('', {
+        label: 'تاریخ انقضا',
+        type: 'date',
+        validators: [],
+        show: false,
+      }),
     };
+    controls.HasExpire.valueChanges.subscribe((val) => {
+      if (val) {
+        controls.expireDate.show = true;
+      } else {
+        controls.expireDate.show = false;
+      }
+    });
+    this.docs.push(controls);
+  }
+  deleteDoc(docIndex: number) {
+    this.docs = this.docs.filter((_, index) => index !== docIndex);
+  }
+  _valuesOfObject(obj: object): any {
+    return Object.values(obj);
+  }
 
-    receipt_.setValue(receipt);
-
-    function calculatePercentage(part: number, whole: number): number {
-      return (part / whole) * 100;
-    }
+  calculateAndOpenReceiptModal() {
+    const module: ModuleControlStrings[] = this.module.modules.map((moduleControls) => {
+      return {
+        name: moduleControls.name.value,
+        currencyUnit: moduleControls.currencyUnit.value,
+        amount: moduleControls.amount.value,
+        period: moduleControls.period.value,
+      };
+    });
+    console.log(this.modal);
+    this.modal.open(ReceiptModalComponent, {
+      maxHeight: '600px',
+      width: '600px',
+    });
   }
 }

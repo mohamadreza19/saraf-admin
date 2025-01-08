@@ -4,7 +4,7 @@ import { ExchangeTableComponent } from 'src/app/modules/dashboard/components/vie
 import { Ticket } from 'src/app/shared/models/ticket-interface';
 
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
-import { TableConfig, TableConfig2 } from 'src/app/shared/models/table-config';
+import { TableConfig } from 'src/app/shared/models/table-config';
 import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.component';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
@@ -15,10 +15,9 @@ const logo =
   standalone: true,
   imports: [HeaderButtonsComponent, ExchangeTableComponent, TableComponent],
   templateUrl: './contact-customer.component.html',
-  styleUrl: './contact-customer.component.scss',
 })
 export class ContactCustomerComponent {
-  tableConfig!: TableConfig2;
+  tableConfig!: TableConfig;
 
   dummyData = [
     {
@@ -51,14 +50,14 @@ export class ContactCustomerComponent {
     const controls = {
       seach: new CustomFormControl(null, {
         label: 'جستوجو',
-        showIf: [],
+
         type: 'search',
         validators: [],
       }),
       priority: new CustomFormControl(null, {
         label: 'الویت',
         options: ['مهم', 'متوسط'],
-        showIf: [],
+
         type: 'select',
         validators: [],
       }),
@@ -67,12 +66,11 @@ export class ContactCustomerComponent {
         options: ['کارمند', ' صرافی'],
         label: '',
         validators: [],
-        showIf: [],
       }),
       status: new CustomFormControl(null, {
         label: 'وضعیت',
         options: ['پاسخ داده شد', 'پاسخ نشده'],
-        showIf: [],
+
         type: 'select',
         validators: [],
       }),

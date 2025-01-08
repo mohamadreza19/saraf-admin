@@ -120,9 +120,7 @@
       <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
     </ng-persian-datepicker>
   </ng-template>
-  <ng-template #financialRateInput>
-  <app-financial-rate [control]="control"></app-financial-rate>
-  </ng-template>
+
   <ng-template #password>
     <div  class="relative">
       <div (click)="togglePassword()" class="flex end-3  h-full w-fit absolute items-center">
@@ -151,7 +149,7 @@
     <ng-container *ngSwitchCase="'checkbox'" [ngTemplateOutlet]="checkbox"></ng-container>
     <ng-container *ngSwitchCase="'select'" [ngTemplateOutlet]="selectInput"></ng-container>
     <ng-container *ngSwitchCase="'date'" [ngTemplateOutlet]="dateInput"></ng-container>
-    <ng-container *ngSwitchCase="'financial-rate'" [ngTemplateOutlet]="financialRateInput"></ng-container>
+
     <ng-container *ngSwitchCase="'select-add'" [ngTemplateOutlet]="selectAdd"></ng-container>
     <ng-container *ngSwitchDefault>
       <p class="text-red-500">Unknown input type</p>

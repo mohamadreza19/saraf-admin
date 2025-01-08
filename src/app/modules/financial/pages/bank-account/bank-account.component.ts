@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CustomFormControl, CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
-import { TableConfig, TableConfig2 } from 'src/app/shared/models/table-config';
+import { TableConfig } from 'src/app/shared/models/table-config';
 import { HeaderButtonsComponent } from '../../components/header-buttons/header-buttons.component';
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { FormControl2 } from 'src/app/shared/components/form-builder2/form-build
   styleUrl: './bank-account.component.css',
 })
 export class BankAccountComponent {
-  tableConfig!: TableConfig2;
+  tableConfig!: TableConfig;
 
   constructor(private router: Router) {
     this.tableConfig = {

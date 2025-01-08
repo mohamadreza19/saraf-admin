@@ -6,12 +6,13 @@ import { HeaderButtonsComponent } from '../../../financial/components/header-but
 import { Router } from '@angular/router';
 import { UserRequestComponent } from '../../components/user-request/user-resurest.component';
 import { ModalService } from 'src/app/core/services/modal.service';
-import { EmployeeMutateComponent } from './pages/employee-mutate/employee-mutate.component';
+
 import { EmployeePrivilegeComponent } from './pages/employee-privilege/employee-privilege.component';
 import { Privilege } from './types/privilege.interface';
 import { BasicInfo, Main } from './constants/privilege.constants';
 import { EmployeeSalaryMutateComponent } from './pages/employee-salary/employee-salary-mutate/employee-salary-mutate.component';
 import { EmployeeSalaryComponent } from './pages/employee-salary/employee-salary.component';
+import { EmployeeMutateComponent } from './pages/employee-mutate /employee-mutate.component';
 
 const fakeProfileImgUrl = 'assets/images/gray-avatar-placeholder.jpg';
 
@@ -85,22 +86,22 @@ export class EmployeeComponent implements AfterViewInit {
             tone: 'light',
           },
         },
-        {
-          callback: () => this.openAddSalary(),
-          label: 'پرداخت حقوق',
-          styleProps: {
-            tone: 'light',
-          },
-        },
-        {
-          label: 'حساب کتاب',
-          callback: (row) => {
-            this.openSalary();
-          },
-          styleProps: {
-            tone: 'light',
-          },
-        },
+        // {
+        //   callback: () => this.openAddSalary(),
+        //   label: 'پرداخت حقوق',
+        //   styleProps: {
+        //     tone: 'light',
+        //   },
+        // },
+        // {
+        //   label: 'حساب کتاب',
+        //   callback: (row) => {
+        //     this.openSalary();
+        //   },
+        //   styleProps: {
+        //     tone: 'light',
+        //   },
+        // },
 
         // {
         //   label: 'کیف پول ',

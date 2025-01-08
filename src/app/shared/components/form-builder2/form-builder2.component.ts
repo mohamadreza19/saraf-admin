@@ -11,14 +11,6 @@ import { CommonModule, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/c
 import { ButtonComponent } from '../button/button.component';
 import { BehaviorSubject } from 'rxjs';
 
-import { BankCheckbookComponent } from '../../../modules/financial/components/bank-checkbook/bank-checkbook.component';
-import { BankCheckBookControl_ } from 'src/app/modules/financial/models/bank-checkbook-control';
-import { ReceiveReceiptControl_ } from 'src/app/modules/financial/models/receive-receipt.control';
-import { ReceiveReceiptComponent } from '../../../modules/financial/components/receive-receipt/receive-receipt.component';
-
-import { PayReceiptControl_ } from 'src/app/modules/financial/models/pay-receipt.control';
-import { PayReceiptComponent } from 'src/app/modules/financial/components/pay-receipt/pay-receipt.component';
-
 @Component({
   selector: 'app-form-builder2',
   standalone: true,
@@ -31,9 +23,7 @@ import { PayReceiptComponent } from 'src/app/modules/financial/components/pay-re
     ReactiveFormsModule,
     CardComponent,
     ButtonComponent,
-    BankCheckbookComponent,
-    ReceiveReceiptComponent,
-    PayReceiptComponent,
+
     NgTemplateOutlet,
   ],
   templateUrl: './form-builder2.component.html',
@@ -66,6 +56,7 @@ export class FormBuilder2Component implements OnInit {
     this.currentStepIndex = val;
   }
   nextStep(form: CustomFormGroup, formIndex: number) {
+    console.log(form);
     if (form._onSubmit) form._onSubmit(form);
     if (this.steps.length - 1 >= formIndex + 1) this.setStep(formIndex + 1);
   }
@@ -81,28 +72,11 @@ export class FormBuilder2Component implements OnInit {
   _isFormControl(control: any) {
     return control instanceof FormControl2;
   }
-  _isCardControl(control: any) {
-    return control instanceof CardControl_;
-  }
 
-  _isBankCheckbookControl(control: any) {
-    return control instanceof BankCheckBookControl_;
-  }
-  _isReceiveReceiptControl(control: any) {
-    return control instanceof ReceiveReceiptControl_;
-  }
-  _isPayReceiptControl(control: any) {
-    return control instanceof PayReceiptControl_;
-  }
   _getControlAsFormControl2(control: any): FormControl2 {
     return control;
   }
-  _getControlAsCardControl(control: any): CardControl_ {
-    return control;
-  }
-  _getControlAsFormControl(control: any): any {
-    return control;
-  }
+
   goBack() {
     // this.location.back(); // Go back to the previous page in the browser history
   }

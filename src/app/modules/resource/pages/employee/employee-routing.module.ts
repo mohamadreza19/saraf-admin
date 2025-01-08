@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee.component';
-import { EmployeeMutateComponent } from './pages/employee-mutate/employee-mutate.component';
+
 import { EmployeePrivilegeComponent } from './pages/employee-privilege/employee-privilege.component';
+import { EmployeeMutateComponent } from './pages/employee-mutate /employee-mutate.component';
 
 const routes: Routes = [
   {

@@ -1,21 +1,14 @@
-import { CustomFormControl, CustomFormGroup } from '../form-builder/form-builder.component';
+import { TemplateRef } from '@angular/core';
 import { ButtonProps } from '../components/button/button.component';
+import { CustomFormControl, CustomFormGroup } from '../form-builder/form-builder.component';
+
 export interface TableConfig {
   title?: string;
-  inputs: CustomFormGroup;
-  tableHeader: string[];
-  tableBody: object[];
-  customStyleForVal?: { [key: string]: string };
-  assetIndexFromBody?: number;
-}
-
-export interface TableConfig2 {
-  title?: string;
-  form: CustomFormGroup;
+  form?: CustomFormGroup;
   tableHeader: string[];
   tableBody: object[];
   customStylePerColumnVal?: { [key: string]: string };
-  actions?: ActionConfig[];
+  actions?: (ActionConfig | TemplateActionConfig)[];
   assetIndexFromBody?: number;
 }
 export interface ActionConfig {
@@ -30,4 +23,8 @@ export interface ActionConfig {
     tone?: ButtonProps['tone'];
     shadow?: ButtonProps['shadow'];
   };
+}
+
+export interface TemplateActionConfig {
+  templateRef: TemplateRef<any>;
 }

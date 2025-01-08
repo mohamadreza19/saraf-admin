@@ -10,9 +10,9 @@ const routes: Routes = [
     loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
-    path: 'employee',
+    path: 'resource',
     component: LayoutComponent,
-    loadChildren: () => import('../employee/employee.module').then((m) => m.EmployeeModule),
+    loadChildren: () => import('../resource/resource.module').then((m) => m.ResourceModule),
   },
   {
     path: 'financial',

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 import { CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
-import { TableConfig2 } from 'src/app/shared/models/table-config';
+import { TableConfig } from 'src/app/shared/models/table-config';
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
 const data = [
   {
@@ -59,7 +59,7 @@ const data = [
   styleUrl: './customer.component.css',
 })
 export class CustomerComponent implements AfterViewInit {
-  tableConfig2!: TableConfig2;
+  tableConfig2!: TableConfig;
 
   constructor() {
     const controls = {

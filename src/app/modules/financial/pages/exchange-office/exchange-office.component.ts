@@ -5,12 +5,12 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 import { HeaderButtonsComponent } from '../../components/header-buttons/header-buttons.component';
 import { Router } from '@angular/router';
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
-import { TableConfig, TableConfig2 } from 'src/app/shared/models/table-config';
+import { TableConfig } from 'src/app/shared/models/table-config';
 import { CustomFormControl, CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
 import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { ExchangeOfficeConnectInfoModalComponent } from '../../components/exchange-office-connect-info-modal/exchange-office-connect-info-modal.component';
-const exchangeOfficesData = [
+export const exchangeOfficesData = [
   {
     firstName: 'علی',
     lastName: 'رضایی',
@@ -50,7 +50,7 @@ const exchangeOfficesData = [
 export class ExchangeOfficeComponent {
   dummyData: object[] = [];
   searchControl!: CustomFormControl;
-  tableConfig!: TableConfig2;
+  tableConfig!: TableConfig;
 
   constructor(private router: Router, private modal: ModalService) {
     const controls = {
@@ -119,7 +119,7 @@ export class ExchangeOfficeComponent {
           },
         },
         {
-          callback(row) {},
+          callback(row: any) {},
           label: 'سطوح دسترسی',
           styleProps: {
             tone: 'light',
@@ -135,7 +135,7 @@ export class ExchangeOfficeComponent {
     });
   }
   navigateToAddExchange() {
-    this.router.navigate(['/financial/exchange-office/add']);
+    this.router.navigate(['/resource/exchange-office/add']);
   }
   navigateToDashboard() {
     this.router.navigate(['/dashboard']);

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 import { CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
-import { TableConfig2 } from 'src/app/shared/models/table-config';
+import { TableConfig } from 'src/app/shared/models/table-config';
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
 const debtorsCreditorsData = [
   {
@@ -86,7 +86,7 @@ const debtorsCreditorsData = [
   styleUrl: './debtor-creditor.component.css',
 })
 export class DebtorCreditorComponent {
-  tableConfig!: TableConfig2;
+  tableConfig!: TableConfig;
 
   constructor() {
     const controls = {

@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { CustomerComponent } from './pages/customer/customer.component';
-import { CustomerMutateComponent } from './pages/customer/customer-mutate/customer-mutate.component';
-import { ReferrerComponent } from './pages/referrer/referrer.component';
-import { ReferrerMutateComponent } from './pages/referrer/referrer-mutate/referrer-mutate.component';
+import { ExchangeOfficeComponent } from '../financial/pages/exchange-office/exchange-office.component';
+import { ExchangeOfficeMutateComponent } from '../financial/pages/exchange-office/exchange-office-mutate/exchange-office-mutate.component';
 
 const routes: Routes = [
   {
@@ -12,22 +9,14 @@ const routes: Routes = [
     // component: ResourceComponent,
 
     children: [
-      { path: '', redirectTo: 'customer', pathMatch: 'full' },
+      { path: '', redirectTo: 'employee', pathMatch: 'full' },
       {
-        path: 'customer',
-        component: CustomerComponent,
+        path: 'exchange-office',
+        component: ExchangeOfficeComponent,
       },
       {
-        path: 'customer/add',
-        component: CustomerMutateComponent,
-      },
-      {
-        path: 'referrer',
-        component: ReferrerComponent,
-      },
-      {
-        path: 'referrer/add',
-        component: ReferrerMutateComponent,
+        path: 'exchange-office/add',
+        component: ExchangeOfficeMutateComponent,
       },
       {
         path: 'employee',

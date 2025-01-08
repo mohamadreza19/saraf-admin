@@ -1,48 +1,13 @@
 import { TemplateRef } from '@angular/core';
+import { CardControl_ } from '../components/cards/card/models/cardControl';
 import { FormControl2 } from '../components/form-builder2/form-builder2.component';
 import { CustomFormControl } from '../form-builder/form-builder.component';
 
 type InputKey = string;
 type ReferencedOptionVal = string;
 export type FileType = 'png' | 'jpg' | 'jpeg' | 'pdf';
-export interface Input {
-  type:
-    | 'text'
-    | 'search'
-    | 'password'
-    | 'email'
-    | 'date'
-    | 'file'
-    | 'files'
-    | 'select'
-    | 'multi-select'
-    | 'radio'
-    | 'checkbox';
-  filesLength?: number;
-  label: string;
-  placeholder?: string;
-  options?: string[]; // For select, radio, and checkbox inputs
-  selectedOptionIndex?: number;
-  validators: [];
-  showIf: string[]; //[InputKey, ReferencedOptionVal];
-  allowedFileTypes?: FileType[];
-}
 
-export interface FormConfig {
-  inputs: {
-    [key: string]: CustomFormControl; // Each key (e.g., 'name', 'username') maps to an `Input`
-  };
-  allNames: string[]; // This is a separate property for the list of input names
-  rootLabel: string;
-  submitText: string;
-}
-export type FormBuilderConfig = FormConfig[];
-
-type InputKey2 = string;
-type ReferencedOptionVal2 = string;
-export type FileType2 = 'png' | 'jpg' | 'jpeg' | 'pdf';
-
-export type InputType2 =
+export type InputType =
   | 'text'
   | 'financial-rate'
   | 'phone-number'
@@ -54,13 +19,15 @@ export type InputType2 =
   | 'date'
   | 'file'
   | 'files'
+  | 'readonly-img'
   | 'select'
+  | 'select-add'
   | 'multi-select'
   | 'radio'
   | 'checkbox';
 
-export interface Input2 {
-  type: InputType2;
+export interface Input {
+  type: InputType;
   groupedBy?: string;
   filesLength?: number;
   selectOptionsLength?: number;
@@ -72,16 +39,16 @@ export interface Input2 {
   disabled?: boolean;
   show?: boolean;
   allowedFileTypes?: FileType[];
-  onChange?: (value: any) => void;
   templateRef?: TemplateRef<any>;
+  onChange?: (value: any) => void;
 }
 
-export interface FormConfig2 {
+export interface FormConfig {
   inputs: {
-    [key: string]: FormControl2 | TemplateRef<any>; // Each key (e.g., 'name', 'username') maps to an `Input`
+    [key: string]: FormControl2 | CardControl_; // Each key (e.g., 'name', 'username') maps to an `Input`
   };
   allNames: string[]; // This is a separate property for the list of input names
   rootLabel: string;
   submitText: string;
 }
-export type FormBuilderConfig2 = FormConfig[];
+export type FormBuilderConfig = FormConfig[];

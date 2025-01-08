@@ -109,8 +109,6 @@ export class CustomFormControl extends FormControl {
 
     this.options = inputConf.options;
     this.selectedOptionIndex = inputConf.selectedOptionIndex;
-
-    this.showIf = inputConf.showIf;
   }
 }
 

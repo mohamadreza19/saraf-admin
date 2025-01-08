@@ -1,5 +1,3 @@
-import { BankCheckbook } from '../models/bank-checkbook.interface';
-
 // constants.ts
 export const CUSTOMER_LIST = [
   { id: 1, name: 'علی رضایی', imgUrl: '/assets/images/gray-avatar-placeholder.jpg' },
@@ -16,7 +14,7 @@ export const PAYMENT_METHODS2 = [
   'واریز به حساب صرافی',
 ];
 
-export const BANK_CHECKBOOK: BankCheckbook[] = [
+export const BANK_CHECKBOOK = [
   {
     bankCheckbookNumber: '32131233',
     bankName: 'صادرات',

@@ -19,7 +19,7 @@ export class Menu {
         {
           icon: 'assets/icons/material-icons/outline/person.svg',
           label: 'کارمند ها',
-          route: '/employee',
+          route: '/resource/employee',
         },
       ],
     },
@@ -34,11 +34,11 @@ export class Menu {
           children: [
             {
               label: 'صرافی ها',
-              route: '/financial/exchange-office',
+              route: '/resource/exchange-office',
             },
             {
               label: 'ارزها',
-              route: '/financial/currency',
+              route: '/resource/currency',
             },
           ], // { label: 'Podcast', route: '/dashboard/podcast' },],
         },

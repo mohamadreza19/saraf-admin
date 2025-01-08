@@ -9,10 +9,7 @@ export interface ExchangeOfficeControls extends ExchangeOfficeEmployCommonContro
 
 export interface ExchangeOfficeControls2 {
   requestedModules: FormControl2;
-  extensionPeriod: FormControl2;
-  amount: AmountFormControl;
 
-  currencyUnit: FormControl2;
   discount: FormControl2;
   receipt_: FormControl2;
 

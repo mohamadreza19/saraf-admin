@@ -24,7 +24,7 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
 import { FormControl2 } from '../form-builder2/form-builder2.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { SearchSelectInputComponent } from './search-select-input/search-select-input.component';
-import { FinancialRateComponent } from '../../../modules/project/components/financial-rate/financial-rate.component';
+
 import { matLockOutline } from '@ng-icons/material-icons/outline';
 import { SelectAddComponent } from './select-add/select-add.component';
 @Component({
@@ -49,7 +49,7 @@ import { SelectAddComponent } from './select-add/select-add.component';
     AmountInputComponent,
     SearchSelectInputComponent,
     CommonModule,
-    FinancialRateComponent,
+
     SelectAddComponent,
   ],
   templateUrl: './input.component.html',

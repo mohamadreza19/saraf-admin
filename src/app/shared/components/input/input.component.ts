@@ -8,7 +8,7 @@ import {
   NgSwitchDefault,
   NgTemplateOutlet,
 } from '@angular/common';
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
 import { NgClickOutsideDirective } from 'ng-click-outside2';
 import { FormControl, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
@@ -24,7 +24,9 @@ import { PhoneNumberInputComponent } from './phone-number-input/phone-number-inp
 import { FormControl2 } from '../form-builder2/form-builder2.component';
 import { AmountInputComponent } from './amount-input/amount-input.component';
 import { SearchSelectInputComponent } from './search-select-input/search-select-input.component';
-
+import { FinancialRateComponent } from '../../../modules/project/components/financial-rate/financial-rate.component';
+import { matLockOutline } from '@ng-icons/material-icons/outline';
+import { SelectAddComponent } from './select-add/select-add.component';
 @Component({
   selector: 'app-input',
   standalone: true,
@@ -47,16 +49,21 @@ import { SearchSelectInputComponent } from './search-select-input/search-select-
     AmountInputComponent,
     SearchSelectInputComponent,
     CommonModule,
+    FinancialRateComponent,
+    SelectAddComponent,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
+  viewProviders: provideIcons({ matLockOutline }),
 })
-export class InputComponent {
+export class InputComponent implements AfterViewInit {
   constructor(private el: ElementRef<HTMLElement>) {
     el.nativeElement.className = 'flex items-center ';
   }
   _iconUrl = '/assets/icons/material-icons/solid/download.svg';
   _iconUrlImage = '/assets/icons/material-icons/solid/image.svg';
+
+  @ViewChild('passwordInput') passwordInput!: ElementRef<HTMLInputElement>;
 
   // @Input() control!: FormControl2; // Pass the actual FormControl
   @Input()
@@ -66,7 +73,7 @@ export class InputComponent {
 
   isCustomBoxOpen = false;
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     // Set the default value (select the first option by default)
     // console.log(this.formGroupDirective);
     // console.log(this.control);
@@ -77,10 +84,25 @@ export class InputComponent {
       });
     }
 
-    if (typeof this.control.selectedOptionIndex === 'number' && this.control.options) {
-      if (!this.control.value) this.control.setValue(this.control.options[0]);
+    if (!this.control.value && this.control.options) {
+      if (typeof this.control.selectedOptionIndex === 'number')
+        this.control.setValue(this.control.options[this.control.selectedOptionIndex]);
+      // else this.control.setValue(this.control.options[0]);
     }
   }
+  // ngOnInit(): void {
+  //   // Set the default value (select the first option by default)
+  //   // console.log(this.formGroupDirective);
+  //   // console.log(this.control);
+
+  //   this.control.show$.subscribe((val) => {
+  //     this.onShowChange(val);
+  //   });
+
+  //   if (typeof this.control.selectedOptionIndex === 'number' && this.control.options) {
+  //     if (!this.control.value) this.control.setValue(this.control.options[0]);
+  //   }
+  // }
 
   onShowChange(show: boolean) {
     // Handle logic for changes in `show`
@@ -118,5 +140,14 @@ export class InputComponent {
   }
   _getMultiSelectSelectedItemAsArray(val: any): string[] {
     return val as string[];
+  }
+
+  togglePassword() {
+    const input = this.passwordInput.nativeElement;
+    const type = this.passwordInput.nativeElement.type;
+
+    if (type === 'password') {
+      input.type = 'text';
+    } else input.type = 'password';
   }
 }

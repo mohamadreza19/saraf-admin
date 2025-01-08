@@ -15,7 +15,7 @@
     style="aspect-ratio: 1 / 1" />
   <label *ngIf="!fileUrlToShow" class="fill-border text-muted-foreground">
     {{ control.label }}
-    <svg-icon src="{{ _iconUrl }}" [svgClass]="'h-5 w-5 mx-auto'"> </svg-icon>
+    <img *ngIf="fileUrlToShow" [src]="_iconUrl" class="mx-auto h-5 w-5" />
   </label>
 
   <div class="absolute bottom-2 left-1/2 flex h-1/4 w-4/5 -translate-x-1/2 transform rounded-md bg-border">

@@ -1,19 +1,24 @@
-<div class="flex min-h-20 gap-3 overflow-x-scroll scrollbar-none">
+<div class="stepper-container flex items-center gap-8 overflow-x-auto px-4 py-6">
   <section
     *ngFor="let step of steps; index as i"
     (click)="handleClickStep(i)"
-    class="flex h-fit w-fit cursor-pointer items-center gap-2">
-    <div class="flex items-center gap-2">
-      <section
-        *ngIf="currentStepIndex !== null"
-        class="flex min-h-7 min-w-7 items-center justify-center rounded-full   {{
-          currentStepIndex >= i ? 'bg-primary' : 'bg-muted-foreground'
-        }} text-xl text-background ">
-        {{ i + 1 }}
-      </section>
-      <p class="text-nowrap">{{ step }}</p>
+    class="flex cursor-pointer items-center gap-4 transition-transform duration-300 ease-in-out hover:scale-110">
+    <!-- Circle for step number -->
+    <div
+      *ngIf="currentStepIndex !== null"
+      class="flex items-center justify-center w-12 h-12 rounded-full
+        {{ currentStepIndex >= i ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600' }}
+        font-semibold text-xl transition-all duration-300 ease-in-out">
+      {{ i + 1 }}
     </div>
 
-    <div *ngIf="i != steps.length - 1" class="h-[2px] w-32 bg-muted-foreground"></div>
+    <!-- Step label -->
+    <p
+      *ngIf="currentStepIndex !== null"
+      class="text-sm font-medium 
+      {{ currentStepIndex >= i ? 'text-blue-600' : 'text-gray-500' }} 
+      transition-all duration-300 ease-in-out">
+      {{ step }}
+    </p>
   </section>
 </div>

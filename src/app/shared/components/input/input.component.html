@@ -21,9 +21,7 @@
 <ng-template #phoneNumber>
   <app-phone-number-input  [control]="control"></app-phone-number-input>
 </ng-template>
-<ng-template #amount>
-  <app-phone-number-input  [control]="control"></app-phone-number-input>
-</ng-template>
+
 <ng-template #searchSelect>
   <app-search-select-input [control]="control"></app-search-select-input>
 </ng-template>
@@ -46,6 +44,11 @@
   <ng-template #filesInput>
     <app-files-input [control]="control"/>
   </ng-template>
+  <ng-template #readOnlyImg>
+    <img class="rounded-md border border-border" [src]="control.value"/>
+  
+  </ng-template>
+
 
   <ng-template #multiSelectInput>
     <div (clickOutside)="closeCustomBox()">
@@ -117,23 +120,39 @@
       <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
     </ng-persian-datepicker>
   </ng-template>
-
+  <ng-template #financialRateInput>
+  <app-financial-rate [control]="control"></app-financial-rate>
+  </ng-template>
+  <ng-template #password>
+    <div  class="relative">
+      <div (click)="togglePassword()" class="flex end-3  h-full w-fit absolute items-center">
+         <ng-icon class="text-muted-foreground text-xl ms-4" name="matLockOutline"></ng-icon>
+      </div>
+      <input  #passwordInput  type="password" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
+    </div>
+  </ng-template>
+  <ng-template #selectAdd>
+  <app-select-add [control]="control"></app-select-add>
+  </ng-template>
 
   <!-- Render the Appropriate Template -->
   <ng-container [ngSwitch]="control.type">
     <ng-container *ngSwitchCase="'text'" [ngTemplateOutlet]="textInput"></ng-container>
+    <ng-container *ngSwitchCase="'password'" [ngTemplateOutlet]="password"></ng-container>
     <ng-container *ngSwitchCase="'phone-number'" [ngTemplateOutlet]="phoneNumber"></ng-container>
     <ng-container *ngSwitchCase="'amount'" [ngTemplateOutlet]="amount"></ng-container>
     <ng-container *ngSwitchCase="'search-select'" [ngTemplateOutlet]="searchSelect"></ng-container>
     <ng-container *ngSwitchCase="'search'" [ngTemplateOutlet]="searchInput"></ng-container>
     <ng-container *ngSwitchCase="'files'" [ngTemplateOutlet]="filesInput"></ng-container>
+    <ng-container *ngSwitchCase="'readonly-img'" [ngTemplateOutlet]="readOnlyImg"></ng-container>
     <ng-container *ngSwitchCase="'multi-select'" [ngTemplateOutlet]="multiSelectInput"></ng-container>
     <ng-container *ngSwitchCase="'email'" [ngTemplateOutlet]="emailInput"></ng-container>
     <ng-container *ngSwitchCase="'radio'" [ngTemplateOutlet]="radioInput"></ng-container>
     <ng-container *ngSwitchCase="'checkbox'" [ngTemplateOutlet]="checkbox"></ng-container>
     <ng-container *ngSwitchCase="'select'" [ngTemplateOutlet]="selectInput"></ng-container>
     <ng-container *ngSwitchCase="'date'" [ngTemplateOutlet]="dateInput"></ng-container>
-
+    <ng-container *ngSwitchCase="'financial-rate'" [ngTemplateOutlet]="financialRateInput"></ng-container>
+    <ng-container *ngSwitchCase="'select-add'" [ngTemplateOutlet]="selectAdd"></ng-container>
     <ng-container *ngSwitchDefault>
       <p class="text-red-500">Unknown input type</p>
     </ng-container>

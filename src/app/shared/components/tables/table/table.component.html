@@ -1,67 +1,118 @@
 <div class="overflow-auto rounded-md bg-background">
   <div class="w-full p-3">
     <section class="p-4">
-      <p *ngIf="tableConfig.title">{{ tableConfig.title }}</p>
+      <p *ngIf="tableConfig.title" class="whitespace-nowrap text-2xl font-semibold text-gray-800">
+        {{ tableConfig.title }}
+      </p>
     </section>
-    <form [formGroup]="tableConfig.form" class="grid w-full grid-cols-4 gap-2 p-3">
+    <form *ngIf="tableConfig.form" [formGroup]="tableConfig.form" class="grid w-full grid-cols-4 gap-2 p-3">
       <div *ngFor="let controlInput of _getFormCroupControlsAsArray(tableConfig.form.controls)">
         <app-input [control]="controlInput"></app-input>
       </div>
     </form>
-    <div class="flex w-full items-center">
-      <app-button [disabled]="!selectedItemsIndex.length" tone="danger" impact="light">حذف</app-button>
+    <div class="mt-4 flex w-full items-center justify-between">
+      <app-button
+        *ngIf="showDeleteButton"
+        (buttonClick)="onDelete()"
+        [disabled]="!selectedItemsIndex.length"
+        tone="danger"
+        impact="light"
+        >حذف</app-button
+      >
     </div>
   </div>
 
-  <table class="w-full">
-    <thead class="border-t border-border">
-      <th
-        *ngFor="let headerKey of tableConfig.tableHeader; index as tableHeaderIndex"
-        class="px-3 py-4 text-start text-sm font-light text-muted-foreground">
-        <div class="flex gap-1">
-          <input *ngIf="tableHeaderIndex == 0" type="checkbox" (change)="onAllCheckboxChange($event)" />
-
-          <p class="text-nowrap">
-            {{ headerKey }}
-          </p>
-        </div>
-      </th>
+  <table class="w-full table-auto">
+    <thead class="border-b bg-gray-100">
+      <tr>
+        <th
+          *ngFor="let headerKey of tableConfig.tableHeader; index as tableHeaderIndex"
+          class="cursor-pointer px-3 py-4 text-start text-sm font-light text-muted-foreground"
+          (click)="sortTable(headerKey, tableHeaderIndex)">
+          <div class="flex items-center gap-1">
+            <input
+              *ngIf="tableHeaderIndex === 0 && showEachCheckbox"
+              type="checkbox"
+              (change)="onAllCheckboxChange($event)" />
+            <p class="whitespace-nowrap">{{ headerKey }}</p>
+            <!-- Sorting Indicators -->
+            <span *ngIf="sortColumn === headerKey">
+              <svg
+                *ngIf="sortDirection[headerKey] === 'asc'"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="h-4 w-4 text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+              </svg>
+              <svg
+                *ngIf="sortDirection[headerKey] === 'desc'"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="h-4 w-4 text-gray-600">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </span>
+          </div>
+        </th>
+        <th *ngIf="tableConfig.actions" class="px-3 py-4 text-start text-sm font-light text-muted-foreground">
+          عملیات
+        </th>
+      </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let row of tableConfig.tableBody; index as bodyItemIndex">
-        <td
-          class="border-t border-t-border px-3 py-4 text-sm font-light text-muted-foreground"
-          *ngFor="let value of getObjectValues(row); index as i">
-          <div class="flex gap-1">
-            <input *ngIf="i == 0" #checkboxChild type="checkbox" (change)="onCheckboxChange($event, bodyItemIndex)" />
-
-            <p
-              *ngIf="i !== tableConfig.assetIndexFromBody"
-              class="w-fit"
-              [class]="'inline-block max-w-36 text-nowrap' + _choseClassBasedCustomStyleForVal(value)">
-              {{ value }}
-            </p>
-            <img *ngIf="i == tableConfig.assetIndexFromBody" [src]="value" class="inline-block h-10 w-10 rounded-md" />
-          </div>
-        </td>
-        <td
-          *ngIf="tableConfig.actions"
-          class="border-t border-b-border px-3 py-4 text-sm font-light text-muted-foreground">
-          <div class="flex gap-2">
-            <app-button
-              *ngFor="let action of tableConfig.actions"
-              [disabled]="action.styleProps?.disabled || false"
-              [impact]="action.styleProps?.impact || 'none'"
-              [size]="action.styleProps?.size || 'medium'"
-              [shape]="action.styleProps?.shape || 'rounded'"
-              [tone]="action.styleProps?.tone || 'primary'"
-              [shadow]="action.styleProps?.shadow || 'none'"
-              (click)="action.callback(row)">
-              <p class="text-nowrap">{{ action.label }}</p></app-button
-            >
-          </div>
-        </td>
-      </tr>
+      <ng-container *ngIf="tableConfig.tableBody.length; else emptyTable">
+        <tr *ngFor="let row of tableConfig.tableBody; index as bodyItemIndex" class="bg-background">
+          <td
+            *ngFor="let value of getObjectValues(row); index as i"
+            class="px-3 py-4 text-sm font-light text-muted-foreground">
+            <div class="flex gap-1">
+              <input
+                *ngIf="i === 0 && showEachCheckbox"
+                #checkboxChild
+                type="checkbox"
+                (change)="onCheckboxChange($event, bodyItemIndex)" />
+              <p *ngIf="i !== tableConfig.assetIndexFromBody" class="text-nowrap">{{ value }}</p>
+              <img *ngIf="i === tableConfig.assetIndexFromBody" [src]="value" class="h-10 w-10 rounded-md" />
+            </div>
+          </td>
+          <td *ngIf="tableConfig.actions" class="px-3 py-4 text-sm font-light text-muted-foreground">
+            <div class="flex items-center gap-2">
+              <ng-container *ngFor="let action of tableConfig.actions">
+                <app-button
+                  *ngIf="_isActionConfig(action)"
+                  [impact]="action.styleProps?.impact || 'none'"
+                  [size]="action.styleProps?.size || 'medium'"
+                  [shape]="action.styleProps?.shape || 'rounded'"
+                  [tone]="action.styleProps?.tone || 'primary'"
+                  [shadow]="action.styleProps?.shadow || 'none'"
+                  (buttonClick)="action.callback(row)">
+                  <p class="text-nowrap">{{ action.label }}</p>
+                </app-button>
+                @if(_isActionTemplateRefConfig(action)){
+                <ng-container
+                  *ngTemplateOutlet="
+                    action.templateRef;
+                    context: {
+                      row: row,
+                      rowIndex: bodyItemIndex
+                    }
+                  ">
+                </ng-container>
+                }
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #emptyTable>
+        <tr>
+          <td colspan="100%" class="py-6 text-center text-xl text-gray-600">خالی!</td>
+        </tr>
+      </ng-template>
     </tbody>
   </table>
 </div>

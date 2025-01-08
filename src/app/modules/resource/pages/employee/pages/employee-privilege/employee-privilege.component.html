@@ -1,0 +1,74 @@
+<div class="w-full">
+  <!-- Header Section -->
+  <div class="p-5 pb-0">
+    <p class="border-b border-border pb-5 text-xl font-semibold text-muted-foreground">دسترسی</p>
+  </div>
+
+  <!-- Main Content Section -->
+  <div class="flex flex-col items-center gap-8 space-y-6 p-5">
+    <!-- Privilege Card -->
+    <div *ngIf="privilege" class="relative w-full rounded-lg border border-gray-300 bg-white shadow-lg sm:w-96 lg:w-80">
+      <!-- Delete Card Button -->
+      <button
+        (click)="remove()"
+        class="absolute -start-2 -top-2 inline-flex items-center justify-center rounded-full bg-red-100 p-2 text-red-600 hover:bg-red-200 focus:ring-2 focus:ring-red-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Card Content -->
+      <div class="space-y-6 p-6">
+        <!-- Section Title -->
+        <div class="flex items-center justify-between text-lg font-semibold text-gray-800">
+          <span>بخش</span>
+          <div class="inline-flex items-center rounded-full bg-card px-4 py-2 text-muted-foreground">
+            {{ privilege.main }}
+          </div>
+        </div>
+
+        <!-- Subsection -->
+        <div class="flex items-center justify-between text-lg font-semibold text-gray-800">
+          <span>زیر بخش</span>
+          <div class="inline-flex items-center rounded-full bg-card px-4 py-2 text-muted-foreground">
+            {{ privilege.sub }}
+          </div>
+        </div>
+
+        <!-- Permissions Section -->
+        <div class="space-y-4">
+          <div class="text-sm font-medium text-gray-600">دسترسی</div>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <!-- Conditional Permission Tags -->
+            <span
+              *ngIf="privilege.add"
+              class="inline-flex items-center rounded-full bg-green-100 px-4 py-2 text-green-600">
+              افزودن
+            </span>
+            <span
+              *ngIf="privilege.delete"
+              class="inline-flex items-center rounded-full bg-red-100 px-4 py-2 text-red-600">
+              حذف
+            </span>
+            <span
+              *ngIf="privilege.edit"
+              class="inline-flex items-center rounded-full bg-blue-100 px-4 py-2 text-blue-600">
+              ویرایش
+            </span>
+            <span
+              *ngIf="privilege.status"
+              class="inline-flex items-center rounded-full bg-yellow-100 px-4 py-2 text-yellow-600">
+              وضعیت
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Placeholder for "No Access" message -->
+    <div *ngIf="!privilege" class="text-red-700">فاقد دسترسی</div>
+
+    @if(form){
+    <app-form-builder2 label="ویرایش دسترسی" [showStepper]="false" [forms]="[form]"></app-form-builder2>
+    }
+  </div>
+</div>

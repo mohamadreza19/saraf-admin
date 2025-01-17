@@ -8,4 +8,5 @@ export interface Controls {
   exchangeOffice: FormControl2;
   subject: FormControl2;
   priority: FormControl2;
+  shouldSendEmail: FormControl2;
 }

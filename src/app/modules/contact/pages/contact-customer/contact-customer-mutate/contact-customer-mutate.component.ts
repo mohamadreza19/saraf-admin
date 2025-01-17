@@ -45,7 +45,7 @@ export class ContactCustomerMutateComponent implements AfterViewInit {
       }),
       employee: new FormControl2('', {
         label: 'انتخاب کارمند',
-        type: 'multi-select',
+        type: 'search-select',
         show: false,
         options: ['علی رضایی', 'رضا مرادی'],
         // showIf: ['userType', 'انتخاب کارمند'],
@@ -53,7 +53,7 @@ export class ContactCustomerMutateComponent implements AfterViewInit {
       }),
       exchangeOffice: new FormControl2('', {
         label: 'انتخاب صراف',
-        type: 'multi-select',
+        type: 'search-select',
         options: ['نوا ', 'تبدیل'],
         show: false,
         // showIf: ['userType', 'انتخاب صراف'],
@@ -71,6 +71,12 @@ export class ContactCustomerMutateComponent implements AfterViewInit {
         label: 'درجه اهمیت',
         type: 'select',
         options: ['بالا', 'متوسط', 'کم'],
+
+        validators: [],
+      }),
+      shouldSendEmail: new FormControl2(false, {
+        label: 'به ایمیل',
+        type: 'checkbox',
 
         validators: [],
       }),

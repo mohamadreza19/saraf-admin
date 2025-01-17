@@ -10,6 +10,8 @@ import { CustomFormControl, CustomFormGroup } from 'src/app/shared/form-builder/
 import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { ExchangeOfficeConnectInfoModalComponent } from '../../components/exchange-office-connect-info-modal/exchange-office-connect-info-modal.component';
+import { ExchangeOfficePrivilegeModalComponent } from './components/exchange-office-privilege-modal/exchange-office-privilege-modal.component';
+import { ExchangeOfficePasswordModalComponent } from './components/exchange-office-password-modal/exchange-office-password-modal.component';
 export const exchangeOfficesData = [
   {
     firstName: 'علی',
@@ -96,14 +98,9 @@ export class ExchangeOfficeComponent {
 
       actions: [
         {
-          callback(row) {},
-          label: 'ویرایش',
-          styleProps: {
-            tone: 'warning',
+          callback: (row) => {
+            this.router.navigate(['/resource/exchange-office/add']);
           },
-        },
-        {
-          callback(row) {},
           label: 'اطلاعات کامل',
           styleProps: {
             impact: 'bold',
@@ -119,8 +116,19 @@ export class ExchangeOfficeComponent {
           },
         },
         {
-          callback(row: any) {},
-          label: 'سطوح دسترسی',
+          callback: (row: any) => {
+            this.openPrivilegeModal();
+          },
+          label: ' دسترسی',
+          styleProps: {
+            tone: 'light',
+          },
+        },
+        {
+          callback: (row: any) => {
+            this.openPasswordModal();
+          },
+          label: ' رمز عبور',
           styleProps: {
             tone: 'light',
           },
@@ -139,5 +147,18 @@ export class ExchangeOfficeComponent {
   }
   navigateToDashboard() {
     this.router.navigate(['/dashboard']);
+  }
+
+  openPrivilegeModal() {
+    this.modal.open(ExchangeOfficePrivilegeModalComponent, {
+      width: '600px',
+      maxWidth: '600px',
+    });
+  }
+  openPasswordModal() {
+    this.modal.open(ExchangeOfficePasswordModalComponent, {
+      width: '600px',
+      maxWidth: '600px',
+    });
   }
 }

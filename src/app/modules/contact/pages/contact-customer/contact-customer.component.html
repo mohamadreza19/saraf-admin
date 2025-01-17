@@ -2,6 +2,15 @@
   <div class="mb-5">
     <app-header-buttons (primaryClick)="navigatePrimary()" (lightClick)="navigateLight()"></app-header-buttons>
   </div>
+  @if (tableConfig) {
 
   <app-table1 [tableConfig]="tableConfig"></app-table1>
+  }
 </div>
+
+<ng-template #answerButton let-row="row">
+  @if(row.operation =='دریافت'){
+
+  <app-button (buttonClick)="openCommunication()" tone="info">پاسخ</app-button>
+  }
+</ng-template>

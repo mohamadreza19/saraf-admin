@@ -32,7 +32,7 @@ export class CurrencyMutateComponent {
         validators: [],
       }),
       abbreviate: new FormControl2('', {
-        label: 'مخفف',
+        label: 'اختصار',
         type: 'text',
         validators: [],
       }),
@@ -41,6 +41,11 @@ export class CurrencyMutateComponent {
         type: 'text',
         label: 'عنوان مستعار',
 
+        validators: [],
+      }),
+      description: new FormControl2('', {
+        label: 'توضیحات',
+        type: 'text',
         validators: [],
       }),
       isActive: new FormControl2('', {

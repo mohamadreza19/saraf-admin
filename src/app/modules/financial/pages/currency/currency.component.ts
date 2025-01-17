@@ -13,20 +13,20 @@ import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk
 
 const data = [
   {
+    logo: 'https://cdn-icons-png.flaticon.com/512/1490/1490853.png',
     order: '1',
     currencyCode: 'USD',
     currencyName: 'دلار',
     currencyNicName: 'دلار آمریکا',
-    status: 'فعال',
-    type: 'رسمی',
+    baseCurrency: 'یورو',
   },
   {
+    logo: 'https://cdn-icons-png.flaticon.com/512/1490/1490853.png',
     order: '2',
     currencyCode: 'USD',
     currencyName: 'دلار',
     currencyNicName: 'دلار آمریکا',
-    status: 'غیرفعال',
-    type: 'شخصی',
+    baseCurrency: 'یورو',
   },
 ];
 @Component({
@@ -49,12 +49,19 @@ export class CurrencyComponent implements AfterViewInit {
   tableConfig!: TableConfig;
   control!: FormControl2;
 
+  _activeControl = new FormControl2(true, {
+    label: '',
+    type: 'checkbox',
+    validators: [],
+  });
+
   data = data;
 
   allDataIndex!: number[];
 
   @ViewChild('coefficientRegistration') coefficientRegistrarTemplate!: TemplateRef<any>;
   @ViewChild('reorderTemplate') reorderTemplate!: TemplateRef<any>;
+  @ViewChild('activeTemplate') activeTemplate!: TemplateRef<any>;
 
   constructor(private router: Router) {}
 
@@ -64,23 +71,23 @@ export class CurrencyComponent implements AfterViewInit {
     this.tableConfig = {
       title: 'ارز ها',
       form: this.generateTableForm(),
-      tableHeader: ['ترتیب', 'کد ارز ', 'عنوان ارز', 'عنوان مستعار', 'فعال / غیرفعال', 'نوع'],
+      tableHeader: ['لوگو', 'ترتیب', 'کد ارز ', 'عنوان ارز', 'عنوان مستعار', 'ارز مبنا', 'وضعیت'],
       tableBody: this.data,
-      customStylePerColumnVal: {
-        فعال: ' p-1 rounded-lg bg-green-100 text-green-700',
-        غیرفعال: ' p-1 rounded-lg bg-red-100 text-red-700',
-      },
+      assetIndexFromBody: 0,
       actions: [
         {
-          label: 'ویرایش',
-          callback(row) {},
+          templateRef: this.activeTemplate,
         },
         {
           templateRef: this.coefficientRegistrarTemplate,
         },
         {
-          templateRef: this.reorderTemplate,
+          label: 'ویرایش',
+          callback(row) {},
         },
+        // {
+        //   templateRef: this.reorderTemplate,
+        // },
       ],
     };
   }

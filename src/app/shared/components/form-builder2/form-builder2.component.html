@@ -12,7 +12,7 @@
       </app-button>
     </div>
 
-    @if(showStepper){
+    @if(showStepper && steps.length>1){
     <div class="stepper-wrapper rounded-md p-1">
       <com-stepper
         (clickStep)="handleStepClick($event)"

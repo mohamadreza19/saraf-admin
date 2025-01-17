@@ -5,6 +5,7 @@ import { FinancialComponent } from './financial.component';
 import { CurrencyComponent } from './pages/currency/currency.component';
 import { CurrencyMutateComponent } from './pages/currency/currency-mutate/currency-mutate.component';
 import { BankAccountComponent } from './pages/bank-account/bank-account.component';
+import { FinancialAccountComponent } from './components/financial-account/financial-account.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       { path: 'currency', component: CurrencyComponent },
       { path: 'currency/add', component: CurrencyMutateComponent },
       { path: 'bank-account', component: BankAccountComponent },
+      {
+        path: 'admin-bank-account',
+        component: FinancialAccountComponent,
+      },
 
       { path: '**', redirectTo: 'errors/404' },
     ],

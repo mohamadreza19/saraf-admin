@@ -10,7 +10,7 @@ import {
   IrBankAccount,
   IrBankAccountValues,
 } from './components/add-financial-account-modal/controls';
-import { getKeysOfInterface } from 'src/app/core/utils/get-keys-of-interface.util';
+
 import {
   CRYPTOCURRENCY_ACCOUNT_DATA,
   FINANCIAL_ACCOUNT_TYPES,

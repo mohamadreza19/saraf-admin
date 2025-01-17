@@ -6,6 +6,6 @@ export enum Module {
 export enum Period {
   monthly = 'یک ماهه',
   threeMonths = 'سه ماهه',
-  sixMonths = 'شیش ماهه',
+  sixMonths = 'شش ماهه',
   yearly = 'سالیانه',
 }

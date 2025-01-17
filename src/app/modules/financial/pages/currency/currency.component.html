@@ -1,12 +1,31 @@
-<div class="w-full">
+<div class="flex w-full flex-col gap-10">
   <app-header-buttons (primaryClick)="navigateToAddCurrency()" (lightClick)="backToDash()"></app-header-buttons>
 
-  <div
-    view-exchange-table
-    [label]="table1Label"
-    [body]="table1Body"
-    [showEdit]="true"
-    [keys]="table1Keys"
-    [itemIconUrls]="table1IconsUrl"
-    [forbiddenKeysInItem]="table1ForbiddenKeysInItem"></div>
+  @if(tableConfig){
+
+  <app-table1 (ondrop)="drop($event)" [tableConfig]="tableConfig"></app-table1>
+  }
+</div>
+
+<ng-template #coefficientRegistration>
+  <div class="flex flex-col text-nowrap">
+    <label class="mb-2 text-xs font-bold text-muted-foreground">ضریب تبدیل</label>
+    <input type="text" class="w-full rounded-md border border-border px-3 py-3" value="1.2" />
+  </div>
+</ng-template>
+<ng-template #reorderTemplate let-row="row" let-rowIndex="rowIndex">
+  <div class="flex flex-col text-nowrap">
+    <label class="mb-2 text-xs font-bold text-muted-foreground">جابجایی ترتیب به</label>
+    <select class="mt-auto ps-6" (change)="onEachCurrencyReorder($event, rowIndex)">
+      @for (index of allDataIndex; track $index) {
+      <option [selected]="index == rowIndex" [value]="index">{{ index + 1 }}</option>
+      }
+    </select>
+  </div>
+</ng-template>
+
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <!-- @for (item of data; track data) {
+    <div class="example-box" cdkDrag>{{movie}}</div>
+  } -->
 </div>

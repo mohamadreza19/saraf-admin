@@ -1,0 +1,23 @@
+<div class="max-h-[600px] w-full overflow-auto scrollbar-thin">
+  <!-- Stepper -->
+  <div class="mx-2 my-5 mt-9 flex items-center justify-center gap-6 rounded-lg bg-gray-100 py-2 shadow-md">
+    <section
+      *ngFor="let option of steps"
+      class="flex items-center gap-3   text-sm {{ step == option && ' !text-2xl font-bold ' }}
+    ">
+      <input type="radio" [id]="option" name="bank-type" [(ngModel)]="step" [value]="option" class="peer hidden" />
+      <label
+        [for]="option"
+        class="cursor-pointer text-muted-foreground transition-all duration-300 peer-checked:text-primary"
+        >{{ option }}</label
+      >
+    </section>
+  </div>
+
+  <!--Form  -->
+
+  @if(form){
+
+  <app-form-builder2 [showHeader]="false" [forms]="[form]"></app-form-builder2>
+  }
+</div>

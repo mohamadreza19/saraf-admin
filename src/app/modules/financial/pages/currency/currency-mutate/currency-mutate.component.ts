@@ -1,10 +1,13 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { FormControl2, FormBuilder2Component } from 'src/app/shared/components/form-builder2/form-builder2.component';
+import { Component } from '@angular/core';
 import {
   CustomFormControl,
   CustomFormGroup,
   FormBuilderComponent,
 } from 'src/app/shared/form-builder/form-builder.component';
+import {
+  FormBuilder2Component,
+  FormControl2,
+} from '../../../../../shared/components/form-builder2/form-builder2.component';
 
 @Component({
   selector: 'app-currency-mutate',
@@ -12,10 +15,10 @@ import {
   imports: [FormBuilderComponent, FormBuilder2Component],
   templateUrl: './currency-mutate.component.html',
 })
-export class CurrencyMutateComponent implements AfterViewInit {
-  form!: CustomFormGroup;
+export class CurrencyMutateComponent {
+  forms: CustomFormGroup[] = [];
 
-  ngAfterViewInit(): void {
+  constructor() {
     const controls = {
       name: new FormControl2('', {
         type: 'text',
@@ -23,32 +26,31 @@ export class CurrencyMutateComponent implements AfterViewInit {
 
         validators: [],
       }),
-      logo: new FormControl2([], {
+      logo: new FormControl2('', {
+        label: 'لگو',
         type: 'files',
-        filesLength: 1,
-        label: 'لوگو',
-        allowedFileTypes: ['jpeg', 'png'],
         validators: [],
       }),
-      acronym: new FormControl2('', {
+      abbreviate: new FormControl2('', {
+        label: 'مخفف',
         type: 'text',
-        label: 'اختصار',
+        validators: [],
+      }),
+
+      nicName: new FormControl2('', {
+        type: 'text',
+        label: 'عنوان مستعار',
 
         validators: [],
       }),
-      baseCurrency: new FormControl2('', {
-        type: 'text',
-        label: 'ارز پایه',
-
-        validators: [],
-      }),
-      rateToBaseCurrency: new FormControl2('', {
-        type: 'text',
-        label: 'ضریب نسبت به ارز مبنا',
-
+      isActive: new FormControl2('', {
+        label: 'فعال',
+        type: 'checkbox',
         validators: [],
       }),
     };
-    this.form = new CustomFormGroup(controls, 'افزودن ارز', 'افزودن');
+    const form1 = new CustomFormGroup(controls, 'افزودن ارز', 'افزودن');
+
+    this.forms.push(form1);
   }
 }

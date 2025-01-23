@@ -170,3 +170,11 @@
 
 /** Plugins **/
 @import './assets/styles/apexchart.scss';
+
+.cdk-overlay-container {
+  /* position: fixed !important; */
+}
+
+.mat-dialog-content {
+  max-height: 100% !important;
+}

@@ -5,6 +5,15 @@
   "projects": {
     "angular-tailwind": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": {
+          "baseHref": "src/locale/messages.xlf",
+          "code": "fa-IR"
+        },
+        "locales": {
+          "en-US": "src/locale/messages.en.xlf"
+        }
+      },
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
@@ -13,9 +22,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": ["fa-IR"],
             "outputPath": "dist/",
             "index": "src/index.html",
-            "polyfills": ["src/polyfills.ts"],
+            "polyfills": ["src/polyfills.ts", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -61,12 +71,7 @@
                   "maximumError": "150kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+
               "outputHashing": "all"
             },
             "development": {
@@ -100,12 +105,12 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["src/polyfills.ts", "@angular/localize/init"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": ["@angular/material/prebuilt-themes/azure-blue.css", "src/styles.scss"],
             "scripts": ["node_modules/apexcharts/dist/apexcharts.min.js"]
           }
         }

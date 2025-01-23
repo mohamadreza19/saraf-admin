@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="4327951684101806729" datatype="html">
+        <source>مبلغ کل درآمد فروش پنل</source>
+        <target>Total Panel Sales Revenue</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4393025540928015851" datatype="html">
+        <source> سامانه خرید و فروش ارز ، طلا و نقره <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/></source>
+        <target>Currency, Gold, and Silver Trading System </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/navbar.component.html</context>
+          <context context-type="linenumber">28,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3779790977981682137" datatype="html">
+        <source>پیمان</source>
+        <target>Peyman</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/navbar.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

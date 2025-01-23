@@ -35,7 +35,7 @@ export interface Input {
   placeholder?: string;
   options?: string[]; // For select, radio, and checkbox inputs
   selectedOptionIndex?: number;
-  validators: [];
+  validators: any[];
   disabled?: boolean;
   show?: boolean;
   allowedFileTypes?: FileType[];

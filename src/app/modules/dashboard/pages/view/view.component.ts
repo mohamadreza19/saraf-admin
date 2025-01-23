@@ -9,6 +9,7 @@ import { Employ } from '../../models/Employ';
 import { Currency } from '../../models/Currency';
 import { ExchangeBills } from '../../models/Exchange‌‌Bills';
 import { MapComponent } from '../../components/map/map.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-view',
@@ -25,6 +26,8 @@ import { MapComponent } from '../../components/map/map.component';
   styleUrl: './view.component.scss',
 })
 export class ViewComponent {
+  titleOne = $localize`مبلغ کل درآمد فروش پنل`;
+  //
   table1Keys: string[];
   table1Label = 'لیست صرافیها';
   table1Body: exchangeOffice[];

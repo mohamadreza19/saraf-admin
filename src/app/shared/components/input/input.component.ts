@@ -27,6 +27,7 @@ import { SearchSelectInputComponent } from './search-select-input/search-select-
 
 import { matLockOutline } from '@ng-icons/material-icons/outline';
 import { SelectAddComponent } from './select-add/select-add.component';
+import { SharedModuleModule } from '../../modules/shared-module/shared-module.module';
 @Component({
   selector: 'app-input',
   standalone: true,
@@ -48,8 +49,8 @@ import { SelectAddComponent } from './select-add/select-add.component';
     PhoneNumberInputComponent,
     AmountInputComponent,
     SearchSelectInputComponent,
-    CommonModule,
-
+    // CommonModule,
+    SharedModuleModule,
     SelectAddComponent,
   ],
   templateUrl: './input.component.html',

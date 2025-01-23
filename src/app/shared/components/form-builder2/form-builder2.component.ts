@@ -10,6 +10,7 @@ import { CustomFormGroup } from '../../form-builder/form-builder.component';
 import { CommonModule, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
 import { BehaviorSubject } from 'rxjs';
+import { SharedModuleModule } from '../../modules/shared-module/shared-module.module';
 
 @Component({
   selector: 'app-form-builder2',
@@ -23,7 +24,7 @@ import { BehaviorSubject } from 'rxjs';
     ReactiveFormsModule,
     CardComponent,
     ButtonComponent,
-
+    SharedModuleModule,
     NgTemplateOutlet,
   ],
   templateUrl: './form-builder2.component.html',

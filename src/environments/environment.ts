@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiUrl: 'http://185.110.191.40:2020',
 };
 
 /*

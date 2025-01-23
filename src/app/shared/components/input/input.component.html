@@ -129,10 +129,12 @@
       <input  #passwordInput  type="password" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
     </div>
   </ng-template>
+
   <ng-template #selectAdd>
   <app-select-add [control]="control"></app-select-add>
   </ng-template>
 
+  
   <!-- Render the Appropriate Template -->
   <ng-container [ngSwitch]="control.type">
     <ng-container *ngSwitchCase="'text'" [ngTemplateOutlet]="textInput"></ng-container>
@@ -155,4 +157,8 @@
       <p class="text-red-500">Unknown input type</p>
     </ng-container>
   </ng-container>
+
+  <span class="text-red-500 text-xs ">
+    {{control | errorMessage}}
+  </span>
 </section>

@@ -1,0 +1,26 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
+import { ValidationMessages } from '../constants/validation-messages';
+
+@Pipe({
+  name: 'errorMessage',
+  pure: false, // Mark the pipe as impure to ensure it recalculates whenever the control's state changes
+})
+export class ErrorMessagePipe implements PipeTransform {
+  transform(control: AbstractControl): string | null {
+    // console.log(control.touched);
+    if (!control || !control.errors || !control.touched) return null;
+    for (const errorKey of Object.keys(control.errors) as Array<keyof typeof ValidationMessages>) {
+      const error = control.errors[errorKey];
+      const message = ValidationMessages[errorKey];
+      // console.log(error);
+
+      // If the message is a function, call it with the error object
+      if (message) {
+        return typeof message === 'function' ? message(error) : message;
+      }
+    }
+
+    return null; // If no matching error message is found
+  }
+}

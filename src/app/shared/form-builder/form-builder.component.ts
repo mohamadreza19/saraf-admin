@@ -125,4 +125,9 @@ export class CustomFormGroup extends FormGroup {
 
     this._onSubmit = _onSubmit || function () {};
   }
+
+  // override markAsTouched(opts?: { onlySelf?: boolean }): void {
+  //   super.markAsTouched(opts);
+  //   Object.values(this.controls).forEach((control) => control.markAsTouched());
+  // }
 }

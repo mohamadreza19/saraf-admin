@@ -39,12 +39,12 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     const controls = {
-      username: new FormControl2('sadasdaasd', {
+      username: new FormControl2('', {
         label: 'نام کاربری',
         type: 'text',
         validators: [Validators.required],
       }),
-      password: new FormControl2('sadasdada', {
+      password: new FormControl2('', {
         label: 'رمز ورود',
         type: 'text',
         validators: [Validators.required, Validators.minLength(6)],

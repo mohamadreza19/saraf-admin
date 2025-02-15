@@ -4,7 +4,7 @@ import {
   ExchangeOfficeControls,
   ExchangeOfficeControls2,
   ExchangeOfficeControls3,
-} from 'src/app/modules/financial/pages/exchange-office/exchange-office-mutate/controls';
+} from 'src/app/modules/resource/pages/exchange-office/exchange-office-mutate/controls';
 import {
   AmountFormControl,
   FormControl2,
@@ -253,7 +253,7 @@ export class EmployeeMutateComponent {
         controls.expireDate.show = false;
       }
     });
-    this.docs.push(controls);
+    // this.docs.push(controls);
   }
   deleteDoc(docIndex: number) {
     this.docs = this.docs.filter((_, index) => index !== docIndex);

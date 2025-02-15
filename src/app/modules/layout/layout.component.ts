@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavigationEnd, Router, RouterOutlet, Event } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CdkScrollable, ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   standalone: true,
-  imports: [SidebarComponent, NavbarComponent, RouterOutlet, FooterComponent],
+  imports: [SidebarComponent, NavbarComponent, RouterOutlet, FooterComponent, CdkScrollable, ScrollingModule],
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements AfterViewInit {
   private mainContent: HTMLElement | null = null;
 
   constructor(private router: Router) {
@@ -23,8 +24,9 @@ export class LayoutComponent implements OnInit {
       }
     });
   }
-
-  ngOnInit(): void {
-    this.mainContent = document.getElementById('main-content');
+  ngAfterViewInit(): void {
+    // document.getElementById('main-content')?.addEventListener('scroll', (e) => {
+    //   console.log(e);
+    // });
   }
 }

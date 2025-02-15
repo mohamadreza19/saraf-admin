@@ -5,9 +5,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
   providedIn: 'root',
 })
 export class ModalService {
-  constructor(private dialog: MatDialog) {
-    console.log(dialog);
-  }
+  constructor(private dialog: MatDialog) {}
 
   open(component: Type<any>, config: MatDialogConfig = {}): MatDialogRef<any> {
     return this.dialog.open(component, config);

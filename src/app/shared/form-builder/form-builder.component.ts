@@ -4,7 +4,10 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { InputComponent } from '../components/input/input.component';
 import { ButtonComponent } from '../components/button/button.component';
-import { FormControl2 } from '../components/form-builder2/form-builder2.component';
+import { FormArray2, FormControl2 } from '../components/form-builder2/form-builder2.component';
+import { BehaviorSubject } from 'rxjs';
+import { Utils } from 'jalali-ts';
+import { convertJalaliToGregorian } from 'src/app/core/utils/convert-jalali-to-gregorian';
 
 @Component({
   selector: 'app-form-builder',
@@ -41,17 +44,9 @@ export class FormBuilderComponent implements AfterViewChecked {
       formGroup[name] = form.inputs[name];
     });
 
-    this.forms.push(this.fb.group(formGroup));
+    // this.forms.push(this.fb.group(formGroup));
   }
 
-  _felidController(felid: FormInput) {
-    // return {
-    //   [felid.name]: {
-    //     ...new FormControl(''),
-    //     type: felid.type,
-    //   },
-    // };
-  }
   _getControlAsFormControl2(control: any): FormControl2 {
     return control;
   }
@@ -83,11 +78,6 @@ export class FormBuilderComponent implements AfterViewChecked {
     if (stepIndex <= currentIndex) return true;
     return false;
   }
-  _deepCopy() {}
-  _isOdd(number: number) {
-    console.log(number);
-    return number % 2 !== 0;
-  }
 }
 
 export class CustomFormControl extends FormControl {
@@ -113,10 +103,24 @@ export class CustomFormControl extends FormControl {
 }
 
 export class CustomFormGroup extends FormGroup {
+  private _disabled = new BehaviorSubject<boolean>(false);
+  private disabled$ = this._disabled.asObservable();
   rootLabel?: string;
   submitText?: string;
+  submit$ = new BehaviorSubject<CustomFormGroup>(this);
+  override disable(opts?: { onlySelf?: boolean; emitEvent?: boolean }): void {
+    super.disable(opts);
+    this._disabled.next(true);
+  }
+  override get disabled(): boolean {
+    if (this._disabled) {
+      return this._disabled.value;
+    }
+    return false;
+  }
 
   _onSubmit?: (form: this) => void;
+
   constructor(controls: any, rootLabel?: string, submitText?: string, _onSubmit?: (form: CustomFormGroup) => void) {
     super(controls);
 
@@ -125,9 +129,77 @@ export class CustomFormGroup extends FormGroup {
 
     this._onSubmit = _onSubmit || function () {};
   }
+  getValues() {
+    return FormValuesMapper.mapValue(this);
+  }
+}
 
-  // override markAsTouched(opts?: { onlySelf?: boolean }): void {
-  //   super.markAsTouched(opts);
-  //   Object.values(this.controls).forEach((control) => control.markAsTouched());
-  // }
+class FormValuesMapper {
+  static mapValue(formAbstract: any): any {
+    if (formAbstract instanceof CustomFormGroup) {
+      const controls = formAbstract.controls;
+
+      return Object.entries(controls).reduce((per: { [key: string]: any }, [key, value]) => {
+        if (this.isKeyTemplate(key)) return per;
+        if (value instanceof FormControl2) per[key] = this.mapFormControlValue(value);
+        else if (value instanceof FormArray2) per[key] = this.mapFormArray(value);
+
+        return per;
+      }, {});
+    }
+  }
+
+  private static mapFormControlValue(formControl: FormControl2) {
+    formControl.markAllAsTouched();
+    const { type, value, filesLength, optionObjImportantKey } = formControl;
+
+    switch (type) {
+      case 'files':
+        if (filesLength == 1) return value[0];
+        else return value;
+
+      case 'select':
+        if (optionObjImportantKey && value) {
+          const objSelectedValue = formControl.getSelectedOptionAsObject() as any;
+
+          if (optionObjImportantKey && objSelectedValue && optionObjImportantKey in objSelectedValue)
+            return objSelectedValue[optionObjImportantKey];
+        } else return value;
+
+        break;
+      case 'map':
+        if (value) {
+          return JSON.stringify({
+            lat: String(value[0]),
+            lng: String(value[1]),
+          });
+        }
+
+        break;
+
+      case 'checkbox':
+        if (value) return 1;
+        else return 0;
+      case 'date':
+        if (value) {
+          return convertJalaliToGregorian(value);
+        }
+        break;
+      default:
+        return value;
+    }
+  }
+  private static mapFormArray(formArray: FormArray2) {
+    return formArray.controls.reduce((per: object[], cur) => {
+      const mapped = this.mapValue(cur);
+      if (mapped) {
+        per.push(mapped);
+      }
+
+      return per;
+    }, []);
+  }
+  private static isKeyTemplate(key: string) {
+    return key.charAt(key.length - 1) == '_';
+  }
 }

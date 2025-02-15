@@ -1,113 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CustomFormControl, CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
 import { TableConfig } from 'src/app/shared/models/table-config';
 import { HeaderButtonsComponent } from '../../components/header-buttons/header-buttons.component';
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
+import { LanguageApiService } from 'src/app/shared/apis/language-api.service';
+import { CurrencyApiService } from 'src/app/shared/apis/currency-api.service';
+import { lastValueFrom } from 'rxjs';
+import { FaCurrencyType, EnCurrencyType } from './constants';
+import { BankAccountRouterLinkQuery } from './types';
 
 @Component({
   selector: 'app-bank-account',
   standalone: true,
-  imports: [HeaderButtonsComponent, TableComponent],
+  imports: [HeaderButtonsComponent, TableComponent, RouterLink],
   templateUrl: './bank-account.component.html',
   styleUrl: './bank-account.component.css',
 })
-export class BankAccountComponent {
+export class BankAccountComponent implements OnInit {
   tableConfig!: TableConfig;
+  languageId = '';
 
-  constructor(private router: Router) {
-    this.tableConfig = {
-      title: 'حساب‌ها',
-      form: this.generateForm(),
-      tableHeader: [
-        'نوع حساب',
-        'نام بانک/صرافی/کیف پول',
-        'نوع مبلغ',
-        'شماره حساب',
-        'شماره کارت',
-        'شماره شبا',
-        'نوع حساب (پس انداز/جاری)',
-        'موجودی',
-        'مینیمم هزینه انتقال',
-        'ماکزیمم هزینه انتقال',
-        'بستر انتقال',
-        'فعال / غیرفعال',
-      ],
-      tableBody: [
-        {
-          accountType: 'بانکی',
-          bankName: 'بانک ملی',
-          amountType: 'ریال',
-          accountNumber: '123456789',
-          cardNumber: '6037991234567890',
-          iban: 'IR123456789012345678901234',
-          savingsType: 'جاری',
-          balance: 1000000,
-          minTransferFee: 1000,
-          maxTransferFee: 50000,
-          transferPlatform: '',
-          isActive: 'فعال',
-        },
-        {
-          accountType: 'رمز ارزی',
-          bankName: '',
-          amountType: 'دلار',
-          accountNumber: '0xabc123def456',
-          cardNumber: '',
-          iban: '',
-          savingsType: '',
-          balance: 500,
-          minTransferFee: 0,
-          maxTransferFee: 10,
-          transferPlatform: 'بستر Ethereum',
-          isActive: 'غیرفعال',
-        },
-        {
-          accountType: 'مجازی',
-          bankName: '',
-          amountType: 'یورو',
-          accountNumber: 'virtual123456',
-          cardNumber: '',
-          iban: '',
-          savingsType: '',
-          balance: 1500,
-          minTransferFee: 2,
-          maxTransferFee: 50,
-          transferPlatform: 'بستر PayPal',
-          isActive: 'فعال',
-        },
-      ],
-      customStylePerColumnVal: {
-        فعال: 'p-1 rounded-lg bg-primary text-background',
-        غیرفعال: 'p-1 rounded-lg bg-muted text-background',
-      },
-      actions: [],
+  irCurTypeId = '';
+  cryptoCurTypeId = '';
+  visaCurTypeId = '';
+  materCurTypeId = '';
+
+  constructor(
+    private router: Router,
+    private languageApi: LanguageApiService,
+
+    private currencyApi: CurrencyApiService,
+  ) {}
+
+  async ngOnInit() {
+    const language = await lastValueFrom(this.languageApi.getBasedLocale());
+    this.languageId = language.id;
+    const currencyTypes = await lastValueFrom(this.currencyApi.getAllCurrencyTypesByLanguageId(language.id));
+
+    for (const currencyType of currencyTypes) {
+      const title = currencyType.title.toLocaleLowerCase();
+
+      if (title.includes(EnCurrencyType.Ir) || title.includes(FaCurrencyType.Ir)) {
+        this.irCurTypeId = currencyType._id;
+      } else if (title.includes(EnCurrencyType.Crypto) || title.includes(FaCurrencyType.Crypto)) {
+        this.cryptoCurTypeId = currencyType._id;
+      } else if (title.includes(EnCurrencyType.Master) || title.includes(FaCurrencyType.Master)) {
+        this.materCurTypeId = currencyType._id;
+      } else if (title.includes(EnCurrencyType.VisaCard) || title.includes(FaCurrencyType.VisaCard)) {
+        this.visaCurTypeId = currencyType._id;
+      }
+    }
+  }
+  generateParam(currencyTypeId: string, languageId: string): BankAccountRouterLinkQuery {
+    return {
+      currencyTypeId,
+      languageId,
     };
-  }
-  generateForm() {
-    const controls = {
-      search: new FormControl2('', {
-        label: 'جستجو',
-        type: 'search',
-
-        validators: [],
-      }),
-      isActive: new FormControl2(false, {
-        type: 'checkbox',
-        label: '',
-        options: ['فعال'],
-
-        validators: [],
-      }),
-    };
-
-    return new CustomFormGroup(controls);
-  }
-  navAdd() {
-    this.router.navigate(['/financial/bank-account/add']);
-  }
-  navDash() {
-    this.router.navigate(['/dashboard']);
   }
 }

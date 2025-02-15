@@ -1,9 +1,9 @@
 
 <section
-
-  class="relative col-span-1 w-full {{control.type == 'checkbox'&&'flex-row-reverse justify-end'}}"
+[id]="control.label" 
+  class="relative col-span-1 w-full h-[calc(100%+16px)] {{control.type == 'checkbox'&&'flex-row-reverse justify-end '}}"
   [ngClass]="{
-    ' flex items-center pt-[30px]': control.type == 'radio' || control.type == 'checkbox'
+    ' flex items-center pt-[15px]': control.type == 'radio' || control.type == 'checkbox'
   }">
   <label *ngIf="control.type !== 'radio' && control.type !== 'files'" class="m-2 block text-xs font-bold text-muted-foreground"
     >{{ control.label }}
@@ -12,13 +12,18 @@
   <!-- Text Input Template -->
   <ng-template #textInput>
 
-    <input   type="text" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
+    <input    type="text" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
+  </ng-template>
+  <ng-template #numberInput>
+
+    <input   type="number" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
   </ng-template>
   <ng-template #amount>
 
     <app-amount-input [control]="control"></app-amount-input>
   </ng-template>
 <ng-template #phoneNumber>
+
   <app-phone-number-input  [control]="control"></app-phone-number-input>
 </ng-template>
 
@@ -108,7 +113,7 @@
       <option *ngIf="!control.value">
         انتخاب کنید
       </option>
-      <option *ngFor="let option of control.options">
+      <option [selected]='option ===control.value' *ngFor="let option of control.options">
         {{option}}
       </option>
     </select>
@@ -116,7 +121,11 @@
   </ng-template>
 
   <ng-template #dateInput>
-    <ng-persian-datepicker>
+    <ng-persian-datepicker
+  
+
+   
+    >
       <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
     </ng-persian-datepicker>
   </ng-template>
@@ -133,11 +142,15 @@
   <ng-template #selectAdd>
   <app-select-add [control]="control"></app-select-add>
   </ng-template>
+  <ng-template #map>
+  <app-map-input [control] ="control"></app-map-input>
+  </ng-template>
 
   
   <!-- Render the Appropriate Template -->
   <ng-container [ngSwitch]="control.type">
     <ng-container *ngSwitchCase="'text'" [ngTemplateOutlet]="textInput"></ng-container>
+    <ng-container *ngSwitchCase="'number'" [ngTemplateOutlet]="numberInput"></ng-container>
     <ng-container *ngSwitchCase="'password'" [ngTemplateOutlet]="password"></ng-container>
     <ng-container *ngSwitchCase="'phone-number'" [ngTemplateOutlet]="phoneNumber"></ng-container>
     <ng-container *ngSwitchCase="'amount'" [ngTemplateOutlet]="amount"></ng-container>
@@ -146,6 +159,7 @@
     <ng-container *ngSwitchCase="'files'" [ngTemplateOutlet]="filesInput"></ng-container>
     <ng-container *ngSwitchCase="'readonly-img'" [ngTemplateOutlet]="readOnlyImg"></ng-container>
     <ng-container *ngSwitchCase="'multi-select'" [ngTemplateOutlet]="multiSelectInput"></ng-container>
+    <ng-container *ngSwitchCase="'map'" [ngTemplateOutlet]="map"></ng-container>
     <ng-container *ngSwitchCase="'email'" [ngTemplateOutlet]="emailInput"></ng-container>
     <ng-container *ngSwitchCase="'radio'" [ngTemplateOutlet]="radioInput"></ng-container>
     <ng-container *ngSwitchCase="'checkbox'" [ngTemplateOutlet]="checkbox"></ng-container>
@@ -160,5 +174,6 @@
 
   <span class="text-red-500 text-xs ">
     {{control | errorMessage}}
-  </span>
+
+      </span>
 </section>

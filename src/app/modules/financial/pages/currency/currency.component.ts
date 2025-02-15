@@ -11,24 +11,6 @@ import { InputComponent } from '../../../../shared/components/input/input.compon
 
 import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
 
-const data = [
-  {
-    logo: 'https://cdn-icons-png.flaticon.com/512/1490/1490853.png',
-    order: '1',
-    currencyCode: 'USD',
-    currencyName: 'دلار',
-    currencyNicName: 'دلار آمریکا',
-    baseCurrency: 'یورو',
-  },
-  {
-    logo: 'https://cdn-icons-png.flaticon.com/512/1490/1490853.png',
-    order: '2',
-    currencyCode: 'USD',
-    currencyName: 'دلار',
-    currencyNicName: 'دلار آمریکا',
-    baseCurrency: 'یورو',
-  },
-];
 @Component({
   selector: 'app-currency',
   standalone: true,
@@ -55,7 +37,7 @@ export class CurrencyComponent implements AfterViewInit {
     validators: [],
   });
 
-  data = data;
+  data = [];
 
   allDataIndex!: number[];
 
@@ -122,10 +104,7 @@ export class CurrencyComponent implements AfterViewInit {
     };
     return new CustomFormGroup(controls);
   }
-  drop(event: CdkDragDrop<any>) {
-    console.log(event);
-    // moveItemInArray(this.data, event.previousIndex, event.currentIndex);
-  }
+
   onEachCurrencyReorder(event: Event, currencyIndex: number) {
     const input = event.target as HTMLInputElement;
 

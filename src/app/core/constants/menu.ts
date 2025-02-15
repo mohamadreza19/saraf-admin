@@ -4,7 +4,7 @@ export class Menu {
   public static pages: MenuItem[] = [
     {
       group: 'داشبورد',
-      separator: false,
+      separator: true,
       items: [
         {
           icon: 'assets/icons/heroicons/outline/chart-pie.svg',
@@ -16,15 +16,15 @@ export class Menu {
             // { label: 'Podcast', route: '/dashboard/podcast' },
           ],
         },
-        {
-          icon: 'assets/icons/material-icons/outline/person.svg',
-          label: 'کارمند ها',
-          route: '/resource/employee',
-        },
+        // {
+        //   icon: 'assets/icons/material-icons/outline/person.svg',
+        //   label: 'کارمند ها',
+        //   route: '/resource/employee',
+        // },
       ],
     },
     {
-      group: 'ارزی',
+      group: 'اطلاعات اولیه',
       separator: true,
       items: [
         {
@@ -90,7 +90,11 @@ export class Menu {
         // },
         {
           label: 'ثبت شماره حسابهای ادمین',
-          route: '/financial/admin-bank-account',
+          route: '/financial/bank-account',
+        },
+        {
+          label: 'انواع مدارک',
+          route: '/resource/document-type',
         },
       ],
     },

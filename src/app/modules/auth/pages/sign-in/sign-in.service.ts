@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -6,6 +6,7 @@ import { Login } from './models/login';
 import { AuthService } from '../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError } from 'rxjs';
+import { LoginResponse } from './models/login-response';
 
 @Injectable()
 export class SignInService {
@@ -13,29 +14,31 @@ export class SignInService {
   constructor(
     private readonly router: Router,
     private http: HttpClient,
-    auth: AuthService,
+    private auth: AuthService,
     private snackBar: MatSnackBar,
   ) {}
 
   login(login: Login) {
-    this.showMessage();
     const observable = this.http.post(this.apiUrl + '/auth/login', login);
 
     observable.subscribe({
-      next(value) {
-        console.log(value);
+      next: (value) => {
+        const _value = value as LoginResponse;
+
+        this.auth.saveToken(_value.data);
+
+        this.router.navigate(['/']);
       },
-      error: (err) => {
+      error: (err: HttpErrorResponse) => {
         console.log(err);
-        this.showMessage();
+        this.showMessage('sad');
       },
     });
   }
 
-  showMessage() {
-    console.log('gooz');
-    this.snackBar.open('This is a message!', 'Close', {
-      // panelClass: 'my-custom-snackbar',
+  showMessage(message: string) {
+    this.snackBar.open(message, 'بستن', {
+      panelClass: 'my-custom-snackbar',
       duration: 3000, // milliseconds
       horizontalPosition: 'center', // 'start' | 'center' | 'end' | 'left' | 'right'
       verticalPosition: 'top', // 'top' | 'bottom'

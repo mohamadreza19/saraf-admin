@@ -1,9 +1,10 @@
 // const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   prefix: '',
   important: false,
-  content: ['./src/**/*.{html,ts}'],
+  content: ['./src/**/*.{html,ts,scss,css}'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -91,6 +92,24 @@ module.exports = {
     fontFamily: {
       poppins: ['Poppins', 'system-ui', 'sans-serif'],
       nunito: ['Nunito Sans', 'sans-serif'],
+    },
+    fontSize: {
+      ...defaultTheme.fontSize,
+      'display-lg': ['57px', { lineHeight: '64px', fontWeight: '400' }],
+      'display-md': ['45px', { lineHeight: '52px', fontWeight: '400' }],
+      'display-sm': ['36px', { lineHeight: '44px', fontWeight: '400' }],
+      'headline-lg': ['32px', { lineHeight: '40px', fontWeight: '400' }],
+      'headline-md': ['28px', { lineHeight: '36px', fontWeight: '400' }],
+      'headline-sm': ['24px', { lineHeight: '32px', fontWeight: '400' }],
+      'title-lg': ['22px', { lineHeight: '28px', fontWeight: '500' }],
+      'title-md': ['16px', { lineHeight: '24px', fontWeight: '500' }],
+      'title-sm': ['14px', { lineHeight: '20px', fontWeight: '500' }],
+      'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+      'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+      'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
+      'label-lg': ['14px', { lineHeight: '20px', fontWeight: '500' }],
+      'label-md': ['12px', { lineHeight: '16px', fontWeight: '500' }],
+      'label-sm': ['11px', { lineHeight: '16px', fontWeight: '500' }],
     },
     container: {
       padding: {

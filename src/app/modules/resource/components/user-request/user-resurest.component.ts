@@ -57,7 +57,7 @@ export class UserRequestComponent {
           requestStatus: 'در حال بررسی',
         },
       ],
-      customStylePerColumnVal: {
+      customStylePerColumn: {
         'تایید شده': 'p-1 bg-green-100 text-green-700 rounded-md',
         'در حال بررسی': 'p-1 bg-yellow-100 text-yellow-700 rounded-md',
         'تایید نشده': 'p-1 bg-red-100 text-red-400 rounded-md',

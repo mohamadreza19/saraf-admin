@@ -39,7 +39,7 @@ export class SelectAddComponent implements OnInit {
   constructor(private modal: ModalService) {}
 
   ngOnInit() {
-    console.log(this.control);
+    // console.log(this.control);
   }
   ngAfterViewInit(): void {
     if (this.control && this.control.options?.length) {

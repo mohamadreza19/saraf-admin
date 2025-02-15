@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ExchangeOfficeComponent } from '../financial/pages/exchange-office/exchange-office.component';
-import { ExchangeOfficeMutateComponent } from '../financial/pages/exchange-office/exchange-office-mutate/exchange-office-mutate.component';
+import { ExchangeOfficeComponent } from './pages/exchange-office/exchange-office.component';
+import { ExchangeOfficeMutateComponent } from './pages/exchange-office/exchange-office-mutate/exchange-office-mutate.component';
+import { DocumentTypeComponent } from './pages/document-type/document-type.component';
+import { DocumentTypeMutateComponent } from './pages/document-type/pages/document-type-mutate/document-type-mutate.component';
 
 const routes: Routes = [
   {
@@ -15,12 +17,20 @@ const routes: Routes = [
         component: ExchangeOfficeComponent,
       },
       {
-        path: 'exchange-office/add',
+        path: 'exchange-office/mutate',
         component: ExchangeOfficeMutateComponent,
       },
       {
         path: 'employee',
         loadChildren: () => import('./pages/employee/employee.module').then((m) => m.EmployeeModule),
+      },
+      {
+        path: 'document-type',
+        component: DocumentTypeComponent,
+      },
+      {
+        path: 'document-type/mutate',
+        component: DocumentTypeMutateComponent,
       },
     ],
   },

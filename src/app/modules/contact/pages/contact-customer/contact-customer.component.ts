@@ -5,12 +5,13 @@ import { Ticket } from 'src/app/shared/models/ticket-interface';
 
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
 import { TableConfig } from 'src/app/shared/models/table-config';
-import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.component';
+import { CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { ModalService } from 'src/app/core/services/modal.service';
 import { ContactCustomerCommunicationModalComponent } from './components/contact-customer-communication-modal/contact-customer-communication-modal.component';
+import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 const logo =
   'https://daftarensha.ir/wp-content/uploads/2024/09/%D9%BE%D8%B3%D8%B1-%D8%A8%DA%86%D9%87-%D8%AE%D9%88%D8%B4%DA%AF%D9%84-%D8%A8%D8%B1%D8%A7%DB%8C-%D9%BE%D8%B1%D9%88%D9%81%D8%A7%DB%8C%D9%84-.jpeg';
 @Component({
@@ -56,26 +57,26 @@ export class ContactCustomerComponent implements AfterViewInit {
   constructor(private router: Router, private modal: ModalService) {}
   ngAfterViewInit(): void {
     const controls = {
-      search: new CustomFormControl(null, {
+      search: new FormControl2(null, {
         label: 'جستوجو',
 
         type: 'search',
         validators: [],
       }),
-      priority: new CustomFormControl(null, {
+      priority: new FormControl2(null, {
         label: 'الویت',
         options: ['مهم', 'متوسط'],
 
         type: 'select',
         validators: [],
       }),
-      sort: new CustomFormControl(null, {
+      sort: new FormControl2(null, {
         type: 'checkbox',
         options: ['کارمند', ' صرافی'],
         label: '',
         validators: [],
       }),
-      status: new CustomFormControl(null, {
+      status: new FormControl2(null, {
         label: 'وضعیت',
         options: ['پاسخ داده شد', 'پاسخ نشده'],
 
@@ -87,9 +88,9 @@ export class ContactCustomerComponent implements AfterViewInit {
     this.tableConfig = {
       title: 'تیکت ها ',
       tableHeader: ['شماره تیکت', 'آواتار', 'نوع کاربر', 'ارسال/دریافت', ' درجه اهمیت', 'پاسخ', 'وضعیت'],
-      form: new FormGroup(controls),
+      form: new CustomFormGroup(controls),
       tableBody: this.dummyData,
-      customStylePerColumnVal: {
+      customStylePerColumn: {
         مهم: 'text-red-500 bg-red-100 rounded-lg p-1',
         متوسط: 'text-orange-500 bg-orange-100  rounded-lg p-1',
       },

@@ -9,6 +9,7 @@ export type FileType = 'png' | 'jpg' | 'jpeg' | 'pdf';
 
 export type InputType =
   | 'text'
+  | 'number'
   | 'financial-rate'
   | 'phone-number'
   | 'amount'
@@ -23,6 +24,7 @@ export type InputType =
   | 'select'
   | 'select-add'
   | 'multi-select'
+  | 'map'
   | 'radio'
   | 'checkbox';
 
@@ -34,7 +36,10 @@ export interface Input {
   label: string;
   placeholder?: string;
   options?: string[]; // For select, radio, and checkbox inputs
+
   selectedOptionIndex?: number;
+  optionObjImportantKey?: string;
+  objOptions?: object[];
   validators: any[];
   disabled?: boolean;
   show?: boolean;

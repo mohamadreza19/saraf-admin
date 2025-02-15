@@ -1,0 +1,7 @@
+<div class="mb-10"><app-header-buttons (primaryClick)="Add()" (lightClick)="dash()"></app-header-buttons></div>
+
+<app-table1
+  [tableConfig]="tableConfig"
+  [list]="(paginationService.normalizedData$ | async)!"
+  [pagination]="(paginationService.pagination$ | async)!"
+  (onPage)="paginationService.onPageChange($event)"></app-table1>

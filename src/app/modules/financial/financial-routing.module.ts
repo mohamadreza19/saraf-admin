@@ -16,7 +16,11 @@ const routes: Routes = [
 
       { path: 'currency', component: CurrencyComponent },
       { path: 'currency/add', component: CurrencyMutateComponent },
-      { path: 'bank-account', component: BankAccountComponent },
+
+      {
+        path: 'bank-account',
+        loadChildren: () => import('./pages/bank-account/bank-account.module').then((m) => m.BankAccountModule),
+      },
       {
         path: 'admin-bank-account',
         component: FinancialAccountComponent,

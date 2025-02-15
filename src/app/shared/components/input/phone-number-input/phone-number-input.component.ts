@@ -4,47 +4,48 @@ import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.comp
 import { AngularPhoneNumberInput } from 'angular-phone-number-input';
 import { countries } from 'countries-list';
 import { NgFor, NgIf } from '@angular/common';
-import { FormControl2 } from '../../form-builder2/form-builder2.component';
+import { FormControl2, PhoneControl } from '../../form-builder2/form-builder2.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { InputComponent } from '../input.component';
 
 @Component({
   selector: 'app-phone-number-input',
   standalone: true,
-  imports: [ReactiveFormsModule, AngularPhoneNumberInput, NgFor, NgIf],
+  imports: [ReactiveFormsModule, AngularPhoneNumberInput, NgFor, NgIf, NgxIntlTelInputModule, InputComponent],
   templateUrl: './phone-number-input.component.html',
   styleUrl: './phone-number-input.component.css',
 })
 export class PhoneNumberInputComponent implements OnInit {
+  _control!: PhoneControl;
+  preCodeControl!: FormControl2;
   @Input()
-  control!: FormControl2;
+  set control(control: FormControl2) {
+    this._control = control as any;
+
+    this.preCodeControl = this._control.preCodeControlRef;
+    const selectedOptionIndex = this.preCodeControl.selectedOptionIndex;
+    if (typeof selectedOptionIndex == 'number') {
+      const option = this.preCodeControl.options[selectedOptionIndex];
+
+      this.preCodeControl.setValue(option);
+    }
+  }
+  get control() {
+    return this._control;
+  }
+
+  // _phone  =
 
   countryList: any[] = []; // List of countries
   phoneError: string = ''; // Validation error message
 
   selectedCountryCode: string = '';
 
-  ngOnInit() {
-    // Initialize form with default country and phone fields
-    // this.phoneForm = this.fb.group({
-    //   country: ['US', Validators.required], // Default country: US
-    //   phone: ['', Validators.required], // Phone field
-    // });
-
-    // Prepare the country list with names, codes, and dial codes
-
-    this.countryList = Object.entries(countries).map(([code, info]) => ({
-      code,
-      name: info.name,
-      dialCode: info.phone,
-    }));
-    this.selectedCountryCode = this.countryList[0].code;
-  }
+  ngOnInit() {}
 
   onCountryChange(e: Event) {
     // Reset phone input and validation when the country changes
 
-    const input = e.target as HTMLInputElement;
     this.control.setValue('');
-    this.phoneError = '';
-    this.selectedCountryCode = input.value;
   }
 }

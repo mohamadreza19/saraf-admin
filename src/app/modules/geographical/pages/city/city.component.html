@@ -1,0 +1,8 @@
+<app-header-buttons (primaryClick)="navAdd()" (lightClick)="navDash()"></app-header-buttons>
+<div class="mt-10 w-full">
+  <app-table1
+    [tableConfig]="tableConfig"
+    [list]="(pg.normalizedData$ | async)!"
+    [pagination]="(pg.pagination$ | async)!"
+    (onPage)="pg.onPageChange($event)"></app-table1>
+</div>

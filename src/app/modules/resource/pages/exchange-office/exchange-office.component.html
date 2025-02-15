@@ -1,0 +1,15 @@
+<div class="w-full">
+ <app-header-buttons (primaryClick)="navigateToAddExchange()"
+ (lightClick)="navigateToDashboard()"
+ />
+
+  <div class="w-full mt-5 ">
+    
+    <app-table1  [tableConfig]="tableConfig"
+    
+    [list]="(service.pagination.normalizedData$ | async)!"
+    [pagination]="(service.pagination.pagination$ | async)!"
+    (onPage)="service.pagination.onPageChange($event)"
+    ></app-table1>
+
+</div>

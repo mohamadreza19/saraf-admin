@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { InputComponent } from '../../input/input.component';
 import { CustomFormControl } from 'src/app/shared/form-builder/form-builder.component';
 import { CommonModule, NgClass, NgFor, NgIf, NgTemplateOutlet } from '@angular/common';
@@ -8,8 +8,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CustomBtnComponent } from './components/custom-btn/custom-btn.component';
 import { FormControl2 } from '../../form-builder2/form-builder2.component';
 
+import {MatPaginatorIntl, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 
 import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop'
+import { CustomPaginatorIntl } from './paginator';
+import { Pagination } from 'src/app/shared/types/pagination.interface';
+import { LoadingService } from 'src/app/core/services/loading.service';
+import { SkeletonsComponent } from "./components/skeletons/skeletons.component";
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 type Row = { [key: string]: any };
 type Rows = any
 
@@ -27,14 +33,18 @@ type Rows = any
     CommonModule,
     NgTemplateOutlet,
     //
-    CdkDropList, CdkDrag
-    
-  ],
+    CommonModule,
+    MatPaginatorModule,
+   
+    NgxSkeletonLoaderModule
+],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
+  providers: [{ provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }],
 })
 export class TableComponent implements OnInit {
-
+  loading = true
+  loadingTimeoutId:any
 
   sortDirection: { [key: string]: 'asc' | 'desc' } = {}; // Track sort direction for each column
   sortColumn: string = ''; // Track the currently sorted column
@@ -45,6 +55,8 @@ export class TableComponent implements OnInit {
 
   @Input()
   tableConfig!: TableConfig;
+  @Input()
+  list:object[]=[]
   @Input()
   allowDragAndDrop =false
 
@@ -58,14 +70,34 @@ export class TableComponent implements OnInit {
   @Output()
   deleteClick = new EventEmitter<Rows>
 
-  @Output()
-  ondrop = new EventEmitter<CdkDragDrop<any>>
+@Output()
+onPage=new EventEmitter<PageEvent>
 
   draggedIndex: boolean | null = null; // Track the index of the dragged item
 
+  
 
+@Input()
+pagination!:Pagination
+constructor(public loadingService:LoadingService){
+loadingService.loading$.subscribe(_loading_=>{
+  this.loadingTimeoutId = setTimeout(()=>{
+    if(_loading_){
+      if(this.loadingTimeoutId){
+
+        clearTimeout(this.loadingTimeoutId)
+        
+      } else this.loading=true
+    } else{
+      clearTimeout(this.loadingTimeoutId)
+      this.loading=false
+    }
+  },2300)
+})
+}
   ngOnInit(): void {
     // console.log(this.tableConfig);
+   
   }
   sortTable(column: string,columnIndex:number) {
     const currentDirection = this.sortDirection[column] || 'asc'; // Default to 'asc' if not yet sorted
@@ -76,7 +108,7 @@ export class TableComponent implements OnInit {
 
   
     // Sort the table data
-  this.tableConfig.tableBody=  this.reverseColumnValues(this.tableConfig.tableBody,columnIndex,this.sortDirection[column])
+  this.list=  this.reverseColumnValues(this.list,columnIndex,this.sortDirection[column])
    
     
   }
@@ -99,10 +131,14 @@ export class TableComponent implements OnInit {
     return data.map((row, index) => {
       return { ...row, [key]: sortedColumnValues[index] }; // Update only the specified column
     });
+
+
   }
   
   
-
+  createDummy(repeat: number) {
+    return Array.from({ length: repeat });
+  }
 
 
   getObjectValues(obj: object): string[] {
@@ -112,10 +148,10 @@ export class TableComponent implements OnInit {
     return str.length > 18 ? str.slice(0, 18) + '...' : str;
   }
   _choseClassBasedCustomStyleForVal(value: string | number) {
-    if (!this.tableConfig.customStylePerColumnVal) return '';
-    const stringVal = String(value) as keyof typeof this.tableConfig.customStylePerColumnVal;
+    if (!this.tableConfig.customStylePerColumn) return '';
+    const stringVal = String(value) as keyof typeof this.tableConfig.customStylePerColumn;
 
-    return this.tableConfig.customStylePerColumnVal[stringVal] || '';
+    return this.tableConfig.customStylePerColumn[stringVal] || '';
   }
   _getFormCroupControlsAsArray(controls: object): FormControl2[] {
     return Object.values(controls);
@@ -178,27 +214,20 @@ export class TableComponent implements OnInit {
   }
   //
 
-  onDragStart(event: any) {
-   
-    const source
-    : 
-    CdkDrag  = event.source
-    // 
-   
- 
-  }
 
-  onDragEnd(event: any) {
-    const source
-    : 
-    CdkDrag  = event.source
-    source.element.nativeElement.classList.add('!bg-red-100')
-   
 
+  getPageSizeOptions(): number[] {
+    // Example logic to calculate pageSizeOptions based on totalItems
+    if (this.pagination.totalRecord <= 10) {
+      return  [5, 10];
+    } else if (this.pagination.totalRecord <= 50) {
+      return [5, 10, 25];
+    } else {
+      return [5, 10, 25, 50, 100];
+    }
   }
-  drop(event: CdkDragDrop<string[]>) {
-    // console.log(event);
-    this.drop(event)
-    // moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  page(event: PageEvent) {
+    this.onPage.emit(event)
+    console.log(event);
   }
 }

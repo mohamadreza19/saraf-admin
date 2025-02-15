@@ -113,7 +113,7 @@ export class DebtorCreditorComponent {
         'ین', // Example additional currency
         'ارزهای دیگر', // Placeholder for more currencies
       ],
-      customStylePerColumnVal: {
+      customStylePerColumn: {
         بدهکار: ' p-1 rounded-md bg-red-100 text-red-700',
         بستانکار: ' p-1 rounded-md bg-green-100 text-green-700',
       },

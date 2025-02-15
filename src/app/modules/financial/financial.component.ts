@@ -7,4 +7,6 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   templateUrl: './financial.component.html',
 })
-export class FinancialComponent {}
+export class FinancialComponent {
+  constructor() {}
+}

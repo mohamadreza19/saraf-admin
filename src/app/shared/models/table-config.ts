@@ -1,19 +1,20 @@
 import { TemplateRef } from '@angular/core';
 import { ButtonProps } from '../components/button/button.component';
 import { CustomFormControl, CustomFormGroup } from '../form-builder/form-builder.component';
-
+type ClassStyle = string;
+type MatchedValue = string;
 export interface TableConfig {
   title?: string;
   form?: CustomFormGroup;
   tableHeader: string[];
   tableBody: object[];
-  customStylePerColumnVal?: { [key: string]: string };
+  customStylePerColumn?: { [key: MatchedValue]: ClassStyle };
   actions?: (ActionConfig | TemplateActionConfig)[];
   assetIndexFromBody?: number;
 }
 export interface ActionConfig {
   label: string; // Button text
-  callback: (row: any) => void; // Function to call on click
+  callback: (row: any, rowIndex: number) => void; // Function to call on click
   condition?: (row: any) => boolean; // Optional condition for visibility
   styleProps?: {
     disabled?: boolean;

@@ -16,6 +16,11 @@ import { Pagination } from 'src/app/shared/types/pagination.interface';
 import { LoadingService } from 'src/app/core/services/loading.service';
 import { SkeletonsComponent } from "./components/skeletons/skeletons.component";
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+
+
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SwitchComponent } from "../../swtichs/switch/switch.component";
 type Row = { [key: string]: any };
 type Rows = any
 
@@ -35,8 +40,9 @@ type Rows = any
     //
     CommonModule,
     MatPaginatorModule,
-   
-    NgxSkeletonLoaderModule
+    
+    NgxSkeletonLoaderModule,
+    SwitchComponent
 ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
@@ -135,7 +141,8 @@ loadingService.loading$.subscribe(_loading_=>{
 
   }
   
-  
+
+
   createDummy(repeat: number) {
     return Array.from({ length: repeat });
   }
@@ -198,7 +205,7 @@ loadingService.loading$.subscribe(_loading_=>{
 
   _isActionConfig(config:any ): config is ActionConfig{
 
-    if(!('templateRef' in config))return true
+    if(('label' in config))return true
 
    else return false
 
@@ -212,6 +219,21 @@ loadingService.loading$.subscribe(_loading_=>{
 
  
   }
+
+  overrideContext(row:any,index:number,onContext: TemplateActionConfig["onContext"]){
+    if(onContext){
+      return {
+        ...onContext(row,index),
+        row,
+        index
+      } 
+    } 
+    return {
+      row,
+      index
+    }
+    }
+   
   //
 
 

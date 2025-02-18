@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -10,6 +10,8 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/services/auth.service';
 import { Router } from '@angular/router';
+
+import { PlatformService } from '../services/platform.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -31,8 +33,14 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === HttpStatusCode.Unauthorized) {
           // If the response status is 401, redirect to login page
-          this.router.navigate(['/auth/sign-in']);
-          this.auth.removeToken();
+          console.log('token');
+          if (this.auth.getToken()) {
+            this.auth.removeToken();
+          }
+
+          this.router.navigateByUrl('/auth/sign-in');
+
+          // console.log('router', this.router);
         }
         // Return the error to the caller
         return throwError(error);

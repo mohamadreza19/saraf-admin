@@ -7,6 +7,8 @@ import { SidebarMenuComponent } from './sidebar-menu/sidebar-menu.component';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { NgClass, NgIf } from '@angular/common';
 import { Theme } from 'src/app/core/models/theme.model';
+import { HttpClient } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,8 +20,12 @@ import { Theme } from 'src/app/core/models/theme.model';
 export class SidebarComponent implements OnInit {
   public appJson: any = packageJson;
   public faAppName = '';
+  ip!: string;
 
-  constructor(public menuService: MenuService) {}
+  constructor(public menuService: MenuService, http: HttpClient) {
+    console.log('qwe');
+    lastValueFrom(http.get<{ ip: string }>('_ip')).then((res) => (this.ip = res.ip));
+  }
 
   ngOnInit(): void {}
 

@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ConvertControlsToAny } from '../types/convert-controls-to-any';
@@ -9,6 +9,7 @@ import { DataWithListResponse } from '../types/list-response.interface';
 import { AbstractMutateApiService } from 'src/app/core/base-components/single-form-mutate/single-form-mutate.component';
 import { ErrorWithFormLabel } from 'src/app/core/utils/error-with-form-label';
 import { errorNormalizedWithFormLabel } from 'src/app/core/utils/error-normalized-with-form-label';
+import { isPlatformServer } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ import { errorNormalizedWithFormLabel } from 'src/app/core/utils/error-normalize
 export class CountryApiService implements GETApiService, AbstractMutateApiService {
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: any) {}
 
   getAll<CountyResponse>(path: String, param: HttpParams): Observable<DataWithListResponse<CountyResponse>> {
     return this.http.get<DataWithListResponse<CountyResponse>>(this.baseUrl + '/country/Paginated/' + path, {

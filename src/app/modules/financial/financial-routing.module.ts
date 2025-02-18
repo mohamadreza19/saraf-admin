@@ -15,7 +15,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'view', pathMatch: 'full' },
 
       { path: 'currency', component: CurrencyComponent },
-      { path: 'currency/add', component: CurrencyMutateComponent },
+      { path: 'currency/mutate', component: CurrencyMutateComponent },
 
       {
         path: 'bank-account',

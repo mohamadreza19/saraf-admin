@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AngularSvgIconModule } from 'angular-svg-icon';
 import { AuthService } from './services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { PlatformService } from 'src/app/core/services/platform.service';
 
 @Component({
   selector: 'app-auth',
@@ -10,12 +12,4 @@ import { AuthService } from './services/auth.service';
   standalone: true,
   imports: [AngularSvgIconModule, RouterOutlet],
 })
-export class AuthComponent implements OnInit {
-  constructor(auth: AuthService, router: Router) {
-    if (auth.isAuthenticated()) {
-      router.navigate(['/']);
-    }
-  }
-
-  ngOnInit(): void {}
-}
+export class AuthComponent {}

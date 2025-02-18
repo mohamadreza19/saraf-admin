@@ -1,0 +1,7 @@
+.off[type='radio'] {
+  color: #ef4444 !important;
+  outline: 0 !important;
+  --tw-ring-offset-shadow: 0 !important;
+  --tw-ring-shadow: 0 !important;
+  box-shadow: 0 !important;
+}

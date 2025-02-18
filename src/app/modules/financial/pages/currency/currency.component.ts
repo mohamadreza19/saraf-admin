@@ -1,4 +1,13 @@
-import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ExchangeTableComponent } from 'src/app/modules/dashboard/components/view/exchange-table/exchange-table.component';
 import { HeaderButtonsComponent } from '../../components/header-buttons/header-buttons.component';
@@ -9,7 +18,13 @@ import { TableComponent } from '../../../../shared/components/tables/table/table
 import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 import { InputComponent } from '../../../../shared/components/input/input.component';
 
-import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk/drag-drop';
+import { PaginationService } from 'src/app/core/services/pagination.service';
+import { factory } from './pg.factory';
+import { CurrencyApiService, CurrencyResponse } from 'src/app/shared/apis/currency-api.service';
+import { lastValueFrom } from 'rxjs';
+import { LanguageApiService } from 'src/app/shared/apis/language-api.service';
+import { CommonModule } from '@angular/common';
+import { SwitchChange, SwitchComponent } from '../../../../shared/components/swtichs/switch/switch.component';
 
 @Component({
   selector: 'app-currency',
@@ -19,23 +34,16 @@ import { CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray } from '@angular/cdk
     HeaderButtonsComponent,
     TableComponent,
     InputComponent,
-
-    //
-    CdkDropList,
-    CdkDrag,
+    CommonModule,
+    SwitchComponent,
   ],
   templateUrl: './currency.component.html',
   styleUrl: './currency.component.scss',
+  providers: [{ provide: PaginationService, useFactory: factory }],
 })
 export class CurrencyComponent implements AfterViewInit {
   tableConfig!: TableConfig;
   control!: FormControl2;
-
-  _activeControl = new FormControl2(true, {
-    label: '',
-    type: 'checkbox',
-    validators: [],
-  });
 
   data = [];
 
@@ -44,28 +52,48 @@ export class CurrencyComponent implements AfterViewInit {
   @ViewChild('coefficientRegistration') coefficientRegistrarTemplate!: TemplateRef<any>;
   @ViewChild('reorderTemplate') reorderTemplate!: TemplateRef<any>;
   @ViewChild('activeTemplate') activeTemplate!: TemplateRef<any>;
+  lanApi = inject(LanguageApiService);
+  lan = '';
+  currencyApi = inject(CurrencyApiService);
+  timeoutId: any;
+  constructor(private router: Router, public pg: PaginationService<CurrencyResponse>) {}
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {}
+  async ngOnInit() {
+    const lan = await lastValueFrom(this.lanApi.getBasedLocale());
+    this.lan = lan.id;
+    this.pg.initPagination(lan.id);
+  }
   ngAfterViewInit(): void {
-    this.allDataIndex = this.data.map((_, index) => index);
+    this.pg.data$.subscribe((data) => {
+      this.allDataIndex = data.map((_, index) => index);
+    });
     this.tableConfig = {
       title: 'ارز ها',
       form: this.generateTableForm(),
-      tableHeader: ['لوگو', 'ترتیب', 'کد ارز ', 'عنوان ارز', 'عنوان مستعار', 'ارز مبنا', 'وضعیت'],
-      tableBody: this.data,
+      tableHeader: ['لوگو', 'نام', 'ضریب پایه', 'وضعیت'],
+      tableBody: [],
       assetIndexFromBody: 0,
       actions: [
         {
-          templateRef: this.activeTemplate,
+          templateRef: this.coefficientRegistrarTemplate,
+          onContext: (_, index) => ({
+            baseCoefficient: this.pg.data$.getValue()[index].baseCoefficient,
+            onEachBaseCoefficientChange: (event: Event, index: number) =>
+              this.onEachBaseCoefficientChange(event, index),
+          }),
         },
         {
-          templateRef: this.coefficientRegistrarTemplate,
+          templateRef: this.activeTemplate,
+          onContext: (_, index) => ({
+            selected: this.pg.data$.getValue()[index].active,
+            statusChange: (event: SwitchChange) => this.onEachStatusChange(event),
+          }),
         },
         {
           label: 'ویرایش',
-          callback(row) {},
+          callback: (_, index) => {
+            // this.navEdit(index);
+          },
         },
         // {
         //   templateRef: this.reorderTemplate,
@@ -73,8 +101,31 @@ export class CurrencyComponent implements AfterViewInit {
       ],
     };
   }
-  navigateToAddCurrency() {
-    this.router.navigate(['/financial/currency/add']);
+  async onEachStatusChange(event: SwitchChange) {
+    const currency = this.pg.data$.getValue()[Number(event.name)] as CurrencyResponse;
+
+    await lastValueFrom(this.currencyApi.patch(currency.id, { active: event.value }));
+  }
+  async onEachBaseCoefficientChange(event: Event, index: number) {
+    const value = (event.target as HTMLInputElement).value;
+    const currency = this.pg.data$.getValue()[index] as CurrencyResponse;
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+    this.timeoutId = setTimeout(async () => {
+      if (Number(value)) {
+        await lastValueFrom(this.currencyApi.patch(currency.id, { baseCoefficient: value }));
+      }
+    }, 500);
+  }
+  navAdd() {
+    this.router.navigate(['/financial/currency/mutate']);
+  }
+  navEdit(index: number) {
+    const entity = this.pg.data$.getValue()[index];
+    this.router.navigate(['/financial/currency/mutate'], {
+      queryParams: { languageId: this.lan, httpMethod: 'patch', entityId: entity.id },
+    });
   }
   backToDash() {
     this.router.navigate(['/dashboard']);

@@ -84,6 +84,10 @@ export class Menu {
           label: 'ماژول ها',
           route: '/admin/panel',
         },
+        {
+          label: 'انواع مدارک',
+          route: '/resource/document-type',
+        },
         // {
         //   label: 'ماژول ها',
         //   route: '/admin/module',
@@ -91,10 +95,6 @@ export class Menu {
         {
           label: 'ثبت شماره حسابهای ادمین',
           route: '/financial/bank-account',
-        },
-        {
-          label: 'انواع مدارک',
-          route: '/resource/document-type',
         },
       ],
     },

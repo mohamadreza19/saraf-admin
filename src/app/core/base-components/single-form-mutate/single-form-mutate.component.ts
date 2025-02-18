@@ -86,6 +86,7 @@ export class SingleFormMutateComponent<Controls> {
   handleAfterPatchInitialization(controls: Controls) {}
   //
 
+  handleErrorManually(error: unknown) {}
   async submit({ focusedForm, setStep }: FormSubmitEmit) {
     try {
       this.formSubmitService.onSend(focusedForm.rootLabel as string);
@@ -101,6 +102,7 @@ export class SingleFormMutateComponent<Controls> {
       this.formSubmitService.successNav(this.successText);
     } catch (error) {
       console.log(error);
+      this.handleErrorManually(error);
       this.formSubmitService.onError(error, this.formArray, setStep);
     }
   }

@@ -28,4 +28,5 @@ export interface ActionConfig {
 
 export interface TemplateActionConfig {
   templateRef: TemplateRef<any>;
+  onContext?: (row: any, index: number) => object;
 }

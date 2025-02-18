@@ -1,3 +1,7 @@
-<p>
-  document-type works!
-</p>
+<app-header-buttons (primaryClick)="navAdd()" (lightClick)="navD()"></app-header-buttons>
+<div class="my-5"></div>
+<app-table1
+  [tableConfig]="tableConfig"
+  [list]="(pg.normalizedData$ | async)!"
+  [pagination]="(pg.pagination$ | async)!"
+  (onPage)="pg.onPageChange($event)"></app-table1>

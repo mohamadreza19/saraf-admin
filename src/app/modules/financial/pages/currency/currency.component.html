@@ -1,19 +1,28 @@
 <div class="flex w-full flex-col gap-10">
-  <app-header-buttons (primaryClick)="navigateToAddCurrency()" (lightClick)="backToDash()"></app-header-buttons>
+  <app-header-buttons (primaryClick)="navAdd()" (lightClick)="backToDash()"></app-header-buttons>
 
   @if(tableConfig){
 
-  <app-table1 [tableConfig]="tableConfig"></app-table1>
+  <app-table1
+    [tableConfig]="tableConfig"
+    [list]="(pg.normalizedData$ | async)!"
+    [pagination]="(pg.pagination$ | async)!"
+    (onPage)="pg.onPageChange($event)"></app-table1>
   }
 </div>
 
-<ng-template #coefficientRegistration>
-  <div class="flex flex-col text-nowrap">
-    <label class="mb-2 text-xs font-bold text-muted-foreground">ضریب </label>
-    <input type="text" class="w-full rounded-md border border-border px-3 py-3" value="1.2" />
-  </div>
+<ng-template
+  #coefficientRegistration
+  let-onEachBaseCoefficientChange="onEachBaseCoefficientChange"
+  let-baseCoefficient="baseCoefficient"
+  let-index="index">
+  <input
+    (input)="onEachBaseCoefficientChange($event, index)"
+    type="text"
+    class="w-10 rounded-md border border-border"
+    [value]="baseCoefficient" />
 </ng-template>
-<ng-template #reorderTemplate let-row="row" let-rowIndex="rowIndex">
+<!-- <ng-template #reorderTemplate let-row="row" let-rowIndex="rowIndex">
   <div class="flex flex-col text-nowrap">
     <label class="mb-2 text-xs font-bold text-muted-foreground">جابجایی ترتیب به</label>
     <select class="mt-auto ps-6" (change)="onEachCurrencyReorder($event, rowIndex)">
@@ -22,8 +31,8 @@
       }
     </select>
   </div>
-</ng-template>
+</ng-template> -->
 
-<ng-template #activeTemplate>
-  <app-input [control]="_activeControl"></app-input>
+<ng-template #activeTemplate let-selected="selected" let-index="index" let-statusChange="statusChange">
+  <app-switch (onChangeStatus)="statusChange($event)" [selected]="selected" [name]="index"></app-switch>
 </ng-template>

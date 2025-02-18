@@ -1,3 +1,5 @@
-<div>
-  <app-form-builder2 [label]="'افزودن ارز'" [forms]="forms"></app-form-builder2>
-</div>
+<app-form-builder3
+  [showStepper]="true"
+  [formArray]="formArray"
+  (lastFormSubmit)="submit($event)"
+  [label]="formLabel"></app-form-builder3>

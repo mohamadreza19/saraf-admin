@@ -96,9 +96,9 @@
               <img *ngIf="i === tableConfig.assetIndexFromBody" [src]="value" class="h-10 w-10 rounded-md" />
             </div>
           </td>
-          <td *ngIf="tableConfig.actions" class="px-3 py-4 text-sm font-light text-muted-foreground">
+          <td *ngFor="let action of tableConfig.actions" class="px-3 py-4 text-sm font-light text-muted-foreground">
             <div class="flex items-center gap-2">
-              <ng-container *ngFor="let action of tableConfig.actions">
+              <ng-container>
                 <app-button
                   *ngIf="_isActionConfig(action)"
                   [impact]="action.styleProps?.impact || 'none'"
@@ -109,15 +109,10 @@
                   (buttonClick)="action.callback(row, rowIndex)">
                   <p class="text-nowrap">{{ action.label }}</p>
                 </app-button>
+
                 @if(_isActionTemplateRefConfig(action)){
                 <ng-container
-                  *ngTemplateOutlet="
-                    action.templateRef;
-                    context: {
-                      row: row,
-                      rowIndex: rowIndex
-                    }
-                  ">
+                  *ngTemplateOutlet="action.templateRef; context: overrideContext(row, rowIndex, action.onContext)">
                 </ng-container>
                 }
               </ng-container>

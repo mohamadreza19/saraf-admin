@@ -15,6 +15,7 @@ import { CountyResponse } from 'src/app/shared/apis/country-api.service';
 import { LanguageApiService } from 'src/app/shared/apis/language-api.service';
 import { lastValueFrom } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { PlatformService } from 'src/app/core/services/platform.service';
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
@@ -41,7 +42,7 @@ export class CountryComponent implements AfterViewInit {
     private router: Router,
     private modal: ModalService,
     private lanApi: LanguageApiService,
-
+    public pt: PlatformService,
     public paginationService: PaginationService<CountyResponse>,
   ) {}
   ngAfterViewInit(): void {
@@ -94,6 +95,7 @@ export class CountryComponent implements AfterViewInit {
     return new CustomFormGroup(controls);
   }
   async ngOnInit() {
+    console.log(this.pt.isServer);
     const localeLan = await lastValueFrom(this.lanApi.getBasedLocale());
     this.languageId = localeLan.id;
     this.paginationService.initPagination(localeLan.id);

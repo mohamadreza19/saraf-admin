@@ -12,6 +12,7 @@ export const ValidationMessages = {
   // Server Errors
   exists: 'این مقدار قبلاً ثبت شده است. لطفاً مقدار دیگری وارد کنید.',
   invalid: 'مقدار وارد شده نامعتبر است.',
+  selected: 'مقدار قابل انتخاب نمیباشد',
 
   // Custom Validators
   fileLength: ({ maxFiles, actualFiles }: any) =>

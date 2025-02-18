@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
@@ -8,6 +8,10 @@ import { FormControl2 } from 'src/app/shared/components/form-builder2/form-build
 import { InputComponent } from '../../../../shared/components/input/input.component';
 import { CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
 import { SignInService } from './sign-in.service';
+import { lastValueFrom } from 'rxjs';
+import { LoadingSnackbar } from 'src/app/shared/components/snackbars/loading-snackbar/loading-snackbar.component';
+import { LoadingSnackbarService } from 'src/app/core/services/loading-snackbar.service';
+import { PlatformService } from 'src/app/core/services/platform.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -30,14 +34,20 @@ export class SignInComponent implements OnInit {
   form!: CustomFormGroup;
   submitted = false;
   passwordTextType!: boolean;
+  pt = inject(PlatformService);
+  constructor(
+    private service: SignInService,
+    private router: Router,
 
-  constructor(private service: SignInService) {}
+    private loadingSnackbar: LoadingSnackbarService,
+  ) {}
 
   onClick() {
     console.log('Button clicked');
   }
 
   ngOnInit(): void {
+    console.log(this.pt.isBrowser, '50');
     const controls = {
       username: new FormControl2('', {
         label: 'نام کاربری',
@@ -61,7 +71,7 @@ export class SignInComponent implements OnInit {
     this.passwordTextType = !this.passwordTextType;
   }
 
-  onSubmit() {
+  async onSubmit() {
     // this.form.markAsTouched();
     this.form.markAllAsTouched();
     this.submitted = true;
@@ -71,11 +81,18 @@ export class SignInComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.service.login({
-      username,
-      password,
-    });
-    // this._router.navigate(['/']);
+    try {
+      await lastValueFrom(
+        this.service.login({
+          username,
+          password,
+        }),
+      );
+
+      this.router.navigate(['/']);
+    } catch (error) {
+      this.loadingSnackbar.openError('نام کاربری یا پسورد وارد شده صحیح نمی‌باشد');
+    }
   }
   getAsFormControl2(control: any): FormControl2 {
     return control;

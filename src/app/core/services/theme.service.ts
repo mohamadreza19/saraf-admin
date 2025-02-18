@@ -2,6 +2,8 @@ import { computed, Inject, Injectable, signal } from '@angular/core';
 import { Theme } from '../models/theme.model';
 import { effect } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { LocalStorageService } from './local-storage.service';
+import { PlatformService } from './platform.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,11 @@ export class ThemeService {
   private docDirection = signal(this.document.dir || 'ltr');
   public isLTR = computed(() => this.docDirection() === 'ltr');
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(
+    public pg: PlatformService,
+    @Inject(DOCUMENT) private document: Document,
+    private localStorageService: LocalStorageService,
+  ) {
     this.loadTheme();
     effect(() => {
       this.setTheme();
@@ -19,14 +25,14 @@ export class ThemeService {
   }
 
   private loadTheme() {
-    const theme = localStorage.getItem('theme');
+    const theme = this.localStorageService.getItem('theme');
     if (theme) {
       this.theme.set(JSON.parse(theme));
     }
   }
 
   private setTheme() {
-    localStorage.setItem('theme', JSON.stringify(this.theme()));
+    this.localStorageService.setItem('theme', JSON.stringify(this.theme()));
     this.setThemeClass();
   }
 
@@ -41,7 +47,9 @@ export class ThemeService {
   }
 
   private setThemeClass() {
-    document.querySelector('html')!.className = this.theme().mode;
-    document.querySelector('html')!.setAttribute('data-theme', this.theme().color);
+    if (this.pg.isBrowser) {
+      document.querySelector('html')!.className = this.theme().mode;
+      document.querySelector('html')!.setAttribute('data-theme', this.theme().color);
+    }
   }
 }

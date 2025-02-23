@@ -1,7 +1,11 @@
-<div class="mb-10"><app-header-buttons (primaryClick)="Add()" (lightClick)="dash()"></app-header-buttons></div>
+<div class="mb-10"><app-header-buttons (primaryClick)="navAdd()" (lightClick)="navDash()"></app-header-buttons></div>
 
-<app-table1
+@if(tableConfig){<app-table1
   [tableConfig]="tableConfig"
-  [list]="(paginationService.normalizedData$ | async)!"
-  [pagination]="(paginationService.pagination$ | async)!"
-  (onPage)="paginationService.onPageChange($event)"></app-table1>
+  [list]="(pg.normalizedData$ | async)!"
+  [pagination]="(pg.pagination$ | async)!"
+  (onPage)="pg.onPageChange($event)"></app-table1
+>}
+<ng-template #statusTem let-index="index" let-onStatusChange="onStatusChange" let-selected="selected">
+  <app-switch [name]="index" [selected]="selected" (onChangeStatus)="onStatusChange($event, index)"></app-switch>
+</ng-template>

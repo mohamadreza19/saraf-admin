@@ -51,7 +51,7 @@ export class BaseMutateComponent {
         validators: [Validators.required],
       }),
       iban: new FormControl2('', {
-        label: 'شماره شبا',
+        label: 'iban',
         type: 'text',
         validators: [Validators.required],
       }),

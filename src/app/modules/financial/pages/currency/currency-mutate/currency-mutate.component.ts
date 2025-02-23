@@ -26,63 +26,55 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './currency-mutate.component.html',
 })
 export class CurrencyMutateComponent extends SingleFormMutateComponent<CurrencyControls> implements OnInit {
-  override formSubmitLabel: string = 'ذخیره';
+  override formSubmitLabel: string = $localize`ذخیره`;
   override entityApiService = inject(CurrencyApiService);
-  override successText: string = 'ارز با موفقیت ذخیره شده';
+  override successText: string = $localize`ارز با موفقیت ذخیره شده`;
   lanApi = inject(LanguageApiService);
 
   constructor() {
     super();
     this.controls = {
-      title: new FormControl2('', {
-        type: 'text',
-        label: 'نام',
-
-        validators: [Validators.required],
-      }),
       language: new FormControl2('', {
         type: 'select',
-        label: 'زبان',
+        label: $localize`زبان`,
         optionObjImportantKey: 'id',
         validators: [Validators.required],
       }),
       currencyType: new FormControl2('', {
         type: 'select',
-        label: 'نوع ارز',
+        label: $localize`نوع ارز`,
         optionObjImportantKey: '_id',
         validators: [Validators.required],
       }),
-
+      title: new FormControl2('', {
+        type: 'text',
+        label: $localize`نام`,
+        validators: [Validators.required],
+      }),
       icon: new FormControl2('', {
-        label: 'لگو',
+        label: $localize`لگو`,
         type: 'files',
         validators: [Validators.required],
       }),
-
       explain: new FormControl2('', {
-        label: 'توضیحات',
+        label: $localize`توضیحات`,
         type: 'text',
         validators: [Validators.required],
       }),
       baseCoefficient: new FormControl2('', {
-        label: 'ضریب پایه',
+        label: $localize`ضریب پایه`,
         type: 'number',
         validators: [Validators.required],
       }),
-      baseCurrency: new FormControl2(true, {
-        label: 'ارز پایه',
-        type: 'checkbox',
-        validators: [Validators.required],
-      }),
-      active: new FormControl2(true, {
-        label: 'فعال',
+      baseCurrency: new FormControl2(false, {
+        label: $localize`ارز پایه`,
         type: 'checkbox',
         validators: [Validators.required],
       }),
     };
   }
   override async handleAfterPostInitialization(controls: CurrencyControls) {
-    this.formLabel = 'افزودن ارز';
+    this.formLabel = $localize`افزودن ارز`;
     const languages = await lastValueFrom(this.lanApi.getAllLanguages());
 
     controls.language.setObjOptions(languages);
@@ -100,9 +92,18 @@ export class CurrencyMutateComponent extends SingleFormMutateComponent<CurrencyC
       controls.currencyType.options = curTypes.map((l) => l.title);
       controls.currencyType.setValue(controls.currencyType.options[0]);
     });
+
+    controls.baseCurrency.valueChanges.subscribe((val) => {
+      if (val) {
+        controls.baseCoefficient.setValue(0);
+        controls.baseCoefficient.disable();
+      } else {
+        controls.baseCoefficient.enable();
+      }
+    });
   }
   override handleAfterPatchInitialization(controls: CurrencyControls): void {
-    this.formLabel = ' ویرایش ارز';
+    this.formLabel = $localize`ویرایش ارز`;
   }
   ngOnInit(): void {
     this.onInit();
@@ -115,7 +116,6 @@ export interface CurrencyControls {
   icon: FormControl2;
   baseCoefficient: FormControl2;
   baseCurrency: FormControl2;
-  active: FormControl2;
   language: FormControl2;
   currencyType: FormControl2;
 }

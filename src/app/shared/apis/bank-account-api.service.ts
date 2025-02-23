@@ -39,6 +39,9 @@ export class BankAccountApiService implements GETApiService {
   postIr(values: ConvertControlsToAny<IRControls>) {
     return this.http.post(this.baseUrl + '/accountInfo/ir', values);
   }
+  patchAccount(entityId: string, values: any) {
+    return this.http.patch(this.baseUrl + '/accountInfo/changeStatus/' + entityId, values);
+  }
 
   private convertEnCurrencyTypeToFa(type: string) {
     switch (type) {

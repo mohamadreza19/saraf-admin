@@ -13,12 +13,11 @@ export class ErrorMessagePipe implements PipeTransform {
   transform(control: FormControl2): string | null {
     // console.log(control.touched);
     if (!control || !control.errors || !control.touched) return null;
+
     for (const errorKey of Object.keys(control.errors) as Array<keyof typeof ValidationMessages>) {
       const error = control.errors[errorKey];
       const message = ValidationMessages[errorKey];
-      // console.log(error);
 
-      // If the message is a function, call it with the error object
       if (message) {
         // console.log(message);
         return typeof message === 'function' ? message(error) : message;

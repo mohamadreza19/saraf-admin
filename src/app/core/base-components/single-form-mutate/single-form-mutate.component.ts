@@ -20,7 +20,7 @@ export class SingleFormMutateComponent<Controls> {
   formArray = new FormArray2([]);
 
   formLabel = '';
-  formSubmitLabel = '';
+  formSubmitLabel = 'ذخیره';
   httpMethod: HttpMethod = 'post';
   entityId = '';
 
@@ -33,6 +33,9 @@ export class SingleFormMutateComponent<Controls> {
   //
   // Need override
   entityApiService!: AbstractMutateApiService;
+
+  //
+  allowNavBack = true;
   constructor() {}
 
   initiateForm(controls: Controls, formLabel: string, formSubmitLabel: string) {
@@ -58,6 +61,9 @@ export class SingleFormMutateComponent<Controls> {
   }
   // call first
   onInit() {
+    if (!this.entityApiService) {
+      throw new Error("entityApiService doesn't config");
+    }
     const queryParams = this.route.snapshot.queryParams;
 
     this.handleQueryParams(queryParams);
@@ -67,7 +73,7 @@ export class SingleFormMutateComponent<Controls> {
   }
   private handleQueryParams(queryParams: object) {
     if (Object.values(queryParams).length == 0 || !('httpMethod' in queryParams)) {
-      this.httpMethod = 'post';
+      // this.httpMethod = 'post';
     } else {
       this.httpMethod = queryParams.httpMethod as HttpMethod;
     }
@@ -87,6 +93,7 @@ export class SingleFormMutateComponent<Controls> {
   //
 
   handleErrorManually(error: unknown) {}
+
   async submit({ focusedForm, setStep }: FormSubmitEmit) {
     try {
       this.formSubmitService.onSend(focusedForm.rootLabel as string);
@@ -95,11 +102,13 @@ export class SingleFormMutateComponent<Controls> {
           await lastValueFrom(this.entityApiService.post(focusedForm.getValues() as ConvertControlsToAny<Controls>));
           break;
         case 'patch':
-          await lastValueFrom(this.entityApiService.post(focusedForm.getValues() as ConvertControlsToAny<Controls>));
+          await lastValueFrom(
+            this.entityApiService.patch(this.entityId, focusedForm.getValues() as ConvertControlsToAny<Controls>),
+          );
           break;
       }
       this.formSubmitService.onfulfilled(focusedForm.rootLabel as string);
-      this.formSubmitService.successNav(this.successText);
+      if (this.allowNavBack) this.formSubmitService.successNav(this.successText);
     } catch (error) {
       console.log(error);
       this.handleErrorManually(error);

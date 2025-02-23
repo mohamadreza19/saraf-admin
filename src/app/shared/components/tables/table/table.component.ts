@@ -10,7 +10,7 @@ import { FormControl2 } from '../../form-builder2/form-builder2.component';
 
 import {MatPaginatorIntl, MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 
-import {CdkDragDrop, CdkDropList, CdkDrag, moveItemInArray} from '@angular/cdk/drag-drop'
+
 import { CustomPaginatorIntl } from './paginator';
 import { Pagination } from 'src/app/shared/types/pagination.interface';
 import { LoadingService } from 'src/app/core/services/loading.service';
@@ -18,8 +18,6 @@ import { SkeletonsComponent } from "./components/skeletons/skeletons.component";
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SwitchComponent } from "../../swtichs/switch/switch.component";
 type Row = { [key: string]: any };
 type Rows = any
@@ -61,8 +59,23 @@ export class TableComponent implements OnInit {
 
   @Input()
   tableConfig!: TableConfig;
+  
+
+  private _list: object[] = [];
   @Input()
-  list:object[]=[]
+  set list(value: object[]) {
+    this._list = value
+    this.loading=false
+
+  }
+
+  // Getter to access the transformed list
+  get list(): object[] {
+    return this._list;
+  }
+
+
+  
   @Input()
   allowDragAndDrop =false
 
@@ -86,20 +99,7 @@ onPage=new EventEmitter<PageEvent>
 @Input()
 pagination!:Pagination
 constructor(public loadingService:LoadingService){
-loadingService.loading$.subscribe(_loading_=>{
-  this.loadingTimeoutId = setTimeout(()=>{
-    if(_loading_){
-      if(this.loadingTimeoutId){
 
-        clearTimeout(this.loadingTimeoutId)
-        
-      } else this.loading=true
-    } else{
-      clearTimeout(this.loadingTimeoutId)
-      this.loading=false
-    }
-  },2300)
-})
 }
   ngOnInit(): void {
     // console.log(this.tableConfig);

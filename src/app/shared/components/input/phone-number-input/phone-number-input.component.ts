@@ -7,6 +7,8 @@ import { NgFor, NgIf } from '@angular/common';
 import { FormControl2, PhoneControl } from '../../form-builder2/form-builder2.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { InputComponent } from '../input.component';
+import { mobileNumberValidator } from 'src/app/shared/validators/mobile-number-validator';
+import { CountyPreCode } from 'src/app/core/utils/get-countrire-code.util';
 
 @Component({
   selector: 'app-phone-number-input',
@@ -47,5 +49,13 @@ export class PhoneNumberInputComponent implements OnInit {
     // Reset phone input and validation when the country changes
 
     this.control.setValue('');
+    this.reInitialPhoneValidator();
+  }
+  reInitialPhoneValidator() {
+    const code = this.preCodeControl.getSelectedOptionAsObject() as CountyPreCode;
+
+    this.control.clearValidators();
+    this.control.setValidators([Validators.required, mobileNumberValidator(code.dialCode)]);
+    this.control.markAsTouched();
   }
 }

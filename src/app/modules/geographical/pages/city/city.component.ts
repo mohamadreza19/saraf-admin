@@ -25,22 +25,13 @@ import { TableComponent } from '../../../../shared/components/tables/table/table
 export class CityComponent implements OnInit {
   tableConfig!: TableConfig;
   route = inject(ActivatedRoute);
+
   constructor(public pg: PaginationService<CityResponse>, private router: Router) {
     this.tableConfig = {
-      title: 'شهر ها',
-
-      tableHeader: ['نام'],
+      title: $localize`شهر ها`,
+      tableHeader: [$localize`نام`],
       tableBody: [],
-
-      actions: [
-        // {
-        //   label: 'ویرایش',
-        //   callback: (_, index) => {},
-        //   styleProps: {
-        //     tone: 'warning',
-        //   },
-        // },
-      ],
+      actions: [],
     };
   }
 
@@ -49,21 +40,23 @@ export class CityComponent implements OnInit {
     if ('countryId' in qp && 'countryTitle' in qp) {
       const { countryId, countryTitle } = qp;
       this.pg.initPagination(countryId);
-      this.tableConfig.title = `لیست شهر های ${countryTitle}`;
+      this.tableConfig.title = $localize`لیست شهر های ${countryTitle}`;
     }
   }
 
   navAdd() {
     const qp = this.route.snapshot.queryParams;
-    if ('countryId' in qp) {
-      const { countryId } = qp;
+    if ('countryId' in qp && 'countryTitle' in qp) {
+      const { countryId, countryTitle } = qp;
 
       this.router.navigate(['geographical/city/mutate'], {
-        queryParams: { httpMethod: 'post', countryId },
+        queryParams: { httpMethod: 'post', countryId, countryTitle },
       });
     }
   }
+
   navEdit(index: number) {}
+
   navDash() {
     this.router.navigate(['dashboard']);
   }

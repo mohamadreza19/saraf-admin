@@ -1,15 +1,22 @@
 <div class="w-full">
- <app-header-buttons (primaryClick)="navigateToAddExchange()"
- (lightClick)="navigateToDashboard()"
+ <app-header-buttons (primaryClick)="navAdd()"
+ (lightClick)="navDash()"
  />
 
   <div class="w-full mt-5 ">
     
-    <app-table1  [tableConfig]="tableConfig"
+    @if(tableConfig){
+      <app-table1  [tableConfig]="tableConfig"
     
-    [list]="(service.pagination.normalizedData$ | async)!"
-    [pagination]="(service.pagination.pagination$ | async)!"
-    (onPage)="service.pagination.onPageChange($event)"
+    [list]="(pg.normalizedData$ | async)!"
+    [pagination]="(pg.pagination$ | async)!"
+    (onPage)="pg.onPageChange($event)"
     ></app-table1>
+    }
 
 </div>
+
+
+<ng-template #statusTem let-index="index" let-selected="selected" let-onStatusChange="onStatusChange">
+  <app-switch [name]="index" [selected]="selected" (onChangeStatus)="onStatusChange($event)"></app-switch>
+</ng-template>

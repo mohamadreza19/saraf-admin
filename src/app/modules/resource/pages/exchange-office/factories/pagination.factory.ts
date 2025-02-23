@@ -8,7 +8,7 @@ export function paginationFactory(): PaginationService<ExchangeResponse> {
     if (!('nature' in source)) return source;
     return {
       ...source,
-      nature: source.nature === 'real' ? 'حقیقی' : 'حقوقی',
+      nature: source.nature === 'real' ? $localize`حقیقی` : $localize`حقوقی`,
     };
   };
   return new PaginationService<ExchangeResponse>(

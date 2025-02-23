@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ExchangeTableComponent } from 'src/app/modules/dashboard/components/view/exchange-table/exchange-table.component';
 import { exchangeOffice } from 'src/app/modules/dashboard/models/exchange-office';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
@@ -17,20 +17,37 @@ import { PaginationService } from 'src/app/core/services/pagination.service';
 import { paginationFactory } from './factories/pagination.factory';
 import { ExchangeService } from './services/exchange.service';
 import { CommonModule } from '@angular/common';
+import { BaseList } from 'src/app/shared/types/base-list.interface';
+import { AbstractMutateApiService } from 'src/app/core/base-components/single-form-mutate/single-form-mutate.component';
+import { ExchangeApiService, ExchangeResponse } from 'src/app/shared/apis/exchange-api.service';
+import { SwitchChange, SwitchComponent } from 'src/app/shared/components/swtichs/switch/switch.component';
+import { lastValueFrom } from 'rxjs';
+import { TConnectionDialog } from './types';
 
 @Component({
   selector: 'app-exchange-office',
   standalone: true,
-  imports: [ExchangeTableComponent, ButtonComponent, HeaderButtonsComponent, TableComponent, CommonModule],
+  imports: [
+    ExchangeTableComponent,
+    ButtonComponent,
+    HeaderButtonsComponent,
+    TableComponent,
+    CommonModule,
+    SwitchComponent,
+  ],
   templateUrl: './exchange-office.component.html',
   providers: [{ provide: PaginationService, useFactory: paginationFactory }, ExchangeService],
 })
-export class ExchangeOfficeComponent implements OnInit {
+export class ExchangeOfficeComponent implements OnInit, AfterViewInit, BaseList {
   searchControl!: CustomFormControl;
-
+  entityApi = inject(ExchangeApiService);
   tableConfig!: TableConfig;
+  pg = inject(PaginationService<ExchangeResponse>);
+  router = inject(Router);
+  @ViewChild('statusTem') statusTem!: TemplateRef<any>;
 
-  constructor(private router: Router, private modal: ModalService, public service: ExchangeService) {
+  constructor(private modal: ModalService) {}
+  ngAfterViewInit(): void {
     const controls = {
       searchName: new FormControl2('', {
         label: 'جستجو بر اساس نام / نام خانوادگی',
@@ -42,12 +59,7 @@ export class ExchangeOfficeComponent implements OnInit {
         type: 'search',
         validators: [],
       }),
-      searchType: new FormControl2('', {
-        label: 'جستجو بر اساس حقیقی / حقوقی',
-        type: 'select', // Dropdown for selecting type
-        options: ['حقیقی', 'حقوقی', 'همه'], // Options
-        validators: [],
-      }),
+
       renewalDateFrom: new FormControl2('', {
         label: 'از تاریخ تمدید',
         type: 'date',
@@ -58,17 +70,23 @@ export class ExchangeOfficeComponent implements OnInit {
         type: 'date',
         validators: [],
       }),
+      searchType: new FormControl2('', {
+        label: 'جستجو بر اساس حقیقی / حقوقی',
+        type: 'select', // Dropdown for selecting type
+        options: ['حقیقی', 'حقوقی', 'همه'], // Options
+        validators: [],
+      }),
     };
-
     this.tableConfig = {
-      title: 'صرافی‌ها',
-      form: new CustomFormGroup(controls),
+      title: $localize`صرافی‌ها`,
+
       tableHeader: [
-        'پروفایل',
-        'نام', // First Name
-        'نام خانوادگی', // Last Name
-        'شماره همراه', // Mobile Number
-        'ایمیل',
+        $localize`پروفایل`, // Profile
+        $localize`نام`, // First Name
+        $localize`نام خانوادگی`, // Last Name
+        $localize`شماره همراه`, // Mobile Number
+        $localize`ایمیل`, // Email
+        $localize`وضعیت`, // Status
         // 'حقیقی/حقوقی', // Legal Type
         // 'تعداد فرم های پر شده',
       ],
@@ -76,17 +94,22 @@ export class ExchangeOfficeComponent implements OnInit {
       assetIndexFromBody: 0,
       actions: [
         {
-          label: 'اطلاعات کامل',
-          styleProps: {
-            impact: 'bold',
-          },
-          callback: (row, rowIndex: number) => this.navToEdit(rowIndex),
+          templateRef: this.statusTem,
+          onContext: (_, index) => ({
+            selected: this.pg.data$.getValue()[index].active ? true : false,
+            onStatusChange: (event: SwitchChange) => this.onStatusChange(event),
+          }),
         },
         {
-          callback: (row) => {
-            this.openConnectModal();
+          label: $localize`ویرایش`, // Edit
+          styleProps: {
+            tone: 'warning',
           },
-          label: 'اطلاعات اتصال',
+          callback: (row, rowIndex: number) => this.navEdit(rowIndex),
+        },
+        {
+          callback: (_, index) => this.openConnectModal(index),
+          label: $localize`اطلاعات اتصال`, // Connection Information
           styleProps: {
             tone: 'light',
           },
@@ -95,7 +118,7 @@ export class ExchangeOfficeComponent implements OnInit {
           callback: (row: any) => {
             this.openPrivilegeModal();
           },
-          label: ' دسترسی',
+          label: $localize`دسترسی`, // Access
           styleProps: {
             tone: 'light',
           },
@@ -104,7 +127,7 @@ export class ExchangeOfficeComponent implements OnInit {
           callback: (row: any) => {
             this.openPasswordModal();
           },
-          label: ' رمز عبور',
+          label: $localize`رمز عبور`, // Password
           styleProps: {
             tone: 'light',
           },
@@ -118,24 +141,42 @@ export class ExchangeOfficeComponent implements OnInit {
       },
     };
   }
+  async openConnectModal(index: number) {
+    const exchange = this.pg.data$.getValue()[index];
 
-  openConnectModal() {
+    const exchangeDetail = await lastValueFrom(this.entityApi.getOneById(exchange.id));
+
+    const data: TConnectionDialog = {
+      connection: exchangeDetail.data.exchangeConnection,
+      entityId: exchange.id,
+      entityName: `${exchange.name} ${exchange.family}`,
+    };
     this.modal.open(ExchangeOfficeConnectInfoModalComponent, {
       width: '600px',
       maxWidth: '600px',
+      data: data,
     });
   }
-  navigateToAddExchange() {
+  navAdd() {
     this.router.navigate(['/resource/exchange-office/mutate']);
   }
-  navigateToDashboard() {
+  navDash() {
     this.router.navigate(['/dashboard']);
   }
-  async ngOnInit() {
-    this.service.pagination.initPagination('');
+  async onStatusChange(event: SwitchChange) {
+    const record = this.pg.data$.getValue()[Number(event.name)];
+
+    await lastValueFrom(
+      this.entityApi.patchStatus(record.id, {
+        active: event.value ? 1 : 0,
+      }),
+    );
   }
-  navToEdit(rowIndex: number) {
-    const id = this.service.pagination.data$.getValue().find((_, index) => index == rowIndex)?.id;
+  async ngOnInit() {
+    this.pg.initPagination('');
+  }
+  navEdit(rowIndex: number) {
+    const id = this.pg.data$.getValue().find((_, index) => index == rowIndex)?.id;
     if (!id) throw Error('Can not find Id');
     this.router.navigate(['/resource/exchange-office/mutate'], {
       queryParams: { exchangeId: id },

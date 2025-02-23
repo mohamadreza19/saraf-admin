@@ -1,5 +1,11 @@
 import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
-import { FileType, FormBuilderConfig, FormConfig, Input as FormInput } from '../models/form-builder-config.interface';
+import {
+  FileType,
+  FormBuilderConfig,
+  FormConfig,
+  Input as FormInput,
+  InputType,
+} from '../models/form-builder-config.interface';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgClass, NgFor, NgIf } from '@angular/common';
 import { InputComponent } from '../components/input/input.component';
@@ -153,7 +159,7 @@ class FormValuesMapper {
     formControl.markAllAsTouched();
     const { type, value, filesLength, optionObjImportantKey } = formControl;
 
-    switch (type) {
+    switch (type as InputType) {
       case 'files':
         if (filesLength == 1) return value[0];
         else return value;
@@ -178,6 +184,9 @@ class FormValuesMapper {
         break;
 
       case 'checkbox':
+        if (value) return 1;
+        else return 0;
+      case 'radio-checkbox':
         if (value) return 1;
         else return 0;
       case 'date':

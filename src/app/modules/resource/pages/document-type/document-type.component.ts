@@ -1,14 +1,18 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, TemplateRef } from '@angular/core';
 import { PaginationService } from 'src/app/core/services/pagination.service';
 import { factory } from './pg.factory';
 import { DocumentTypeResponse } from 'src/app/shared/apis/document-type-api.service';
-import { Language, LanguageApiService } from 'src/app/shared/apis/language-api.service';
-import { lastValueFrom } from 'rxjs';
+import { LanguageApiService } from 'src/app/shared/apis/language-api.service';
 import { TableComponent } from '../../../../shared/components/tables/table/table.component';
 import { CommonModule } from '@angular/common';
 import { TableConfig } from 'src/app/shared/models/table-config';
 import { Router } from '@angular/router';
 import { HeaderButtonsComponent } from '../../../financial/components/header-buttons/header-buttons.component';
+import { BaseList } from 'src/app/shared/types/base-list.interface';
+import { QueryParamUtil } from 'src/app/core/utils/query-params.util';
+import { CustomFormGroup } from 'src/app/shared/form-builder/form-builder.component';
+import { withLanguageControl } from 'src/app/core/configs/with-language-control.config';
+import { SwitchChange } from 'src/app/shared/components/swtichs/switch/switch.component';
 
 @Component({
   selector: 'app-document-type',
@@ -23,28 +27,37 @@ import { HeaderButtonsComponent } from '../../../financial/components/header-but
   ],
   imports: [TableComponent, CommonModule, HeaderButtonsComponent],
 })
-export class DocumentTypeComponent implements OnInit {
+export class DocumentTypeComponent implements BaseList, OnInit {
   lanApi = inject(LanguageApiService);
+  pg = inject(PaginationService<DocumentTypeResponse>);
+  pru = inject(QueryParamUtil);
+  router = inject(Router);
+  statusTem?: TemplateRef<any> | undefined;
   tableConfig: TableConfig;
-  lan!: Language;
-  constructor(public pg: PaginationService<DocumentTypeResponse>, private router: Router) {
+
+  constructor() {
     this.tableConfig = {
-      title: 'لیست انواع مدارک',
+      title: $localize`لیست انواع مدارک`,
       tableBody: [],
-      tableHeader: ['عنوان', 'تعداد صفحه', 'دارای شناسه'],
+      form: new CustomFormGroup(withLanguageControl({})),
+      tableHeader: [$localize`عنوان`, $localize`تعداد صفحه`, $localize`دارای شناسه`],
     };
   }
 
   async ngOnInit() {
-    this.lan = await lastValueFrom(this.lanApi.getBasedLocale());
-    this.pg.initPagination(this.lan.id);
+    this.pru
+      .setPagination(this.pg)
+      .withLanguagePath((this.tableConfig.form as any).controls)
+      .then();
   }
+
+  navDash(): void {}
+  navEdit(index: number): void {}
+  onStatusChange(event: SwitchChange, index: number): void {}
+
   navAdd() {
-    this.router.navigate(['/resource/document-type/mutate'], {
-      queryParams: {
-        languageId: this.lan.id,
-      },
-    });
+    this.router.navigate(['/resource/document-type/mutate'], {});
   }
+
   navD() {}
 }

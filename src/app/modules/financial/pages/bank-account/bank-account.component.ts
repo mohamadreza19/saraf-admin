@@ -10,11 +10,12 @@ import { CurrencyApiService } from 'src/app/shared/apis/currency-api.service';
 import { lastValueFrom } from 'rxjs';
 import { FaCurrencyType, EnCurrencyType } from './constants';
 import { BankAccountRouterLinkQuery } from './types';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-bank-account',
   standalone: true,
-  imports: [HeaderButtonsComponent, TableComponent, RouterLink],
+  imports: [HeaderButtonsComponent, TableComponent, RouterLink, NgIf],
   templateUrl: './bank-account.component.html',
   styleUrl: './bank-account.component.css',
 })

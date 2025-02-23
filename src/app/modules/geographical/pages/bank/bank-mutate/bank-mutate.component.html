@@ -1,6 +1,9 @@
-<div class="w-full">
-  @if(form){
+<app-form-builder3
+  [showStepper]="true"
+  [formArray]="formArray"
+  (lastFormSubmit)="submit($event)"
+  [label]="formLabel"></app-form-builder3>
 
-  <app-form-builder2 label="افزودن بانک" [forms]="[form]"></app-form-builder2>
-  }
-</div>
+<ng-template #active let-index="index">
+  <app-switch [name]="index"></app-switch>
+</ng-template>

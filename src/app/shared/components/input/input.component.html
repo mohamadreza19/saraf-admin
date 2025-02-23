@@ -1,64 +1,62 @@
-
 <section
-[id]="control.label" 
-  class="relative col-span-1 w-full h-[calc(100%+16px)] {{control.type == 'checkbox'&&'flex-row-reverse justify-end '}}"
+  [id]="control.label"
+  class="relative col-span-1 w-full h-[calc(100%+16px)]  {{
+    control.type == 'checkbox' && 'flex-row-reverse justify-end '
+  }}
+
+  "
   [ngClass]="{
     ' flex items-center pt-[15px]': control.type == 'radio' || control.type == 'checkbox'
   }">
-  <label *ngIf="control.type !== 'radio' && control.type !== 'files'" class="m-2 block text-xs font-bold text-muted-foreground"
+  <label
+    *ngIf="control.type !== 'radio'"
+    class="m-2 block text-xs font-bold text-muted-foreground    {{
+      control.type == 'files' || (control.type == 'radio-checkbox' && 'invisible')
+    }}"
     >{{ control.label }}
   </label>
 
   <!-- Text Input Template -->
   <ng-template #textInput>
-
-    <input    type="text" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
+    <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
   </ng-template>
   <ng-template #numberInput>
-
-    <input   type="number" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
+    <input type="number" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
   </ng-template>
   <ng-template #amount>
-
     <app-amount-input [control]="control"></app-amount-input>
   </ng-template>
-<ng-template #phoneNumber>
+  <ng-template #phoneNumber>
+    <app-phone-number-input [control]="control"></app-phone-number-input>
+  </ng-template>
 
-  <app-phone-number-input  [control]="control"></app-phone-number-input>
-</ng-template>
-
-<ng-template #searchSelect>
-  <app-search-select-input [control]="control"></app-search-select-input>
-</ng-template>
+  <ng-template #searchSelect>
+    <app-search-select-input [control]="control"></app-search-select-input>
+  </ng-template>
 
   <ng-template #searchInput>
-
     <div class="relative">
-      <div class="flex h-full w-fit absolute items-center">
-
-
-      <ng-icon class="text-muted-foreground text-xl ms-4"  name="matSearchOutline"></ng-icon>
-
+      <div class="absolute flex h-full w-fit items-center">
+        <ng-icon class="ms-4 text-xl text-muted-foreground" name="matSearchOutline"></ng-icon>
       </div>
 
-
-        <input class="w-full rounded-md border border-border px-3 ps-10 py-3"  type="text"  [formControl]="control" />
+      <input class="w-full rounded-md border border-border px-3 py-3 ps-10" type="text" [formControl]="control" />
     </div>
   </ng-template>
 
   <ng-template #filesInput>
-    <app-files-input [control]="control"/>
+    <app-files-input2 [control]="control"></app-files-input2>
+    <!-- <app-files-input [control]="control"/> -->
   </ng-template>
   <ng-template #readOnlyImg>
-    <img class="rounded-md border border-border" [src]="control.value"/>
-  
+    <img class="rounded-md border border-border" [src]="control.value" />
   </ng-template>
-
 
   <ng-template #multiSelectInput>
     <div (clickOutside)="closeCustomBox()">
-      <div class="flex w-full gap-2 flex-wrap rounded-md border border-border px-5 py-2 ">
+      <div class="flex w-full flex-wrap gap-2 rounded-md border border-border px-5 py-2">
         <p
+          i18n
           (click)="openCustomBox()"
           class="cursor-pointer border-e border-muted-foreground py-[2px] pe-5 text-sm text-muted-foreground">
           انتخاب
@@ -100,53 +98,63 @@
   </ng-template>
   <!-- Checkbox Button Template -->
   <ng-template #checkbox>
-    <div class="ms-2 flex items-center gap-2" >
+    <div class="ms-2 flex items-center gap-2">
       <input type="checkbox" class="scale-[.70] rounded-md border border-border px-3 py-3" [formControl]="control" />
-    
+    </div>
+  </ng-template>
+  <!-- Radio-Checkbox Button Template -->
+  <ng-template #radioCheckbox>
+    <div class="flex items-center gap-2">
+      <section class="ms-2 flex items-center gap-2" *ngFor="let option of control.options">
+        <input
+          *ngIf="control.label"
+          [name]="control.label"
+          [value]="option === control.label ? true : false"
+          type="radio"
+          class="scale-[.70] rounded-md border border-border px-3 py-3"
+          [formControl]="control" />
+        <!-- Bind the formControl to the group -->
+        <label class="text-xs font-bold text-muted-foreground">{{ option }}</label>
+      </section>
     </div>
   </ng-template>
 
   <!-- Select Template -->
   <ng-template #selectInput>
-    <select class="w-full rounded-md border border-border px-3 ps-6 py-3" [formControl]="control">
-
-      <option *ngIf="!control.value">
-        انتخاب کنید
-      </option>
-      <option [selected]='option ===control.value' *ngFor="let option of control.options">
-        {{option}}
+    <select class="w-full rounded-md border border-border px-3 py-3 ps-6" [formControl]="control">
+      <option *ngIf="!control.value">انتخاب کنید</option>
+      <option [selected]="option === control.value" *ngFor="let option of control.options">
+        {{ option }}
       </option>
     </select>
-
   </ng-template>
 
   <ng-template #dateInput>
-    <ng-persian-datepicker
-  
-
-   
-    >
+    <ng-persian-datepicker>
       <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
     </ng-persian-datepicker>
   </ng-template>
 
   <ng-template #password>
-    <div  class="relative">
-      <div (click)="togglePassword()" class="flex end-3  h-full w-fit absolute items-center">
-         <ng-icon class="text-muted-foreground text-xl ms-4" name="matLockOutline"></ng-icon>
+    <div class="relative">
+      <div (click)="togglePassword()" class="absolute end-3 flex h-full w-fit items-center">
+        <ng-icon class="ms-4 text-xl text-muted-foreground" name="matLockOutline"></ng-icon>
       </div>
-      <input  #passwordInput  type="password" class="w-full  rounded-md border border-border px-3 py-3" [formControl]="control" />
+      <input
+        #passwordInput
+        type="password"
+        class="w-full rounded-md border border-border px-3 py-3"
+        [formControl]="control" />
     </div>
   </ng-template>
 
   <ng-template #selectAdd>
-  <app-select-add [control]="control"></app-select-add>
+    <app-select-add [control]="control"></app-select-add>
   </ng-template>
   <ng-template #map>
-  <app-map-input [control] ="control"></app-map-input>
+    <app-map-input [control]="control"></app-map-input>
   </ng-template>
 
-  
   <!-- Render the Appropriate Template -->
   <ng-container [ngSwitch]="control.type">
     <ng-container *ngSwitchCase="'text'" [ngTemplateOutlet]="textInput"></ng-container>
@@ -163,6 +171,7 @@
     <ng-container *ngSwitchCase="'email'" [ngTemplateOutlet]="emailInput"></ng-container>
     <ng-container *ngSwitchCase="'radio'" [ngTemplateOutlet]="radioInput"></ng-container>
     <ng-container *ngSwitchCase="'checkbox'" [ngTemplateOutlet]="checkbox"></ng-container>
+    <ng-container *ngSwitchCase="'radio-checkbox'" [ngTemplateOutlet]="radioCheckbox"></ng-container>
     <ng-container *ngSwitchCase="'select'" [ngTemplateOutlet]="selectInput"></ng-container>
     <ng-container *ngSwitchCase="'date'" [ngTemplateOutlet]="dateInput"></ng-container>
 
@@ -172,8 +181,7 @@
     </ng-container>
   </ng-container>
 
-  <span class="text-red-500 text-xs ">
-    {{control | errorMessage}}
-
-      </span>
+  <span class="text-xs text-red-500">
+    {{ control | errorMessage }}
+  </span>
 </section>

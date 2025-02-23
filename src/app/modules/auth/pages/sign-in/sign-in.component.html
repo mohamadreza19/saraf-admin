@@ -1,24 +1,22 @@
 <!-- login form -->
 <form class="my-10 space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="text-center">
-    <h2 class="mb-1 text-3xl font-semibold text-foreground">ورود ادمین</h2>
+    <h2 class="mb-1 text-3xl font-semibold text-foreground" i18n="@@adminLoginTitle">ورود ادمین</h2>
     <p class="text-sm text-muted-foreground"></p>
   </div>
 
   <div class="space-y-3">
-    <div class="form__group">
-      <app-input [control]="getAsFormControl2(form.controls['username'])"></app-input>
-      <app-input [control]="getAsFormControl2(form.controls['password'])"></app-input>
-    </div>
+    <app-input [control]="getAsFormControl2(form.controls['username'])"></app-input>
+    <app-input [control]="getAsFormControl2(form.controls['password'])" type="password"></app-input>
   </div>
 
   <!-- Submit Button -->
   <div>
-    <app-button full impact="bold" tone="primary" shape="rounded" size="medium">ورود</app-button>
+    <app-button full impact="bold" tone="primary" shape="rounded" size="medium" i18n="@@loginButton">ورود</app-button>
   </div>
 
   <!-- Sign-up -->
   <!-- <div class="flex items-center text-sm text-muted-foreground">
-    <app-button routerLink="/auth/sign-up" impact="none" tone="primary" shape="rounded" size="small">  </app-button>
+    <app-button routerLink="/auth/sign-up" impact="none" tone="primary" shape="rounded" size="small" i18n="@@signUpButton">ثبت نام</app-button>
   </div> -->
 </form>

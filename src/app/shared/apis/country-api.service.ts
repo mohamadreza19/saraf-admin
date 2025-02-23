@@ -39,9 +39,9 @@ export class CountryApiService implements GETApiService, AbstractMutateApiServic
   post(body: ConvertControlsToAny<CountryControls>) {
     return this.http.post(this.baseUrl + '/country', body).pipe(errorNormalizedWithFormLabel('ثبت کشور'));
   }
-  patch(entityId: string, body: ConvertControlsToAny<CountryControls>) {
+  patch(entityId: string, values: object) {
     return this.http
-      .patch(this.baseUrl + '/country/' + entityId, body)
+      .patch(this.baseUrl + '/country/' + entityId, values)
       .pipe(errorNormalizedWithFormLabel('ویرایش کشور'));
   }
 }

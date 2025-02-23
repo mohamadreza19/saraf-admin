@@ -22,9 +22,13 @@ import { PaginationService } from 'src/app/core/services/pagination.service';
 import { factory } from './pg.factory';
 import { CurrencyApiService, CurrencyResponse } from 'src/app/shared/apis/currency-api.service';
 import { lastValueFrom } from 'rxjs';
-import { LanguageApiService } from 'src/app/shared/apis/language-api.service';
+import { Language, LanguageApiService } from 'src/app/shared/apis/language-api.service';
 import { CommonModule } from '@angular/common';
 import { SwitchChange, SwitchComponent } from '../../../../shared/components/swtichs/switch/switch.component';
+import { BaseQuerySearchControls } from 'src/app/shared/types/base-query-search';
+import { QueryParamUtil } from 'src/app/core/utils/query-params.util';
+import { withLanguageControl } from 'src/app/core/configs/with-language-control.config';
+import { BaseList } from 'src/app/shared/types/base-list.interface';
 
 @Component({
   selector: 'app-currency',
@@ -50,30 +54,36 @@ export class CurrencyComponent implements AfterViewInit {
   allDataIndex!: number[];
 
   @ViewChild('coefficientRegistration') coefficientRegistrarTemplate!: TemplateRef<any>;
-  @ViewChild('reorderTemplate') reorderTemplate!: TemplateRef<any>;
+  @ViewChild('baseCurrency') baseCurrencyTemplate!: TemplateRef<any>;
   @ViewChild('activeTemplate') activeTemplate!: TemplateRef<any>;
   lanApi = inject(LanguageApiService);
   lan = '';
   currencyApi = inject(CurrencyApiService);
   timeoutId: any;
-  constructor(private router: Router, public pg: PaginationService<CurrencyResponse>) {}
+  //
+  pru = inject(QueryParamUtil);
+  pg = inject(PaginationService<CurrencyResponse>);
+  constructor(private router: Router) {}
 
   async ngOnInit() {
-    const lan = await lastValueFrom(this.lanApi.getBasedLocale());
-    this.lan = lan.id;
-    this.pg.initPagination(lan.id);
+    // const lan = await lastValueFrom(this.lanApi.getBasedLocale());
+    // this.lan = lan.id;
   }
   ngAfterViewInit(): void {
-    this.pg.data$.subscribe((data) => {
-      this.allDataIndex = data.map((_, index) => index);
-    });
     this.tableConfig = {
-      title: 'ارز ها',
-      form: this.generateTableForm(),
-      tableHeader: ['لوگو', 'نام', 'ضریب پایه', 'وضعیت'],
+      title: $localize`ارز ها`,
+      form: new CustomFormGroup(withLanguageControl({})),
+      tableHeader: [$localize`لوگو`, $localize`نام`, $localize`ارز پایه`, $localize`ضریب پایه`, $localize`وضعیت`],
       tableBody: [],
       assetIndexFromBody: 0,
       actions: [
+        {
+          templateRef: this.baseCurrencyTemplate,
+          onContext: (_, index) => ({
+            isBase: this.pg.data$.getValue()[index].baseCurrency ? true : false,
+            onEachBaseCurrencyChange: (event: Event, index: number) => this.onEachBaseCurrencyChange(event, index),
+          }),
+        },
         {
           templateRef: this.coefficientRegistrarTemplate,
           onContext: (_, index) => ({
@@ -90,7 +100,7 @@ export class CurrencyComponent implements AfterViewInit {
           }),
         },
         {
-          label: 'ویرایش',
+          label: $localize`ویرایش`,
           callback: (_, index) => {
             // this.navEdit(index);
           },
@@ -100,6 +110,10 @@ export class CurrencyComponent implements AfterViewInit {
         // },
       ],
     };
+    this.pru
+      .setPagination(this.pg)
+      .withLanguagePath((this.tableConfig.form as any).controls)
+      .then();
   }
   async onEachStatusChange(event: SwitchChange) {
     const currency = this.pg.data$.getValue()[Number(event.name)] as CurrencyResponse;
@@ -118,6 +132,15 @@ export class CurrencyComponent implements AfterViewInit {
       }
     }, 500);
   }
+  async onEachBaseCurrencyChange(event: Event, index: number) {
+    const value = (event.target as HTMLInputElement).value;
+    const currency = this.pg.data$.getValue()[index] as CurrencyResponse;
+
+    if (value) {
+      await lastValueFrom(this.currencyApi.patchBase(currency.id));
+      this.pg.initPagination(this.pru.mountedLanguage.id);
+    }
+  }
   navAdd() {
     this.router.navigate(['/financial/currency/mutate']);
   }
@@ -129,31 +152,6 @@ export class CurrencyComponent implements AfterViewInit {
   }
   backToDash() {
     this.router.navigate(['/dashboard']);
-  }
-  generateTableForm() {
-    const controls = {
-      search: new CustomFormControl('', {
-        label: 'جستجو',
-        type: 'search',
-
-        validators: [],
-      }),
-      currencyOrder: new CustomFormControl('', {
-        type: 'select',
-        label: 'ترتیب نمایش',
-        options: ['غیرفعال', 'فعال'],
-
-        validators: [],
-      }),
-      currencyOrderType: new CustomFormControl('', {
-        type: 'select',
-        label: 'نوع',
-        options: ['رسمی', 'شخصی'],
-
-        validators: [],
-      }),
-    };
-    return new CustomFormGroup(controls);
   }
 
   onEachCurrencyReorder(event: Event, currencyIndex: number) {

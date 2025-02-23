@@ -27,6 +27,7 @@ export class ModuleFormService implements AbstractFormService {
   currencyUnits$ = new BehaviorSubject<CurrencyUnit[]>([]);
   bankAccounts: BankAccount[] = [];
   intervalId: any;
+  //
   constructor(
     private bankAccountApi: BankAccountApiService,
     private currencyUnitApi: CurrencyApiService,
@@ -36,16 +37,15 @@ export class ModuleFormService implements AbstractFormService {
     return {
       info: moduleFormArray,
       discount_: new FormControl2('', {
-        label: 'تخفیف',
+        label: $localize`تخفیف`, // Marked for translation
         type: 'number',
         validators: [],
       }),
       accountNumber: new FormControl2('', {
-        label: 'به حساب',
+        label: $localize`به حساب`, // Marked for translation
         type: 'select',
-
         optionObjImportantKey: 'id',
-        options: ['حسابی ثبت نشده'],
+        options: [$localize`حسابی ثبت نشده`], // Marked for translation
         validators: [Validators.required],
         selectedOptionIndex: 0,
       }),
@@ -58,24 +58,24 @@ export class ModuleFormService implements AbstractFormService {
         } as PreReceiptVal,
         {
           templateRef: preReceiptTemplate,
-          label: '',
+          label: '', // No translation needed (empty label)
           type: 'text',
           validators: [],
         },
       ),
       isDeposit: new FormControl2('', {
-        label: 'واریز انجام شده ',
+        label: $localize`واریز انجام شده`, // Marked for translation
         type: 'checkbox',
         validators: [],
       }),
-      depositStatus: new FormControl2(true, {
-        label: 'واریز بدون مدرک مورد تایید است',
+      depositStatus: new FormControl2(false, {
+        label: $localize`واریز بدون مدرک مورد تایید است`, // Marked for translation
         type: 'checkbox',
         show: false,
         validators: [],
       }),
       receipt: new FormControl2([], {
-        label: 'بارگزاری رسید واریز',
+        label: $localize`بارگزاری رسید واریز`, // Marked for translation
         type: 'files',
         show: false,
         validators: [],
@@ -95,7 +95,7 @@ export class ModuleFormService implements AbstractFormService {
 
     const controls = this.generateControls(this.moduleFormArray, preReceiptTemplate);
 
-    const form = new CustomFormGroup(controls, FormLabels.Modules, 'ادامه');
+    const form = new CustomFormGroup(controls, FormLabels.Modules, $localize`‍ادامه`);
 
     // this.moduleFormArray.valueChanges.subscribe((e) => {
     //   this.timeoutId = setTimeout(() => {
@@ -150,7 +150,7 @@ export class ModuleFormService implements AbstractFormService {
     disableCurrency: boolean,
   ) {
     const currency = new FormControl2('', {
-      label: 'واحد',
+      label: $localize`واحد`,
       type: 'select',
       validators: [Validators.required],
       options: currencyUnits.map((currencyUnit) => currencyUnit.title),
@@ -163,7 +163,7 @@ export class ModuleFormService implements AbstractFormService {
 
     const moduleControls: RequestedModulesControls = {
       module: new FormControl2('', {
-        label: 'نام ماژول',
+        label: $localize`نام ماژول`,
         type: 'select',
         objOptions: availableModules,
         options: availableModules.map((m) => m.title),
@@ -172,13 +172,13 @@ export class ModuleFormService implements AbstractFormService {
         validators: [Validators.required],
       }),
       extensionPrice: new FormControl2('40000', {
-        label: 'مبلغ ',
+        label: $localize`مبلغ`,
         type: 'number',
         validators: [Validators.required],
       }),
       currency: currency,
       extensionPriod: new FormControl2('', {
-        label: 'مدت',
+        label: $localize`مدت`,
         type: 'select',
         validators: [Validators.required],
         options: PERIODS.map((p) => p.title),
@@ -264,10 +264,10 @@ export class ModuleFormService implements AbstractFormService {
           firstCurrencyControl = currency;
         }
       }
+
       if (firstCurrencyControl) {
         firstCurrencyControl.valueChanges.subscribe((val) => {
           const currencyObj = firstCurrencyControl.getSelectedOptionAsObject() as CurrencyUnit;
-
           if (currencyObj) this.setBankAccountControlBasedCurrencyUnit(currencyObj._id, accountNumber);
         });
       }

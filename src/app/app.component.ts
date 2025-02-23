@@ -5,6 +5,7 @@ import {
   Component,
   inject,
   Inject,
+  LOCALE_ID,
   OnInit,
   PLATFORM_ID,
   Renderer2,
@@ -14,12 +15,7 @@ import {
 import { ThemeService } from './core/services/theme.service';
 
 import { LoadingService } from './core/services/loading.service';
-import { PlatformService } from './core/services/platform.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { isPlatformBrowser } from '@angular/common';
-import { WindowService } from './core/services/window.service';
-import { environment } from 'src/environments/environment';
-import { CountryApiService } from './shared/apis/country-api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -34,16 +30,18 @@ export class AppComponent {
   isLoading$ = inject(LoadingService).loading$;
   title = 'ادمین';
 
-  constructor(public themeService: ThemeService, private ps: PlatformService, private cs: CountryApiService) {
-    if (this.ps.isBrowser) {
-      document.title = this.title;
-      if (environment.locale.toLocaleLowerCase().includes('fa')) {
-        document.dir = 'rtl';
-      }
-    }
+  constructor(
+    @Inject(LOCALE_ID) private localeId: string,
+    private titleService: Title,
+    public themeService: ThemeService,
+  ) {
+    this.setTitleBasedOnLocale();
   }
 
   ngOnInit() {
     // Get data from TransferState
+  }
+  setTitleBasedOnLocale() {
+    this.titleService.setTitle($localize`سامانه خرید و فروش ارز ، طلا و نقره پیمان`);
   }
 }

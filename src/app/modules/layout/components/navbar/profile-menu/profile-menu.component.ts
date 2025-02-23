@@ -43,17 +43,17 @@ export class ProfileMenuComponent implements OnInit {
   public profile!: UserProfileResponse;
   public profileMenu = [
     {
-      title: 'پروفایل',
+      title: $localize`پروفایل`,
       icon: './assets/icons/heroicons/outline/user-circle.svg',
       link: '/profile',
     },
     {
-      title: 'تنظیمات',
+      title: $localize`تنظیمات`,
       icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
       link: '/settings',
     },
     {
-      title: 'خروج',
+      title: $localize`خروج`,
       icon: './assets/icons/heroicons/outline/logout.svg',
       link: '/auth',
     },

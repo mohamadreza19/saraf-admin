@@ -17,9 +17,9 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 })
 export class HeaderButtonsComponent {
   @Input()
-  textPrimary = 'افزودن';
+  textPrimary = $localize`افزودن`;
   @Input()
-  textLight = 'بازگشت به داشبورد';
+  textLight = $localize`بازگشت به داشبورد`;
 
   @Output()
   primaryClick = new EventEmitter<void>();

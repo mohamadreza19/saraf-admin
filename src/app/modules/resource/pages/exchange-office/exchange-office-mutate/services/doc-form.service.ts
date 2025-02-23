@@ -29,21 +29,18 @@ export class DocFormService implements AbstractFormService {
   }
 
   pushDocForm() {
-    //
-
     const selectedType = this.docTypeControl.getSelectedOptionAsObject() as DocumentModel;
 
     let controls = {} as DocCombinedControls;
 
     if (selectedType.title) {
       const documentType = new FormControl2(selectedType.title, {
-        label: 'نوع مدرک',
+        label: $localize`نوع مدرک`, // Marked for translation
         type: 'select',
         validators: [Validators.required],
         optionObjImportantKey: '_id',
         options: [selectedType.title],
         selectedOptionIndex: 0,
-
         objOptions: [selectedType],
       });
       documentType.disable();
@@ -51,14 +48,14 @@ export class DocFormService implements AbstractFormService {
     }
     if (selectedType.hasIdnumber) {
       controls.idNumber = new FormControl2('1234', {
-        label: 'شناسه',
+        label: $localize`شناسه`, // Marked for translation
         type: 'text',
         validators: [Validators.required],
       });
     }
     if (selectedType.hasexpireDate) {
       controls.expireDate = new FormControl2(null, {
-        label: 'تاریخ انقضا',
+        label: $localize`تاریخ انقضا`, // Marked for translation
         type: 'date',
         validators: [Validators.required],
       });
@@ -66,13 +63,14 @@ export class DocFormService implements AbstractFormService {
     if (selectedType.pagecount) {
       controls.docs = new FormControl2([], {
         type: 'files',
-        filesLength: selectedType.pagecount,
-        label: 'بارگزاری مدارک',
+        label: $localize`بارگزاری مدارک`, // Marked for translation
         validators: [Validators.required, fileLengthValidator(selectedType.pagecount)], // Added required validator
       });
     }
+
     const docsFormArrayChildForm = new CustomFormGroup(controls);
     this.docsFormArray.push(docsFormArrayChildForm);
+    console.log(this.docsFormArray);
     return docsFormArrayChildForm;
   }
 
@@ -97,7 +95,7 @@ export class DocFormService implements AbstractFormService {
           this.docTypeControl.options = docTypes.map((dt) => dt.title);
           this.docTypeControl.setValue(this.docTypeControl.options[0]);
         }
-        console.log('ss');
+
         if (this.data) {
           for (const docObj of this.data) {
             const mountedDocType = docTypes.find((dt) => dt._id == (docObj.documentType as any));
@@ -107,7 +105,7 @@ export class DocFormService implements AbstractFormService {
               const { docs, expireDate, idNumber }: DocCombinedControls = this.pushDocForm().controls as any;
 
               if (Array.isArray(docObj.docFiles) && docObj.docFiles.length) {
-                docs.setValue(docObj.docFiles);
+                setTimeout(() => docs.setValue(docObj.docFiles), 300);
               }
               if (docObj.expireDate && expireDate) {
                 expireDate.setValue(convertGregorianTOJalali(docObj.expireDate));
@@ -133,12 +131,13 @@ export class DocFormService implements AbstractFormService {
   }
   generateForm(addDocTemplate: TemplateRef<any>): CustomFormGroup {
     this.docTypeControl = new FormControl2('', {
-      label: 'انواع مدارک',
+      label: $localize`انواع مدارک`, // Marked for translation
       type: 'select',
       validators: [Validators.required],
       optionObjImportantKey: '_id',
       options: [],
     });
+
     this.docsFormArray = new FormArray2([]);
     this.docsFormArray.templateRef = addDocTemplate;
 
@@ -151,7 +150,7 @@ export class DocFormService implements AbstractFormService {
 
     const controls = this.generateControls(this.docsFormArray);
 
-    this.mainForm = new CustomFormGroup(controls, FormLabels.Document, 'ذخیره');
+    this.mainForm = new CustomFormGroup(controls, FormLabels.Document, $localize`:@@saveButtonLabel:ادامه`); // Marked for translation
 
     return this.mainForm;
   }

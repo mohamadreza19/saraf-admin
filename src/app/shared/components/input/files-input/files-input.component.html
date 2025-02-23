@@ -2,7 +2,7 @@
   (drop)="_drop($event)"
   (dragover)="_fileOver($event)"
   style="aspect-ratio: 1 / 1"
-  class="relative flex w-full flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-border px-2 py-2 pb-8">
+  class="relative mx-auto flex w-full max-w-52 flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-border px-2 py-2 pb-8">
   <img
     *ngIf="fileUrlToShow"
     [src]="fileUrlToShow.src"

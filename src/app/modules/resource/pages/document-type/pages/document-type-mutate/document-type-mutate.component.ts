@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+
 import {
   AbstractMutateApiService,
   SingleFormMutateComponent,
@@ -8,6 +8,8 @@ import {
 import { DocumentTypeApiService } from 'src/app/shared/apis/document-type-api.service';
 import { FormControl2 } from 'src/app/shared/components/form-builder2/form-builder2.component';
 import { FormBuilder3Component } from '../../../../../../shared/components/form-builder3/form-builder3.component';
+import { LanguageApiService } from 'src/app/shared/apis/language-api.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-document-type-mutate',
@@ -17,55 +19,56 @@ import { FormBuilder3Component } from '../../../../../../shared/components/form-
   imports: [FormBuilder3Component],
 })
 export class DocumentTypeMutateComponent extends SingleFormMutateComponent<DocumentTypeControls> implements OnInit {
-  override successText: string = 'با موفقیت ذخیره شد';
+  override successText: string = $localize`با موفقیت ذخیره شد`;
   override entityApiService = inject(DocumentTypeApiService);
-  override formSubmitLabel: string = 'ذخیره';
+  override formSubmitLabel: string = $localize`ذخیره`;
+  lanApi = inject(LanguageApiService);
+
   constructor() {
     super();
     this.controls = {
+      language: new FormControl2('', {
+        label: $localize`زبان`,
+        type: 'select',
+        validators: [Validators.required],
+      }),
       title: new FormControl2('', {
-        label: 'عنوان',
+        label: $localize`عنوان`,
         type: 'text',
         validators: [Validators.required],
       }),
       explain: new FormControl2('', {
-        label: 'توضیحات',
+        label: $localize`توضیحات`,
         type: 'text',
-        validators: [Validators.required],
-      }),
-      language: new FormControl2('', {
-        label: 'زبان',
-        type: 'text',
-
         validators: [Validators.required],
       }),
       pagecount: new FormControl2('', {
-        label: 'تعداد صفحه',
+        label: $localize`تعداد صفحه`,
         type: 'number',
-
         validators: [Validators.required],
       }),
       hasIdnumber: new FormControl2(false, {
-        label: 'شناسه',
+        label: $localize`شناسه`,
         type: 'checkbox',
-
         validators: [Validators.required],
       }),
       hasexpireDate: new FormControl2(false, {
-        label: 'تاریخ',
+        label: $localize`تاریخ`,
         type: 'checkbox',
-
         validators: [Validators.required],
       }),
     };
   }
-  override handleAfterPostInitialization(controls: DocumentTypeControls): void {
-    const { languageId } = this.route.snapshot.queryParams;
-    this.formLabel = 'ثبت نوع سند';
 
-    if (languageId) {
-      controls.language.setValue(languageId);
-      controls.language.disable();
+  override async handleAfterPostInitialization(controls: DocumentTypeControls) {
+    this.formLabel = $localize`ثبت نوع سند`;
+    const languages = await lastValueFrom(this.lanApi.getAllLanguages());
+
+    if (languages.length) {
+      const options = languages.map((l) => l.title);
+      controls.language.setValue(options[0]);
+      controls.language.setObjOptions(languages);
+      controls.language.options = options;
     }
   }
 

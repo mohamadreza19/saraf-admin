@@ -1,0 +1,13 @@
+<div class="w-full">
+  <app-header-buttons (primaryClick)="navAdd()" (lightClick)="navDash()"></app-header-buttons>
+
+  @if (tableConfig) {
+
+  <div class="mt-10 w-full">
+    <app-table1
+      [list]="(pg.normalizedData$ | async)!"
+      [tableConfig]="tableConfig"
+      [pagination]="(pg.pagination$ | async)!"></app-table1>
+  </div>
+  }
+</div>

@@ -14,6 +14,11 @@ export class ReceiptComponent {
   @Input()
   control!: FormControl2;
 
+  cur = $localize`واحد پول`;
+  amount = $localize`مبلغ قابل واریز`;
+  discount = $localize`تخفیف`;
+  percent = $localize`درصد تخفیف`;
+  total = $localize`مبلغ کل قابل پرداخت`;
   @Input()
   get receipt(): Receipt {
     if (!this.control.value) {

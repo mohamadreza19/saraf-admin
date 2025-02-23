@@ -26,6 +26,7 @@ export type InputType =
   | 'multi-select'
   | 'map'
   | 'radio'
+  | 'radio-checkbox'
   | 'checkbox';
 
 export interface Input {

@@ -8,13 +8,14 @@ import { GlobalBaseComponent } from '../../components/global-base/global-base.co
 import { HeaderButtonsComponent } from '../../../../components/header-buttons/header-buttons.component';
 import { TableComponent } from '../../../../../../shared/components/tables/table/table.component';
 import { CommonModule } from '@angular/common';
+import { SwitchComponent } from '../../../../../../shared/components/swtichs/switch/switch.component';
 
 @Component({
   selector: 'app-visa-global',
   standalone: true,
   templateUrl: './visa-global.component.html',
   styleUrl: './visa-global.component.css',
-  imports: [TableComponent, HeaderButtonsComponent, CommonModule],
+  imports: [TableComponent, HeaderButtonsComponent, CommonModule, SwitchComponent],
   providers: [
     {
       provide: PaginationService,
@@ -24,5 +25,5 @@ import { CommonModule } from '@angular/common';
 })
 export class VisaGlobalComponent extends GlobalBaseComponent {
   override urlPath = 'visa-global';
-  override title: string = 'حساب های ویزا کارت';
+  override title: string = $localize`حساب های ویزا کارت`; // Localized title for Visa Cards
 }

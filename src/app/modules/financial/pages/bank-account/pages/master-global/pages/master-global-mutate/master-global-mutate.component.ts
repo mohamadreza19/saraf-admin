@@ -9,6 +9,6 @@ import { FormBuilder3Component } from '../../../../../../../../shared/components
   imports: [FormBuilder3Component],
 })
 export class MasterGlobalMutateComponent extends BaseMutateComponent {
-  override title = 'ثبت حساب Master';
+  override title = $localize`ثبت حساب Master`; // Localized title for "Register Master Account"
   override type: 'visa' | 'master' = 'master';
 }

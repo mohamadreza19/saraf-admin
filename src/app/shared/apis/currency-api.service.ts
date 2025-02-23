@@ -21,6 +21,11 @@ export class CurrencyApiService implements GETApiService, AbstractMutateApiServi
       .get<{ data: CurrencyUnit[] }>(this.baseUrl + '/currencyType/' + languageId)
       .pipe(map((res) => res.data));
   }
+  getAllByLanguageId(languageId: string) {
+    return this.http
+      .get<{ data: CurrencyResponse[] }>(this.baseUrl + '/currency/' + languageId)
+      .pipe(map((res) => res.data));
+  }
   getOneById(entityId: string) {
     return this.http.get(this.baseUrl + '/currency/' + entityId);
   }
@@ -35,6 +40,9 @@ export class CurrencyApiService implements GETApiService, AbstractMutateApiServi
   }
   patch(entityId: string, values: object): Observable<unknown> {
     return this.http.patch(this.baseUrl + '/currency/' + entityId, values);
+  }
+  patchBase(entityId: string) {
+    return this.http.patch(this.baseUrl + '/currency/changeBase/' + entityId, null);
   }
 }
 

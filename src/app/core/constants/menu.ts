@@ -1,100 +1,65 @@
+import '@angular/localize/init';
 import { MenuItem } from '../models/menu.model';
 
 export class Menu {
   public static pages: MenuItem[] = [
     {
-      group: 'داشبورد',
+      group: '',
       separator: true,
       items: [
         {
           icon: 'assets/icons/heroicons/outline/chart-pie.svg',
-          label: 'داشبورد',
+          label: $localize`:Dashboard|Menu Label: داشبورد`,
           route: '/dashboard',
-          children: [
-            { label: 'در یک نگاه', route: '/dashboard/view' },
-
-            // { label: 'Podcast', route: '/dashboard/podcast' },
-          ],
+          children: [{ label: $localize`:Dashboard Overview|Menu Label: در یک نگاه`, route: '/dashboard/view' }],
         },
-        // {
-        //   icon: 'assets/icons/material-icons/outline/person.svg',
-        //   label: 'کارمند ها',
-        //   route: '/resource/employee',
-        // },
       ],
     },
     {
-      group: 'اطلاعات اولیه',
+      group: '',
       separator: true,
       items: [
         {
-          icon: 'assets/icons/material-icons/outline/mony.svg',
-          label: 'مالی',
+          icon: 'assets/icons/material-icons/outline/info.svg',
+          label: $localize`:Basic Information|Menu Label: اطلاعات اولیه`,
           route: '/financial',
           children: [
+            { label: $localize`:Currencies|Menu Label: ارزها`, route: '/financial/currency' },
+            { label: $localize`:Banks|Menu Label: بانکها`, route: '/geographical/bank' },
+            { label: $localize`:Countries|Menu Label: کشورها`, route: '/geographical/country' },
+            { label: $localize`:Document Types|Menu Label: انواع مدارک`, route: '/resource/document-type' },
             {
-              label: 'صرافی ها',
-              route: '/resource/exchange-office',
+              label: $localize`:Admin Bank Accounts|Menu Label: ثبت شماره حسابهای ادمین`,
+              route: '/financial/bank-account',
             },
-            {
-              label: 'ارزها',
-              route: '/financial/currency',
-            },
-          ], // { label: 'Podcast', route: '/dashboard/podcast' },],
+            { label: $localize`:Panel Renewal|Menu Label: تمدید پنل`, route: '/admin/panel-revival' },
+          ],
         },
         {
-          icon: 'assets/icons/circum-icons/outline/bank.svg',
-          label: 'کشورها و بانک‌ها',
-          route: '/geographical',
-          children: [
-            {
-              label: 'بانکها',
-              route: '/geographical/bank',
-            },
-            {
-              label: 'کشورها',
-              route: '/geographical/country',
-            },
-          ], // { label: 'Podcast', route: '/dashboard/podcast' },],
+          icon: 'assets/icons/material-icons/outline/exchange.svg',
+          label: $localize`:Exchange Offices|Menu Label: صرافی ها`,
+          route: '/resource/exchange-office',
+        },
+        {
+          icon: 'assets/icons/material-icons/outline/module.svg',
+          label: $localize`:Modules|Menu Label: ماژول ها`,
+          route: '/admin/module',
         },
       ],
     },
     {
-      group: 'گزارش و ارتباط با مشتری',
+      group: '',
       separator: true,
       items: [
         {
           icon: 'assets/icons/material-icons/outline/clipboard.svg',
-          label: 'گزارش ها',
+          label: $localize`:Reports|Menu Label: گزارش ها`,
           route: '/report',
         },
         {
           icon: 'assets/icons/font-awesome/outline/comment.svg',
-          label: 'ارتباط با مشتری',
+          label: $localize`:Customer Relations|Menu Label: ارتباط با مشتری`,
           route: '/contact/customer',
-        },
-      ],
-    },
-    {
-      group: 'پنل و ادمین',
-      separator: true,
-
-      items: [
-        {
-          label: 'ماژول ها',
-          route: '/admin/panel',
-        },
-        {
-          label: 'انواع مدارک',
-          route: '/resource/document-type',
-        },
-        // {
-        //   label: 'ماژول ها',
-        //   route: '/admin/module',
-        // },
-        {
-          label: 'ثبت شماره حسابهای ادمین',
-          route: '/financial/bank-account',
         },
       ],
     },

@@ -1,4 +1,4 @@
 export enum Locale {
-  FA = 'fa-IR',
-  EN = 'en-US',
+  FA = 'fa',
+  EN = 'en',
 }

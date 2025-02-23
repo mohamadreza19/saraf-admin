@@ -19,19 +19,17 @@
   <input
     (input)="onEachBaseCoefficientChange($event, index)"
     type="text"
-    class="w-10 rounded-md border border-border"
+    class="w-14 rounded-md border border-border text-center"
     [value]="baseCoefficient" />
 </ng-template>
-<!-- <ng-template #reorderTemplate let-row="row" let-rowIndex="rowIndex">
-  <div class="flex flex-col text-nowrap">
-    <label class="mb-2 text-xs font-bold text-muted-foreground">جابجایی ترتیب به</label>
-    <select class="mt-auto ps-6" (change)="onEachCurrencyReorder($event, rowIndex)">
-      @for (index of allDataIndex; track $index) {
-      <option [selected]="index == rowIndex" [value]="index">{{ index + 1 }}</option>
-      }
-    </select>
-  </div>
-</ng-template> -->
+
+<ng-template
+  #baseCurrency
+  let-isBase="isBase"
+  let-onEachBaseCurrencyChange="onEachBaseCurrencyChange"
+  let-index="index">
+  <input (input)="onEachBaseCurrencyChange($event, index)" type="checkbox" [checked]="isBase" [disabled]="isBase" />
+</ng-template>
 
 <ng-template #activeTemplate let-selected="selected" let-index="index" let-statusChange="statusChange">
   <app-switch (onChangeStatus)="statusChange($event)" [selected]="selected" [name]="index"></app-switch>

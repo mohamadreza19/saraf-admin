@@ -11,8 +11,8 @@
           <svg-icon src="assets/icons/logo.svg"> </svg-icon>
         </a>
         <b class="ms-1 ps-2 text-sm font-bold text-foreground">
-          سمت :
-          <span class="font-light">مدیر</span>
+          <span i18n> سمت :</span>
+          <span i18n class="font-light">مدیر</span>
           <p>
             <span class="mr-2">IP :</span>
             <span>{{ ip }}</span>
@@ -26,6 +26,17 @@
         [ngClass]="{ 'rotate-180': !menuService.showSideBar }">
         <svg-icon src="assets/icons/heroicons/solid/chevron-double-left.svg"> </svg-icon>
       </button>
+    </div>
+    <div class="flex justify-center gap-4 py-3 text-body-sm">
+      <a
+        *ngFor="let link of languages"
+        [href]="link.link"
+        class="flex items-center gap-2 rounded-md border bg-gray-100 px-3 py-2 font-semibold text-muted-foreground hover:bg-gray-100 {{
+          isLinkIncludesLocale(link.link, localeId) && 'ring-2 ring-primary'
+        }}"
+        aria-label="Change language ">
+        {{ link.title }}
+      </a>
     </div>
 
     <!-- Separator -->

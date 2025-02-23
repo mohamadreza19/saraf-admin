@@ -1,4 +1,4 @@
-import { Injector, NgModule } from '@angular/core';
+import { Injector, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -54,6 +54,7 @@ export let AppInjector: Injector;
     // provideClientHydration(),
     // { provide: HTTP_INTERCEPTORS, useClass: NormalizedListDataInterceptor, multi: true },
     provideClientHydration(),
+    // { provide: LOCALE_ID, useFactory: getLocale },
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
@@ -64,3 +65,10 @@ export class AppModule {
     // else router.navigateByUrl('/auth/sin-in');
   }
 }
+// Function to determine the current language from the browser URL
+// export function getLocale(): string {
+//   const lang = window.location.pathname.split('/')[1]; // Get the first part of the URL (e.g., 'fa' or 'en')
+
+//   console.log(lang);
+//   return lang;
+// }

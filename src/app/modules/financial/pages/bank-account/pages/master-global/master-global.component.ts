@@ -5,6 +5,7 @@ import { GlobalBaseComponent } from '../../components/global-base/global-base.co
 import { HeaderButtonsComponent } from '../../../../components/header-buttons/header-buttons.component';
 import { TableComponent } from '../../../../../../shared/components/tables/table/table.component';
 import { CommonModule } from '@angular/common';
+import { SwitchComponent } from '../../../../../../shared/components/swtichs/switch/switch.component';
 
 @Component({
   selector: 'app-master-global',
@@ -18,9 +19,9 @@ import { CommonModule } from '@angular/common';
     },
   ],
   standalone: true,
-  imports: [HeaderButtonsComponent, TableComponent, CommonModule],
+  imports: [HeaderButtonsComponent, TableComponent, CommonModule, SwitchComponent],
 })
 export class MasterGlobalComponent extends GlobalBaseComponent {
   override urlPath = 'master-global';
-  override title = 'حساب های مستر کارت';
+  override title = $localize`حساب های مستر کارت`; // Localized title for MasterCard accounts
 }

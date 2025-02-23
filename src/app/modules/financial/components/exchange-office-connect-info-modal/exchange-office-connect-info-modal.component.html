@@ -1,3 +1,8 @@
-<div class="max-h-[600px] w-full overflow-auto">
-  <app-form-builder2 [forms]="[form]"></app-form-builder2>
+<div class="flex max-h-[600px] w-full flex-col gap-10 overflow-auto bg-background">
+  <app-form-builder3
+    (backClick)="onBack()"
+    [label]="formLabel"
+    [showStepper]="false"
+    [formArray]="formArray"
+    (lastFormSubmit)="submit($event)"></app-form-builder3>
 </div>

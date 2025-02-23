@@ -42,8 +42,13 @@ export class PaginationService<D extends Record<string, any>> {
    * *
    */
 
-  public initPagination(path: string) {
+  public initPagination(path: string, queryParams?: HttpParams) {
+    this.isInitializing = true;
     this.path = path;
+
+    if (queryParams) {
+      this.queryParams = queryParams;
+    }
     lastValueFrom(this.fetchData())
       .then((response) => {
         this.pagination$ = new BehaviorSubject(response.data.pagination);
@@ -115,6 +120,7 @@ export class PaginationService<D extends Record<string, any>> {
    */
   private updateData(data: D[]): void {
     this.data$.next(data);
+
     this.normalizedData$.next(this.transformData(data));
   }
 

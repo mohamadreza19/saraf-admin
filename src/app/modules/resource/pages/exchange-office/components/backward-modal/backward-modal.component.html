@@ -1,13 +1,13 @@
 <div class="w-full bg-background p-6">
   <!-- عنوان اصلی -->
   <div class="border-b border-border pb-4">
-    <p class="text-headline-sm font-medium text-gray-900">اخطار</p>
+    <p i18n class="text-headline-sm font-medium text-gray-900">اخطار</p>
   </div>
 
   <!-- متن بدنه -->
   <div class="flex flex-col gap-6 pt-4">
     <div>
-      <p class="text-body-lg text-gray-800">
+      <p i18n class="text-body-lg text-gray-800">
         تغییراتی در فرم‌های زیر اعمال شده است. در صورت خروج، این تغییرات ذخیره نخواهند شد. آیا مطمئن هستید که می‌خواهید
         از صفحه خارج شوید؟
       </p>
@@ -16,22 +16,22 @@
     <!-- لیست فرم‌ها -->
     <!-- لیست فرم‌ها -->
     <div>
-      <p class="text-title-md font-medium text-gray-900">فرم‌های معتبر</p>
+      <p i18n class="text-title-md font-medium text-gray-900">فرم‌های معتبر</p>
 
       <ul class="mt-2 space-y-2 text-body-md text-gray-700">
         <li *ngFor="let label of data.validFormLabels" class="flex items-center gap-2">
           <span class="text-green-600">✔</span> {{ label }}
         </li>
-        <li *ngIf="!data.validFormLabels.length" class="text-red-500">فرم معتبری یافت نشد</li>
+        <li i18n *ngIf="!data.validFormLabels.length" class="text-red-500">فرم معتبری یافت نشد</li>
       </ul>
     </div>
 
     <!-- دکمه‌ها -->
     <div class="flex justify-between gap-3 pt-4">
-      <app-button (buttonClick)="data.onStay()" impact="none"> باقی ماندن </app-button>
+      <app-button (buttonClick)="data.onStay()" i18n impact="none"> باقی ماندن </app-button>
       <div class="flex gap-2">
-        <app-button (buttonClick)="data.onSaveAndExist()" impact="bold" tone="primary"> ذخیره و خروج </app-button>
-        <app-button (buttonClick)="data.onExist()" impact="bold" tone="danger">خروج</app-button>
+        <app-button (buttonClick)="data.onSaveAndExist()" i18n impact="bold" tone="primary"> ذخیره و خروج </app-button>
+        <app-button (buttonClick)="data.onExist()" i18n impact="bold" tone="danger">خروج</app-button>
       </div>
     </div>
   </div>

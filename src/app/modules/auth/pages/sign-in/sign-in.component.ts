@@ -47,16 +47,15 @@ export class SignInComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.pt.isBrowser, '50');
     const controls = {
       username: new FormControl2('', {
-        label: 'نام کاربری',
+        label: $localize`نام کاربری`,
         type: 'text',
         validators: [Validators.required],
       }),
       password: new FormControl2('', {
-        label: 'رمز ورود',
-        type: 'text',
+        label: $localize`رمز ورود`,
+        type: 'password',
         validators: [Validators.required, Validators.minLength(6)],
       }),
     };
@@ -91,7 +90,7 @@ export class SignInComponent implements OnInit {
 
       this.router.navigate(['/']);
     } catch (error) {
-      this.loadingSnackbar.openError('نام کاربری یا پسورد وارد شده صحیح نمی‌باشد');
+      this.loadingSnackbar.openError($localize`نام کاربری یا پسورد وارد شده صحیح نمی‌باشد`);
     }
   }
   getAsFormControl2(control: any): FormControl2 {

@@ -25,40 +25,45 @@ import { FormSubmitService } from 'src/app/core/services/form-submit.service';
 export class CryptoMutateComponent implements OnInit, OnDestroy {
   formArray = new FormArray2([]);
   step = 0;
-  title = 'ثبت حساب رمز ارز';
+
+  // Localized title for the component
+  title = $localize`ثبت حساب رمز ارز`;
+
   formSubmit = inject(FormSubmitService);
+
   constructor(public route: ActivatedRoute, private bankAccountApi: BankAccountApiService) {}
+
   generateForm() {
     const controls: CryptoControls = {
       currencyName: new FormControl2('', {
-        label: 'نام ارز',
+        label: $localize`نام ارز`, // Localized label
         type: 'text',
         validators: [Validators.required],
       }),
       accountNumber: new FormControl2('', {
-        label: 'شماره حساب',
+        label: $localize`شماره حساب`, // Localized label
         type: 'text',
         validators: [Validators.required],
       }),
       memo: new FormControl2('', {
-        label: 'memo',
+        label: $localize`memo`, // Localized label
         type: 'text',
         validators: [Validators.required],
       }),
       transferPlatform: new FormControl2('', {
-        label: 'بستر انتقال ارز دیجیتال',
+        label: $localize`بستر انتقال ارز دیجیتال`, // Localized label
         type: 'text',
         validators: [Validators.required],
       }),
       currencyType: new FormControl2('', {
-        label: 'نوع ارز',
+        label: $localize`نوع ارز`, // Localized label
         type: 'text',
         options: [],
         validators: [Validators.required],
       }),
     };
 
-    return new CustomFormGroup(controls, 'ثبت حساب رمز ارز', 'ذخیره');
+    return new CustomFormGroup(controls, $localize`ثبت حساب رمز ارز`, $localize`ذخیره`);
   }
 
   ngOnInit(): void {
@@ -70,15 +75,18 @@ export class CryptoMutateComponent implements OnInit, OnDestroy {
 
     this.formArray.push(form);
   }
+
   ngOnDestroy(): void {
     this.formArray.clear();
   }
+
   async submit({ focusedForm, setStep }: FormSubmitEmit) {
     this.formSubmit.onSend(focusedForm.rootLabel as string);
     try {
       await lastValueFrom(this.bankAccountApi.postCrypto(focusedForm.getValues()));
       this.formSubmit.onfulfilled(focusedForm.rootLabel as string);
-      this.formSubmit.successNav('حساب رمز ارز با موفقیت ذخیره شد.');
+      // Localized success message
+      this.formSubmit.successNav($localize`حساب رمز ارز با موفقیت ذخیره شد.`);
     } catch (error) {
       this.formSubmit.onError(error, this.formArray, (formIndex) => setStep(formIndex));
     }

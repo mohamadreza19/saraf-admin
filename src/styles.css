@@ -1,9 +1,16 @@
-@import url('./assets/styles/Vazirmatn-font-face.css');
-@import url('./assets/styles/Vazirmatn-Variable-font-face.css');
+@import url('src/assets/styles/Vazirmatn-font-face.css');
+@import url('src/assets/styles/Vazirmatn-Variable-font-face.css');
+
+@import './assets/styles/apexchart.scss';
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+html[dir='rtl'] * {
+  font-family: Vazirmatn, monospace !important;
+  font-feature-settings: 'ss01';
+}
 
 @layer base {
   :root {
@@ -19,10 +26,6 @@
     --destructive-foreground: 0 0% 98%;
     --border: 214 32% 91%;
     --custom-border: rgb(233 236 239);
-  }
-  * {
-    font-family: Vazirmatn, monospace !important;
-    font-feature-settings: 'ss01';
   }
 
   .dark {
@@ -174,7 +177,6 @@
 }
 
 /** Plugins **/
-@import './assets/styles/apexchart.scss';
 
 .cdk-overlay-container {
   /* position: fixed !important; */
@@ -189,4 +191,18 @@
   left: 0;
   width: 100%;
   z-index: 1000;
+}
+.filepond--panel-root {
+  background-color: hsl(var(--border)) !important;
+}
+
+.filepond--drop-label {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+.filepond--credits {
+  display: none !important;
+}
+.datepicker-outer-container {
+  position: absolute;
 }

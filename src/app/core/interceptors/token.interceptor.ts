@@ -30,10 +30,13 @@ export class TokenInterceptor implements HttpInterceptor {
 
     // Pass the request to the next handler
     return next.handle(request).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === HttpStatusCode.Unauthorized) {
+      catchError((e: HttpErrorResponse) => {
+        if (e.status === HttpStatusCode.Unauthorized) {
           // If the response status is 401, redirect to login page
-          console.log('token');
+
+          if ('error' in e.error && (e.error.error as string).toLocaleLowerCase().includes('selected')) {
+            return throwError(e);
+          }
           if (this.auth.getToken()) {
             this.auth.removeToken();
           }
@@ -43,7 +46,7 @@ export class TokenInterceptor implements HttpInterceptor {
           // console.log('router', this.router);
         }
         // Return the error to the caller
-        return throwError(error);
+        return throwError(e);
       }),
     );
   }

@@ -15,7 +15,7 @@ const routes: Routes = [
     component: GeographicalComponent,
   },
   { path: 'bank', component: BankComponent },
-  { path: 'bank/add', component: BankMutateComponent },
+  { path: 'bank/mutate', component: BankMutateComponent },
   { path: 'country', component: CountryComponent },
   { path: 'country/mutate', component: CountryMutateComponent },
   { path: 'city', component: CityComponent },

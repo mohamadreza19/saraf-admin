@@ -16,37 +16,47 @@ import { CityApiService } from 'src/app/shared/apis/city-api.service';
   imports: [FormBuilder3Component],
 })
 export class CityMutateComponent extends SingleFormMutateComponent<CityControls> implements OnInit {
-  override successText: string = 'شهر با موفقیت ذخیره شد';
+  override successText: string = $localize`شهر با موفقیت ذخیره شد`;
   override entityApiService = inject(CityApiService);
+
   constructor() {
     super();
     this.controls = {
       title: new FormControl2('', {
-        label: 'عنوان',
+        label: $localize`عنوان`,
         type: 'text',
         validators: [Validators.required],
       }),
       country: new FormControl2('', {
-        label: 'کشور',
-        type: 'text',
+        label: $localize`کشور`,
+        type: 'select',
         validators: [Validators.required],
+        optionObjImportantKey: 'id',
       }),
     };
   }
-  override handleAfterPostInitialization(controls: CityControls): void {
-    this.formLabel = 'ثبت شهر';
-    const qp = this.route.snapshot.queryParams;
-    if ('countryId' in qp) {
-      const { countryId } = qp;
 
-      controls.country.setValue(countryId);
+  override handleAfterPostInitialization(controls: CityControls): void {
+    this.formLabel = $localize`ثبت شهر`;
+    const qp = this.route.snapshot.queryParams;
+    if ('countryId' in qp && 'countryTitle' in qp) {
+      const { countryId, countryTitle } = qp;
+      const mountedCountry = {
+        id: countryId,
+        title: countryTitle,
+      };
+      controls.country.options = [countryTitle];
+      controls.country.setObjOptions([mountedCountry]);
+      controls.country.setValue(countryTitle);
       controls.country.disable();
     }
   }
+
   ngOnInit() {
     this.onInit();
   }
 }
+
 export interface CityControls {
   title: FormControl2;
   country: FormControl2;

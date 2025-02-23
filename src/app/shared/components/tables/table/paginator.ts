@@ -10,7 +10,7 @@ export class CustomPaginatorIntl extends MatPaginatorIntl {
 
     return `${endIndex}  / ${length}`;
   };
-  override itemsPerPageLabel: string = 'نمایش در هر صفحه';
-  override nextPageLabel: string = 'بعدی';
-  override previousPageLabel: string = 'قبلی';
+  override itemsPerPageLabel: string = $localize`نمایش در هر صفحه`;
+  override nextPageLabel: string = $localize`بعدی`;
+  override previousPageLabel: string = $localize`قبلی`;
 }

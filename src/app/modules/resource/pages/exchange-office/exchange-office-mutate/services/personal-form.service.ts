@@ -18,6 +18,9 @@ import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { ConvertControlsToAny } from 'src/app/shared/types/convert-controls-to-any';
 import { Exchange, ExchangeApiService } from 'src/app/shared/apis/exchange-api.service';
 import { convertGregorianTOJalali } from 'src/app/core/utils/convertGregorianToJalali';
+import { fileLengthValidator } from 'src/app/shared/validators/file-length-validator';
+import { mobileNumberValidator } from 'src/app/shared/validators/mobile-number-validator';
+import { lengthValidator } from 'src/app/shared/validators/length-validator';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +42,7 @@ export class PersonalFormService implements AbstractFormService {
   }
   generateControls(): PersonalControls {
     const mobileCode = new FormControl2('', {
-      label: '',
+      label: '', // Marked for translation
       type: 'select',
       show: false,
       validators: [],
@@ -49,11 +52,11 @@ export class PersonalFormService implements AbstractFormService {
 
     return {
       language: new FormControl2('', {
-        label: 'زبان پنل',
+        label: $localize`زبان پنل`, // Marked for translation
         type: 'select',
         options: [],
         optionObjImportantKey: 'id',
-        validators: [Validators.required], // Required
+        validators: [Validators.required],
       }),
       mobileCode: mobileCode,
       mobile: new PhoneControl(
@@ -61,103 +64,101 @@ export class PersonalFormService implements AbstractFormService {
         {
           type: 'phone-number',
           show: true,
-          label: 'شماره تماس',
-          validators: [Validators.required], // Required and a valid Iranian phone number
+          label: $localize`شماره تماس`, // Marked for translation
+          validators: [Validators.required],
         },
         mobileCode,
       ) as any,
       name: new FormControl2('', {
         type: 'text',
-        label: 'نام',
-        validators: [Validators.required, Validators.minLength(2)], // Required, minimum length 2
+        label: $localize`:@@nameLabel:نام`, // Marked for translation
+        validators: [Validators.required, Validators.minLength(2)],
       }),
       family: new FormControl2('', {
         type: 'text',
-        label: 'نام خانوادگی',
-        validators: [Validators.required, Validators.minLength(2)], // Required, minimum length 2
+        label: $localize`نام خانوادگی`, // Marked for translation
+        validators: [Validators.required, Validators.minLength(2)],
       }),
       picture: new FormControl2([], {
         type: 'files',
-        filesLength: 1,
-        label: 'بارگزاری یا انتخاب تصویر فردی',
-        validators: [Validators.required], // File upload is required
+        label: $localize`بارگزاری یا انتخاب تصویر فردی`, // Marked for translation
+        validators: [Validators.required, fileLengthValidator(1)],
         allowedFileTypes: ['pdf', 'jpeg', 'png', 'jpg'],
       }),
       nationalcode: new FormControl2('', {
-        type: 'text',
-        label: 'کد ملی',
-        validators: [Validators.required, Validators.pattern(/^\d{10}$/)], // Required, exactly 10 digits
+        type: 'number',
+        label: $localize`کد ملی`, // Marked for translation
+        validators: [Validators.required, lengthValidator(10)],
       }),
       fathername: new FormControl2('', {
         type: 'text',
-        label: 'نام پدر',
-        validators: [Validators.required], // Required
+        label: $localize`نام پدر`, // Marked for translation
+        validators: [Validators.required],
       }),
       nikename: new FormControl2('', {
         type: 'text',
-        label: 'نام مستعار',
-        validators: [Validators.required, Validators.maxLength(50)], // Optional, maximum length 50
+        label: $localize`نام مستعار`, // Marked for translation
+        validators: [Validators.required, Validators.maxLength(50)],
       }),
       gender: new FormControl2(true, {
+        type: 'radio-checkbox',
+        label: $localize`مذکر`, // Marked for translation
+        validators: [Validators.required],
+        options: [$localize`:@@maleOption:مذکر`, $localize`:@@femaleOption:مونث`], // Marked for translation
+      }),
+      isExchange: new FormControl2(false, {
+        label: $localize`صراف هستم`, // Marked for translation
         type: 'checkbox',
-        label: 'مذکر',
-        validators: [Validators.required], // Required
+        validators: [],
       }),
-      nationality: new FormControl2('', {
-        type: 'text',
-        label: 'ملیت',
-        validators: [Validators.required], // Required
-      }),
-      isExchange: new FormControl2(true, {
-        label: 'صراف هست',
-        type: 'checkbox',
-        validators: [], // No validators
-      }),
-
       birthday: new FormControl2('', {
         type: 'date',
-        label: 'تاریخ تولد',
-        validators: [Validators.required], // Required
+        label: $localize`تاریخ تولد`, // Marked for translation
+        validators: [Validators.required],
       }),
-
       email: new FormControl2('', {
-        type: 'email',
-        label: 'ایمیل',
-        validators: [Validators.required, Validators.email], // Valid email format
+        type: 'text',
+        label: $localize`ایمیل`, // Marked for translation
+        validators: [Validators.required, Validators.email],
+      }),
+      nationality: new FormControl2('', {
+        type: 'select',
+        label: $localize`ملیت`, // Marked for translation
+        validators: [Validators.required],
       }),
       country: new FormControl2('', {
         type: 'select',
-        label: 'کشور',
-        validators: [Validators.required], // Required
+        label: $localize`کشور`, // Marked for translation
+        validators: [Validators.required],
         optionObjImportantKey: 'id',
         options: [],
       }),
       city: new FormControl2('', {
         type: 'select',
-        label: 'شهر',
-        validators: [Validators.required], // Required
+        label: $localize`شهر`, // Marked for translation
+        validators: [Validators.required],
         optionObjImportantKey: '_id',
         options: [],
       }),
       address: new FormControl2('', {
         type: 'text',
-        label: 'آدرس',
-        validators: [Validators.required, Validators.minLength(5)], // Required, minimum length 5
+        label: $localize`آدرس`, // Marked for translation
+        validators: [Validators.required, Validators.minLength(5)],
       }),
       postalcode: new FormControl2('', {
         type: 'text',
-        label: 'کدپستی',
-        validators: [Validators.required, Validators.pattern(/^\d{10}$/)], // Required, exactly 10 digits
+        label: $localize`کدپستی`, // Marked for translation
+        validators: [Validators.required],
       }),
       location: new FormControl2(null, {
-        label: 'انتخاب موقعیت روی نقشه',
+        label: $localize`انتخاب موقعیت روی نقشه`, // Marked for translation
         type: 'map',
         validators: [Validators.required],
       }),
       nature: new FormControl2(false, {
         type: 'checkbox',
-        label: 'حقوقی',
-        validators: [], // No validators
+        label: $localize`حقوقی`, // Marked for translation
+        validators: [],
       }),
     };
   }
@@ -165,14 +166,14 @@ export class PersonalFormService implements AbstractFormService {
   generateForm() {
     const controls = this.generateControls();
 
-    const form = new CustomFormGroup(controls, FormLabels.Personal, 'ادامه');
+    const form = new CustomFormGroup(controls, FormLabels.Personal, $localize`ادامه`);
     this.mainForm = form;
     return form;
   }
   beforeInit(data: Exchange, formStep$: BehaviorSubject<number>): void {
     this.data = data;
     // formStep$.next(data.step - 1 || 0);
-    console.log(data);
+
     if (data) {
       setTimeout(() => formStep$.next(data.step - 1), 2000);
     }
@@ -231,6 +232,8 @@ export class PersonalFormService implements AbstractFormService {
       ) as CountyPreCode;
       if (mountedMobileCode) {
         mobileCode.setValue(`(${mountedMobileCode.name} ${mountedMobileCode.dialCode})`);
+
+        mobile.setValidators([Validators.required, mobileNumberValidator(mountedMobileCode.dialCode)]);
       }
       //
       name.setValue(this.data.name);
@@ -266,7 +269,6 @@ export class PersonalFormService implements AbstractFormService {
       //
       const cities = await lastValueFrom(this.cityApi.getAllByCountyId(this.data.country));
       if (cities) {
-        mobileCode.setObjOptions;
         city.setObjOptions(cities);
         city.options = cities.map((c) => c.title);
         city.setValue(city.options[0]);
@@ -290,9 +292,12 @@ export class PersonalFormService implements AbstractFormService {
         language$.next(LanObj);
         const countries = await lastValueFrom(this.countryApi.getAllByLanguageId(LanObj.id));
         if (countries) {
+          const countriesOptions = countries.map((c) => c.title);
           country.setObjOptions(countries);
-          country.options = countries.map((c) => c.title);
+          country.options = countriesOptions;
           country.setValue(country.options[0]);
+
+          nationality.options = countriesOptions;
 
           const preCodes: CountyPreCode[] = countries.map((c) => ({
             dialCode: c.countryPreCode,
@@ -303,6 +308,7 @@ export class PersonalFormService implements AbstractFormService {
           mobileCode.setObjOptions(preCodes);
           mobileCode.options = preCodes.map((p) => `(${p.name} ${p.dialCode})`);
           mobileCode.setValue(mobileCode.options[0]);
+          mobile.setValidators([Validators.required, mobileNumberValidator(preCodes[0].dialCode)]);
         }
       }
     });
@@ -313,7 +319,6 @@ export class PersonalFormService implements AbstractFormService {
       if (countryObj) {
         const cities = await lastValueFrom(this.cityApi.getAllByCountyId(countryObj.id));
         if (cities) {
-          mobileCode.setObjOptions;
           city.setObjOptions(cities);
           city.options = cities.map((c) => c.title);
           city.setValue(city.options[0]);

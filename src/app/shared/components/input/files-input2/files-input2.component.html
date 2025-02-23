@@ -1,0 +1,11 @@
+<div class="max-h-36 w-full overflow-hidden transition-all delay-300 hover:max-h-[1000px]">
+  <file-pond
+    #myPond
+    [options]="pondOptions"
+    [files]="pondFiles"
+    (oninit)="pondHandleInit()"
+    (onaddfile)="pondHandleAddFile($event)"
+    (onremovefile)="pondHandleRemoveFile($event)"
+    (onactivatefile)="pondHandleActivateFile($event)">
+  </file-pond>
+</div>

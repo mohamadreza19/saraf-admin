@@ -20,12 +20,12 @@ export class BadRequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((e: HttpErrorResponse) => {
+        console.log(e);
         if (e.status == HttpStatusCode.BadRequest || e.status == HttpStatusCode.Unauthorized) {
-          console.log(e);
           const errors = BadRequestError.getErrors(e.error);
 
           if ('unknown' in errors) {
-            this.loadingSnackbar.openError('خطای ناشناخته');
+            this.loadingSnackbar.openError($localize`خطای ناشناخته`);
           }
           return throwError(errors);
         } else return throwError(e);

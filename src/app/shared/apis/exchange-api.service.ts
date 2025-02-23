@@ -15,11 +15,12 @@ import { FormLabels } from 'src/app/modules/resource/pages/exchange-office/excha
 import { Pagination } from '../types/pagination.interface';
 import { DataWithListResponse, ListResponse } from '../types/list-response.interface';
 import { GETApiService } from 'src/app/core/services/pagination.service';
+import { AbstractMutateApiService } from 'src/app/core/base-components/single-form-mutate/single-form-mutate.component';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ExchangeApiService implements GETApiService {
+export class ExchangeApiService implements GETApiService, AbstractMutateApiService {
   private url = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
@@ -54,6 +55,15 @@ export class ExchangeApiService implements GETApiService {
           return throwError(new ErrorWithFormLabel(FormLabels.Personal, error));
         }),
       );
+  }
+  patch(entityId: string, values: object): Observable<unknown> {
+    return this.http.post('as', {});
+  }
+  post(values: object): Observable<unknown> {
+    return this.http.post('as', {});
+  }
+  patchStatus(entityId: string, values: object) {
+    return this.http.patch(this.url + '/exchange/' + entityId, values);
   }
   patchCompanyInfoByExchangeId(exchangeId: string, body: ConvertControlsToAny<LegalControls>) {
     return this.http.patch(this.url + '/exchange/companyInfo/' + exchangeId, body).pipe(
@@ -145,7 +155,7 @@ export interface ExchangeDetailResponse {
   exchangeInfo: Exchange[];
   exchangeCompany: ExchangeCompany[];
   panelInfo: PanelInfo[];
-  exchangeConnection: any[];
+  exchangeConnection: ExchangeConnection[];
   alldoc: Alldoc[];
 }
 
@@ -231,6 +241,11 @@ export interface PanelInfo {
   receipt: null;
   active: number;
   __v: number;
+}
+export interface ExchangeConnection {
+  ipServer: string;
+  ipDatabase: string;
+  portDatabase: string;
 }
 
 export interface Item {

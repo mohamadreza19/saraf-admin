@@ -4,15 +4,15 @@
   @if(showHeader){
 
   <header class="form-header flex w-full flex-col gap-4 rounded-t-lg bg-white p-6 text-gray-800 shadow-md">
-    <p class="!text-2xl font-bold text-gray-800">{{ label }}</p>
+    <div class="flex items-center justify-between">
+      <p class="!text-2xl font-bold text-gray-800">{{ label }}</p>
 
-    <!-- Back URL Button -->
-    <div class="back-button">
-      <app-button (buttonClick)="goBack()" impact="light" tone="light" class="w-full sm:w-auto">
-        <span class="!text-base font-normal">
-          {{ 'بازگشت' }}
-        </span>
-      </app-button>
+      <!-- Back URL Button -->
+      <div class="back-button">
+        <app-button (buttonClick)="goBack()" impact="light" tone="light" class="w-full sm:w-auto">
+          <span i18n class="!text-base font-normal">بازگشت</span>
+        </app-button>
+      </div>
     </div>
 
     @if(showStepper && steps.length>1){
@@ -74,6 +74,7 @@
                 {{ form.submitText }}
               </app-button>
               <app-button
+                i18n
                 *ngIf="formIndex > 0"
                 (buttonClick)="prevStep(formIndex)"
                 impact="light"

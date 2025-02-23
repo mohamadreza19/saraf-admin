@@ -10,7 +10,7 @@
         <app-input [control]="controlInput"></app-input>
       </div>
     </form>
-    <div class="mt-4 flex w-full items-center justify-between">
+    <div class="mt-4 flex !hidden w-full items-center justify-between">
       <app-button
         *ngIf="showDeleteButton"
         (buttonClick)="onDelete()"
@@ -31,6 +31,7 @@
           (click)="sortTable(headerKey, tableHeaderIndex)">
           <div class="flex items-center gap-1">
             <input
+              class="hidden"
               *ngIf="tableHeaderIndex === 0 && showEachCheckbox"
               type="checkbox"
               (change)="onAllCheckboxChange($event)" />
@@ -58,7 +59,7 @@
             </span>
           </div>
         </th>
-        <th *ngIf="tableConfig.actions" class="px-3 py-4 text-start text-sm font-light text-muted-foreground">
+        <th i18n *ngIf="tableConfig.actions" class="px-3 py-4 text-start text-sm font-light text-muted-foreground">
           عملیات
         </th>
       </tr>
@@ -84,6 +85,7 @@
             class="px-3 py-4 text-sm font-light text-muted-foreground">
             <div class="flex gap-1">
               <input
+                class="hidden"
                 *ngIf="i === 0 && showEachCheckbox"
                 #checkboxChild
                 type="checkbox"
@@ -122,7 +124,7 @@
       </ng-container>
       <ng-template #emptyTable>
         <tr>
-          <td colspan="100%" class="py-6 text-center text-xl text-gray-600">خالی!</td>
+          <td i18n colspan="100%" class="py-6 text-center text-xl text-gray-600">خالی!</td>
         </tr>
       </ng-template>
       }

@@ -12,6 +12,6 @@ import { FormBuilder3Component } from '../../../../../../../../shared/components
   templateUrl: './visa-global-mutate.component.html',
 })
 export class VisaGlobalMutateComponent extends BaseMutateComponent {
-  override title = 'ثبت حساب Visa';
+  override title = $localize`ثبت حساب Visa`; // Localized title for "Register Visa Account"
   override type: 'visa' | 'master' = 'visa';
 }

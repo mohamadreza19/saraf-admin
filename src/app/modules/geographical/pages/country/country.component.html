@@ -1,14 +1,14 @@
-@if (tableConfig && activeButton) {
+@if (tableConfig && statusTem) {
 <app-header-buttons (primaryClick)="navAdd()" (lightClick)="navDash()"></app-header-buttons>
 <div class="mt-10 w-full">
   <app-table1
     [tableConfig]="tableConfig"
-    [list]="(paginationService.normalizedData$ | async)!"
-    [pagination]="(paginationService.pagination$ | async)!"
-    (onPage)="paginationService.onPageChange($event)"></app-table1>
+    [list]="(pg.normalizedData$ | async)!"
+    [pagination]="(pg.pagination$ | async)!"
+    (onPage)="pg.onPageChange($event)"></app-table1>
 </div>
 }
 
-<ng-template #activeButton>
-  <input type="checkbox" checked />
+<ng-template #statusTem let-index="index" let-selected="selected" let-onStatusChange="onStatusChange">
+  <app-switch [selected]="selected" [name]="index" (onChangeStatus)="onStatusChange($event)"></app-switch>
 </ng-template>

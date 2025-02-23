@@ -1,18 +1,1156 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="8170452247543765587" datatype="html">
+        <source>سامانه خرید و فروش ارز ، طلا و نقره پیمان</source>
+        <target>Peyman Currency, Gold, and Silver Trading System</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/auth.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8074304452955982641" datatype="html">
+        <source>زبان</source>
+        <target>Language</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/configs/with-language-control.config.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+          <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/pages/panel-revival-mutate/panel-revival-mutate.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8402795754306503403" datatype="html">
+        <source> داشبورد</source>
+        <target>Dashboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Dashboard</note>
+      </trans-unit>
+      <trans-unit id="3072601629519381357" datatype="html">
+        <source> در یک نگاه</source>
+        <target>Dashboard Overview</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Dashboard Overview</note>
+      </trans-unit>
+      <trans-unit id="599325588675851133" datatype="html">
+        <source> اطلاعات اولیه</source>
+        <target>Basic Information</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Basic Information</note>
+      </trans-unit>
+      <trans-unit id="3296548524784662650" datatype="html">
+        <source> ارزها</source>
+        <target>Currencies</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Currencies</note>
+      </trans-unit>
+      <trans-unit id="7543328182785935637" datatype="html">
+        <source> بانکها</source>
+        <target>Banks</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Banks</note>
+      </trans-unit>
+      <trans-unit id="6778951230421679441" datatype="html">
+        <source> کشورها</source>
+        <target>Countries</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Countries</note>
+      </trans-unit>
+      <trans-unit id="8757272871760641536" datatype="html">
+        <source> انواع مدارک</source>
+        <target>Document Types</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Document Types</note>
+      </trans-unit>
+      <trans-unit id="4890956993526600481" datatype="html">
+        <source> ثبت شماره حسابهای ادمین</source>
+        <target>Admin Bank Accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Admin Bank Accounts</note>
+      </trans-unit>
+      <trans-unit id="1757193296158917255" datatype="html">
+        <source> تمدید پنل</source>
+        <target>Panel Renewal</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Panel Renewal</note>
+      </trans-unit>
+      <trans-unit id="6066700389965776287" datatype="html">
+        <source> صرافی ها</source>
+        <target>Exchange Offices</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Exchange Offices</note>
+      </trans-unit>
+      <trans-unit id="1820367859819143009" datatype="html">
+        <source> ماژول ها</source>
+        <target>Modules</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Modules</note>
+      </trans-unit>
+      <trans-unit id="1867945150576461260" datatype="html">
+        <source> گزارش ها</source>
+        <target>Reports</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Reports</note>
+      </trans-unit>
+      <trans-unit id="7585256710780481013" datatype="html">
+        <source> ارتباط با مشتری</source>
+        <target>Customer Relations</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/menu.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <note priority="1" from="description">Menu Label</note>
+        <note priority="1" from="meaning">Customer Relations</note>
+      </trans-unit>
+      <trans-unit id="925482650878966407" datatype="html">
+        <source>این فیلد الزامی است.</source>
+        <target>This field is required.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5312961581304141921" datatype="html">
+        <source>حداقل طول باید <x id="PH" equiv-text="min.length"/> کاراکتر باشد (در حال حاضر <x id="PH_1" equiv-text="actual"/> کاراکتر).</source>
+        <target>The minimum length must be <x id="PH" equiv-text="min.length"/> characters (currently <x id="PH_1" equiv-text="actual"/> characters).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1305284764805491655" datatype="html">
+        <source>حداکثر طول باید <x id="PH" equiv-text="max.length"/> کاراکتر باشد (در حال حاضر <x id="PH_1" equiv-text="actual"/> کاراکتر).</source>
+        <target>The maximum length must be <x id="PH" equiv-text="max.length"/> characters (currently <x id="PH_1" equiv-text="actual"/> characters).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6763694319923900729" datatype="html">
+        <source>لطفاً یک آدرس ایمیل معتبر وارد کنید.</source>
+        <target>Please enter a valid email address.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8700293808645319208" datatype="html">
+        <source>فرمت وارد شده نامعتبر است.</source>
+        <target>The entered format is invalid.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6842943007963492794" datatype="html">
+        <source>مقدار وارد شده یافت نشد.</source>
+        <target>The entered value was not found.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4394975099588562946" datatype="html">
+        <source>این مقدار قبلاً ثبت شده است. لطفاً مقدار دیگری وارد کنید.</source>
+        <target>This value has already been registered. Please enter a different value.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5232779319088487246" datatype="html">
+        <source>مقدار وارد شده نامعتبر است.</source>
+        <target>The entered value is invalid.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8866565994477395418" datatype="html">
+        <source>مقدار قابل انتخاب نمیباشد</source>
+        <target>The value is not selectable.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5303156110973760888" datatype="html">
+        <source>حداکثر <x id="PH" equiv-text="maxFiles"/> فایل مجاز است (در حال حاضر <x id="PH_1" equiv-text="actualFiles"/> فایل انتخاب شده است).</source>
+        <target>A maximum of <x id="PH" equiv-text="maxFiles"/> files is allowed (currently <x id="PH_1" equiv-text="actualFiles"/> files are selected).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4725874765549169074" datatype="html">
+        <source>حداکثر <x id="PH" equiv-text="maxLength"/> طول مجاز است (در حال حاضر <x id="PH_1" equiv-text="actual"/> طول انتخاب شده است).</source>
+        <target>A maximum length of <x id="PH" equiv-text="maxLength"/> is allowed (currently <x id="PH_1" equiv-text="actual"/> length is selected).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6791608985626338915" datatype="html">
+        <source>حداقل حجم فایل باید <x id="PH" equiv-text="requiredSize"/> باشد (در حال حاضر <x id="PH_1" equiv-text="actualSize"/>).</source>
+        <target>The minimum file size must be <x id="PH" equiv-text="requiredSize"/> (currently <x id="PH_1" equiv-text="actualSize"/>).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3900872859912534070" datatype="html">
+        <source>حداکثر حجم فایل باید <x id="PH" equiv-text="requiredSize"/> باشد (در حال حاضر <x id="PH_1" equiv-text="actualSize"/>).</source>
+        <target>The maximum file size must be <x id="PH" equiv-text="requiredSize"/> (currently <x id="PH_1" equiv-text="actualSize"/>).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1503244141684269661" datatype="html">
+        <source>فقط فایل‌های با فرمت‌های <x id="PH" equiv-text="allowedTypes.join(', ')"/> مجاز هستند.</source>
+        <target>Only files with formats <x id="PH" equiv-text="allowedTypes.join(', ')"/> are allowed.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/constants/validation-messages.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9069504035421427411" datatype="html">
+        <source>خطای ناشناخته</source>
+        <target>Unknown Error</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/interceptors/bad-request.interceptor.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2899978740235133656" datatype="html">
+        <source>ماژول ها</source>
+        <target>Modules</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/admin/pages/module/module.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+         <trans-unit id="2276423407315111586" datatype="html">
+        <source>افزودن احیای پنل</source>
+        <target>Add panel refresh</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/pages/panel-revival-mutate/panel-revival-mutate.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3369787728441546503" datatype="html">
+        <source>عنوان</source>
+        <target>Title</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/admin/pages/module/module.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/pages/city-mutate/city-mutate.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/document-type.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="adminLoginTitle" datatype="html">
+        <source>ورود ادمین</source>
+        <target>Admin Login</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/pages/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+         <trans-unit id="8008928654536647129" datatype="html">
+        <source>نام کاربری</source>
+        <target>User Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/pages/sign-in/sign-in.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4196529238734092021" datatype="html">
+        <source>رمز ورود</source>
+        <target>Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/pages/sign-in/sign-in.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3471581465287632160" datatype="html">
+        <source>نام کاربری یا پسورد وارد شده صحیح نمی‌باشد</source>
+        <target>The username or password entered is incorrect.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/pages/sign-in/sign-in.component.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="loginButton" datatype="html">
+        <source>ورود</source>
+        <target>Login</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/auth/pages/sign-in/sign-in.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="titleOne" datatype="html">
+        <source>Title One</source>
+        <target>Title One</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="foreignCustomers" datatype="html">
+        <source>تعداد مشتریان خارج</source>
+        <target>Number of Foreign Customers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="iranianCustomers" datatype="html">
+        <source>تعداد مشتریان ایران</source>
+        <target>Number of Iranian Customers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="table1Label" datatype="html">
+        <source>Table 1 Label</source>
+        <target>Table 1 Label</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="table2Label" datatype="html">
+        <source>Table 2 Label</source>
+        <target>Table 2 Label</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="table3Label" datatype="html">
+        <source>Table 3 Label</source>
+        <target>Table 3 Label</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="table4Label" datatype="html">
+        <source>Table 4 Label</source>
+        <target>Table 4 Label</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="mapView" datatype="html">
+        <source>Map View</source>
+        <target>Map View</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="exchanges" datatype="html">
+        <source>صرافیها</source>
+        <target>Exchanges</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4327951684101806729" datatype="html">
         <source>مبلغ کل درآمد فروش پنل</source>
         <target>Total Panel Sales Revenue</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/dashboard/pages/view/view.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="742008340238247199" datatype="html">
+        <source>ذخیره</source>
+        <target>Save</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/components/exchange-office-connect-info-modal/exchange-office-connect-info-modal.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1681939110534735695" datatype="html">
+        <source>آدرس سرور صرافی</source>
+        <target>Exchange Server Address</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/components/exchange-office-connect-info-modal/exchange-office-connect-info-modal.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8935344737939468691" datatype="html">
+        <source>آدرس دیتابیس صرافی</source>
+        <target>Exchange Database Address</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/components/exchange-office-connect-info-modal/exchange-office-connect-info-modal.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="103499174686745707" datatype="html">
+        <source>پورت دیتابیس صرافی</source>
+        <target>Exchange Database Port</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/components/exchange-office-connect-info-modal/exchange-office-connect-info-modal.component.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4396944708027282513" datatype="html">
+        <source>ویرایش اطلاعات اتصال</source>
+        <target>Edit Connection Information</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/components/exchange-office-connect-info-modal/exchange-office-connect-info-modal.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="843824695215317486" datatype="html">
+        <source>افزودن</source>
+        <target>Add</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/components/header-buttons/header-buttons.component.ts</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4792265715735737650" datatype="html">
+        <source>بازگشت به داشبورد</source>
+        <target>Back to Dashboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/components/header-buttons/header-buttons.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="account-management-title" datatype="html">
+        <source>مدیریت حساب‌ها</source>
+        <target>Account Management</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="iranian-bank-accounts" datatype="html">
+        <source>حساب‌های بانکی ایرانی</source>
+        <target>Iranian Bank Accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="iranian-bank-description" datatype="html">
+        <source> مدیریت و مشاهده حساب‌های بانکی داخلی </source>
+        <target>Manage and view domestic bank accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">14,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="international-bank-accounts" datatype="html">
+        <source> حساب‌های بین‌المللی </source>
+        <target>International Accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">22,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="international-bank-description" datatype="html">
+        <source> مدیریت کارت‌های ویزا و مسترکارت </source>
+        <target>Manage Visa and Mastercard cards</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">25,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="visa-card" datatype="html">
+        <source>ویزا کارت</source>
+        <target>Visa Card</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="master-card" datatype="html">
+        <source>مسترکارت</source>
+        <target>Mastercard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">42</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="crypto-wallet" datatype="html">
+        <source>کیف پول رمز ارز</source>
+        <target>Cryptocurrency Wallet</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="crypto-wallet-description" datatype="html">
+        <source> مدیریت دارایی‌های دیجیتال </source>
+        <target>Manage digital assets</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/bank-account.component.html</context>
+          <context context-type="linenumber">54,56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6743488982776404841" datatype="html">
+        <source>لیست حساب ها</source>
+        <target>List of Accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/components/global-base/global-base.component.ts</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9187006178010691797" datatype="html">
+        <source>شماره حساب</source>
+        <target>Account Number</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/components/global-base/global-base.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/crypto.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/ir/ir.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2677024348977717406" datatype="html">
+        <source>نام بانک</source>
+        <target>Bank Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/components/global-base/global-base.component.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/ir/ir.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6881296674400637960" datatype="html">
+        <source>نام کارت</source>
+        <target>Card Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/components/global-base/global-base.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6209388992493476001" datatype="html">
+        <source>کشور</source>
+        <target>Country</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/components/global-base/global-base.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/ir/ir.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/pages/city-mutate/city-mutate.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+          <context context-type="linenumber">131</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3087708551937555672" datatype="html">
+        <source>شهر</source>
+        <target>City</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/components/global-base/global-base.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/ir/ir.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country.component.ts</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3437471784382047948" datatype="html">
+        <source>نام ارز</source>
+        <target>Currency Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/crypto.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7474403733656948887" datatype="html">
+        <source>پلتفرم انتقال</source>
+        <target>Transfer Platform</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/crypto.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5727991521052094719" datatype="html">
+        <source>memo</source>
+        <target>memo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/crypto.component.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4198915833035802319" datatype="html">
+        <source>لیست شماره حساب های رمزارز</source>
+        <target>List of Cryptocurrency Account Numbers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/crypto.component.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="199171594409137676" datatype="html">
+        <source>ثبت حساب رمز ارز</source>
+        <target>Register Cryptocurrency Account</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4794913869781497488" datatype="html">
+        <source>بستر انتقال ارز دیجیتال</source>
+        <target>Digital Currency Transfer Platform</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2776699126855112411" datatype="html">
+        <source>نوع ارز</source>
+        <target>Currency Type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9118091055763500983" datatype="html">
+        <source>حساب رمز ارز با موفقیت ذخیره شد.</source>
+        <target>The cryptocurrency account was successfully saved.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/crypto/pages/crypto-mutate/crypto-mutate.component.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="508356883320284347" datatype="html">
+        <source>نام شعبه</source>
+        <target>Branch Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/ir/ir.component.ts</context>
+          <context context-type="linenumber">47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7913432449903628244" datatype="html">
+        <source>لیست حساب های ایرانی</source>
+        <target>List of Iranian Accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/ir/ir.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2403352097065962199" datatype="html">
+        <source>حساب های مستر کارت</source>
+        <target>Mastercard Accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/master-global/master-global.component.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7749088065847041213" datatype="html">
+        <source>ثبت حساب Master</source>
+        <target>Register Master Account</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/master-global/pages/master-global-mutate/master-global-mutate.component.ts</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2468682536796817529" datatype="html">
+        <source>ثبت حساب Visa</source>
+        <target>Register Visa Account</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/visa-global/pages/global-mutate/visa-global-mutate.component.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7375183588300649832" datatype="html">
+        <source>حساب های ویزا کارت</source>
+        <target>Visa Card Accounts</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/bank-account/pages/visa-global/visa-global.component.ts</context>
           <context context-type="linenumber">28</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="739633817080361541" datatype="html">
+        <source>ارز با موفقیت ذخیره شده</source>
+        <target>The currency was successfully saved</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7280207011559943039" datatype="html">
+        <source>نام</source>
+        <target>Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/city.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5202407152228397483" datatype="html">
+        <source>لگو</source>
+        <target>Logo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="40310348765493149" datatype="html">
+        <source>توضیحات</source>
+        <target>Description</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3364540631673861135" datatype="html">
+        <source>ضریب پایه</source>
+        <target>Base Coefficient</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">65</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1787950779543578651" datatype="html">
+        <source>ارز پایه</source>
+        <target>Base Currency</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1206880328891313774" datatype="html">
+        <source>افزودن ارز</source>
+        <target>Add Currency</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1222658862595277266" datatype="html">
+        <source>ویرایش ارز</source>
+        <target>Edit Currency</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6459465765494216931" datatype="html">
+        <source>ارز ها</source>
+        <target>Currencies</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">74</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1867143698442710990" datatype="html">
+        <source>لوگو</source>
+        <target>Logo</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4927242844457010964" datatype="html">
+        <source>وضعیت</source>
+        <target>Status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+          <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">89</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1056902425167197337" datatype="html">
+        <source>ویرایش</source>
+        <target>Edit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">103</context>
+        </context-group>
+           <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">104</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1911446848494391940" datatype="html">
+        <source>بانک با موفقیت ذخیره شد</source>
+        <target>The bank was successfully saved</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7871071628126024256" datatype="html">
+        <source>واحد پول</source>
+        <target>Currency Unit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4542931394336487945" datatype="html">
+        <source>افزودن بانک</source>
+        <target>Add Bank</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1110490587286638121" datatype="html">
+        <source>بانک ها</source>
+        <target>Banks</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank.component.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8281254976981106191" datatype="html">
+        <source>ارز</source>
+        <target>Currency</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2900232739771152990" datatype="html">
+        <source>شهر ها</source>
+        <target>Cities</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/city.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5304671340766673891" datatype="html">
+        <source>لیست شهر های <x id="PH" equiv-text="countryTitle"/></source>
+        <target>List of cities of <x id="PH" equiv-text="countryTitle"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/city.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7844107570140967374" datatype="html">
+        <source>شهر با موفقیت ذخیره شد</source>
+        <target>The city was successfully saved</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/pages/city-mutate/city-mutate.component.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1364877662147762293" datatype="html">
+        <source>ثبت شهر</source>
+        <target>Register City</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/pages/city-mutate/city-mutate.component.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3585410269626373642" datatype="html">
+        <source>کشور با موفقیت ذخیره شد</source>
+        <target>The country was successfully saved</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3913497207807846645" datatype="html">
+        <source>انتخاب زبان</source>
+        <target>Select Language</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5590463232423236026" datatype="html">
+        <source>نام کشور</source>
+        <target>Country Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3789514871346773983" datatype="html">
+        <source>پرچم</source>
+        <target>Flag</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2093708553765947061" datatype="html">
+        <source>مخفف</source>
+        <target>Abbreviation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country.component.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6736196154803901652" datatype="html">
+        <source>پیش شماره</source>
+        <target>Country Code</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="369588738430903162" datatype="html">
+        <source>ثبت کشور</source>
+        <target>Register Country</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8620572702600420947" datatype="html">
+        <source>ویرایش کشور</source>
+        <target>Edit Country</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/country/country-mutate/country-mutate.component.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1064648036889114572" datatype="html">
+        <source>ارز مبنا</source>
+        <target>Reference Currency</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/base-currency/base-currency.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2005818722469409502" datatype="html">
+        <source>Open menu</source>
+        <target>Open menu</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/navbar.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8118285165912044678" datatype="html">
+        <source> پیمان </source>
+        <target>Peyman</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/navbar.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4393025540928015851" datatype="html">
-        <source> سامانه خرید و فروش ارز ، طلا و نقره <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/></source>
-        <target>Currency, Gold, and Silver Trading System </target>
+        <source> سامانه خرید و فروش ارز ، طلا و نقره <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/></source>
+        <target>Currency, Gold, and Silver Trading System <x id="LINE_BREAK" ctype="lb" equiv-text="<br />"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/layout/components/navbar/navbar.component.html</context>
           <context context-type="linenumber">28,30</context>
@@ -24,6 +1162,756 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/modules/layout/components/navbar/navbar.component.html</context>
           <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5670583882673854016" datatype="html">
+        <source>پروفایل</source>
+        <target>Profile</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/profile-menu/profile-menu.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1243230557109277095" datatype="html">
+        <source>تنظیمات</source>
+        <target>Settings</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/profile-menu/profile-menu.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2735473191893981679" datatype="html">
+        <source>خروج</source>
+        <target>Logout</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/navbar/profile-menu/profile-menu.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5400276286441889213" datatype="html">
+        <source> سمت :</source>
+        <target>Position:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7636618766132185608" datatype="html">
+        <source>مدیر</source>
+        <target>Manager</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/layout/components/sidebar/sidebar.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2862811471531580924" datatype="html">
+        <source>لیست انواع مدارک</source>
+        <target>List of Document Types</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/document-type.component.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9008798723372468156" datatype="html">
+        <source>تعداد صفحه</source>
+        <target>Number of Pages</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/document-type.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1197577749163183940" datatype="html">
+        <source>دارای شناسه</source>
+        <target>Has Identifier</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/document-type.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1289867738743935546" datatype="html">
+        <source>با موفقیت ذخیره شد</source>
+        <target>Saved Successfully</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8759152404241634157" datatype="html">
+        <source>شناسه</source>
+        <target>Identifier</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/doc-form.service.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2117581402059710037" datatype="html">
+        <source>تاریخ</source>
+        <target>Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">56</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1479070183235448252" datatype="html">
+        <source>ثبت نوع سند</source>
+        <target>Register Document Type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/document-type/pages/document-type-mutate/document-type-mutate.component.ts</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4474018675706150226" datatype="html">
+        <source>نوع مدرک</source>
+        <target>Document Type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/doc-form.service.ts</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8845118375676238452" datatype="html">
+        <source>تاریخ انقضا</source>
+        <target>Expiration Date</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/doc-form.service.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7913223696394510496" datatype="html">
+        <source>بارگزاری مدارک</source>
+        <target>Upload Documents</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/doc-form.service.ts</context>
+          <context context-type="linenumber">66</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3133809748812656799" datatype="html">
+        <source>انواع مدارک</source>
+        <target>Document Types</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/doc-form.service.ts</context>
+          <context context-type="linenumber">134</context>
+        </context-group>
+      </trans-unit>
+     <trans-unit id="790490245233780036" datatype="html">
+    <source>اخطار</source>
+    <target>Warning</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/components/backward-modal/backward-modal.component.html</context>
+        <context context-type="linenumber">4</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="7210432119704281120" datatype="html">
+    <source> تغییراتی در فرم‌های زیر اعمال شده است. در صورت خروج، این تغییرات ذخیره نخواهند شد. آیا مطمئن هستید که می‌خواهید از صفحه خارج شوید؟ </source>
+    <target> Changes have been made to the forms below. If you exit, these changes will not be saved. Are you sure you want to leave the page? </target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/components/backward-modal/backward-modal.component.html</context>
+        <context context-type="linenumber">10,13</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="6011832892187639644" datatype="html">
+    <source>فرم‌های معتبر</source>
+    <target>Valid Forms</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/components/backward-modal/backward-modal.component.html</context>
+        <context context-type="linenumber">19</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4569525754107523281" datatype="html">
+    <source>فرم معتبری یافت نشد</source>
+    <target>No Valid Form Found</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/components/backward-modal/backward-modal.component.html</context>
+        <context context-type="linenumber">25</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="2763135650077404175" datatype="html">
+    <source> باقی ماندن </source>
+    <target> Stay </target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/components/backward-modal/backward-modal.component.html</context>
+        <context context-type="linenumber">31</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="8465040054104399785" datatype="html">
+    <source> ذخیره و خروج </source>
+    <target> Save and Exit </target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/components/backward-modal/backward-modal.component.html</context>
+        <context context-type="linenumber">33</context>
+    </context-group>
+</trans-unit>
+      <trans-unit id="saveButtonLabel" datatype="html">
+        <source>ادامه</source>
+        <target>Continue</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/doc-form.service.ts</context>
+          <context context-type="linenumber">153</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6255285561592637659" datatype="html">
+        <source>qwe</source>
+        <target>qwe</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+          <context context-type="linenumber">126</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7219173948001822457" datatype="html">
+        <source>نام شرکت  / فروشگاه</source>
+        <target>Company / Store Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+          <context context-type="linenumber">137</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6887301328013973627" datatype="html">
+    <source>شماره تماس</source>
+    <target>Phone Number</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+        <context context-type="linenumber">144</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">67</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="1415694851476054991" datatype="html">
+    <source>آدرس</source>
+    <target>Address</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+        <context context-type="linenumber">167</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">145</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="109705341590361368" datatype="html">
+    <source>موقعیت روی نقشه</source>
+    <target>Location on Map</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+        <context context-type="linenumber">171</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="5851829812096122304" datatype="html">
+    <source>کد پستی</source>
+    <target>Postal Code</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+        <context context-type="linenumber">177</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="3562506734784619740" datatype="html">
+    <source>ادامه</source>
+    <target>Continue</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/legal-form.service.ts</context>
+        <context context-type="linenumber">184</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">169</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="1223324913732365019" datatype="html">
+    <source>تخفیف</source>
+    <target>Discount</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">40</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="7239925457531243873" datatype="html">
+    <source>به حساب</source>
+    <target>To Account</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">45</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="265555523460951152" datatype="html">
+    <source>حسابی ثبت نشده</source>
+    <target>No Account Registered</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">48</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="3899876902632655377" datatype="html">
+    <source>واریز انجام شده</source>
+    <target>Deposit Completed</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">67</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="9158511653864764751" datatype="html">
+    <source>واریز بدون مدرک مورد تایید است</source>
+    <target>Deposit Without Documentation is Approved</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">72</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4196048226269513649" datatype="html">
+    <source>بارگزاری رسید واریز</source>
+    <target>Upload Deposit Receipt</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">78</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="1764560593493741737" datatype="html">
+    <source>‍ادامه</source>
+    <target>Continue</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">98</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="3586935393233702390" datatype="html">
+    <source>واحد</source>
+    <target>Unit</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">153</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4169556876020328148" datatype="html">
+    <source>نام ماژول</source>
+    <target>Module Name</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">166</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4012177843004914005" datatype="html">
+    <source>مبلغ</source>
+    <target>Amount</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">175</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="5350558015406492203" datatype="html">
+    <source>مدت</source>
+    <target>Duration</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/module-form.service.ts</context>
+        <context context-type="linenumber">181</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4293083979471916869" datatype="html">
+    <source>زبان پنل</source>
+    <target>Panel Language</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">55</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="nameLabel" datatype="html">
+    <source>نام</source>
+    <target>Name</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">74</context>
+    </context-group>
+     <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency-mutate/currency-mutate.component.ts</context>
+          <context context-type="linenumber">51</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/financial/pages/currency/currency.component.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/geographical/pages/city/city.component.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+</trans-unit>
+<trans-unit id="6173831640812325599" datatype="html">
+    <source>نام خانوادگی</source>
+    <target>Last Name</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">79</context>
+    </context-group>
+         <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">86</context>
+        </context-group>
+</trans-unit>
+<trans-unit id="5629752108055555260" datatype="html">
+    <source>بارگزاری یا انتخاب تصویر فردی</source>
+    <target>Upload or Select Personal Image</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">84</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="2292821785794824971" datatype="html">
+    <source>کد ملی</source>
+    <target>National Code</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">90</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="3312041964136994461" datatype="html">
+    <source>نام پدر</source>
+    <target>Father's Name</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">95</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4520345051450022832" datatype="html">
+    <source>نام مستعار</source>
+    <target>Alias</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">100</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="5510982952975150984" datatype="html">
+    <source>مذکر</source>
+    <target>Male</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">105</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="maleOption" datatype="html">
+    <source>مذکر</source>
+    <target>Male</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">107</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="femaleOption" datatype="html">
+    <source>مونث</source>
+    <target>Female</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">107</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="3399455177468489990" datatype="html">
+    <source>صراف هستم</source>
+    <target>I am a Money Changer</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">110</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4268914719740700972" datatype="html">
+    <source>تاریخ تولد</source>
+    <target>Date of Birth</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">116</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="5297910103993563709" datatype="html">
+    <source>ایمیل</source>
+    <target>Email</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">121</context>
+    </context-group>
+     <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+</trans-unit>
+<trans-unit id="2269442508768136226" datatype="html">
+    <source>ملیت</source>
+    <target>Nationality</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">126</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="7633844188408446399" datatype="html">
+    <source>کدپستی</source>
+    <target>Postal Code</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">150</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4880464942982244300" datatype="html">
+    <source>انتخاب موقعیت روی نقشه</source>
+    <target>Select Location on Map</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">154</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="8191199636785753026" datatype="html">
+    <source>حقوقی</source>
+    <target>Legal</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office-mutate/services/personal-form.service.ts</context>
+        <context context-type="linenumber">160</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/factories/pagination.factory.ts</context>
+        <context context-type="linenumber">11</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="8084230403471480048" datatype="html">
+    <source>حقیقی</source>
+    <target>Individual</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/factories/pagination.factory.ts</context>
+        <context context-type="linenumber">11</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="9121273379379717545" datatype="html">
+    <source>بازگشت</source>
+    <target>Back</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/form-builder3/form-builder3.component.html</context>
+        <context context-type="linenumber">13</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="7708270344948043036" datatype="html">
+    <source> <x id="INTERPOLATION" equiv-text="{{ &apos;قبلی&apos; }}"/> </source>
+    <target> <x id="INTERPOLATION" equiv-text="{{ &apos;Previous&apos; }}"/> </target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/form-builder3/form-builder3.component.html</context>
+        <context context-type="linenumber">82,84</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="8003642784424476258" datatype="html">
+    <source>فرم قبلی معتبر نیست</source>
+    <target>Previous Form is Not Valid</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/form-builder3/form-builder3.component.ts</context>
+        <context context-type="linenumber">129</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="8011076449172477594" datatype="html">
+    <source>... فایل‌های خود را اینجا رها کنید یا برای آپلود کلیک کنید</source>
+    <target>... Drop your files here or click to upload</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/input/files-input2/files-input2.component.ts</context>
+        <context context-type="linenumber">26</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="295032462226063885" datatype="html">
+    <source>تعداد فایل های افزوده شده: </source>
+    <target>Number of Files Added: </target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/input/files-input2/files-input2.component.ts</context>
+        <context context-type="linenumber">27</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="5500324651554672125" datatype="html">
+    <source>Error fetching or adding files:</source>
+    <target>Error fetching or adding files:</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/input/files-input2/files-input2.component.ts</context>
+        <context context-type="linenumber">53</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="7144861472636624343" datatype="html">
+    <source>FilePond has initialised</source>
+    <target>FilePond has initialised</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/input/files-input2/files-input2.component.ts</context>
+        <context context-type="linenumber">64</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="6440129166863823615" datatype="html">
+    <source>A file was activated</source>
+    <target>A file was activated</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/input/files-input2/files-input2.component.ts</context>
+        <context context-type="linenumber">122</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="2119188665790824191" datatype="html">
+    <source> انتخاب </source>
+    <target> Select </target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/input/input.component.html</context>
+        <context context-type="linenumber">61,63</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="6781159701223297108" datatype="html">
+    <source>نمایش در هر صفحه</source>
+    <target>Display per Page</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/tables/table/paginator.ts</context>
+        <context context-type="linenumber">13</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="9202344017078054938" datatype="html">
+    <source>بعدی</source>
+    <target>Next</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/tables/table/paginator.ts</context>
+        <context context-type="linenumber">14</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="2744694614726163995" datatype="html">
+    <source>قبلی</source>
+    <target>Previous</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/tables/table/paginator.ts</context>
+        <context context-type="linenumber">15</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="1522264041691596711" datatype="html">
+    <source> عملیات </source>
+    <target> Actions </target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/tables/table/table.component.html</context>
+        <context context-type="linenumber">62,64</context>
+    </context-group>
+</trans-unit>
+<trans-unit id="4234976251439085587" datatype="html">
+    <source>خالی!</source>
+    <target>Empty!</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/shared/components/tables/table/table.component.html</context>
+        <context context-type="linenumber">127</context>
+    </context-group>
+</trans-unit>
+   <trans-unit id="1074186828857501737" datatype="html">
+    <source>ماژول</source>
+    <target>Module</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/pages/panel-revival-mutate/panel-revival-mutate.component.ts</context>
+        <context context-type="linenumber">38</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/panel-revival.component.ts</context>
+        <context context-type="linenumber">43</context>
+    </context-group>
+</trans-unit>
+
+<trans-unit id="7871071628126024256" datatype="html">
+    <source>واحد پول</source>
+    <target>Currency</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/pages/panel-revival-mutate/panel-revival-mutate.component.ts</context>
+        <context context-type="linenumber">44</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank-mutate/bank-mutate.component.ts</context>
+        <context context-type="linenumber">63</context>
+    </context-group>
+</trans-unit>
+
+<trans-unit id="584602399263359375" datatype="html">
+    <source>هزینه احیا</source>
+    <target>Revival Cost</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/pages/panel-revival-mutate/panel-revival-mutate.component.ts</context>
+        <context context-type="linenumber">51</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/panel-revival.component.ts</context>
+        <context context-type="linenumber">43</context>
+    </context-group>
+</trans-unit>
+
+<trans-unit id="1547967451067664801" datatype="html">
+    <source>هزینه فروش</source>
+    <target>Sell Cost</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/pages/panel-revival-mutate/panel-revival-mutate.component.ts</context>
+        <context context-type="linenumber">56</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/panel-revival.component.ts</context>
+        <context context-type="linenumber">43</context>
+    </context-group>
+</trans-unit>
+
+<trans-unit id="7056287156813395057" datatype="html">
+    <source>لیست احیای پنل ها</source>
+    <target>Panel Revival List</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/panel-revival.component.ts</context>
+        <context context-type="linenumber">42</context>
+    </context-group>
+</trans-unit>
+
+<trans-unit id="8281254976981106191" datatype="html">
+    <source>ارز</source>
+    <target>Currency</target>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/admin/pages/panel-revival/panel-revival.component.ts</context>
+        <context context-type="linenumber">43</context>
+    </context-group>
+    <context-group purpose="location">
+        <context context-type="sourcefile">src/app/modules/geographical/pages/bank/bank.component.ts</context>
+        <context context-type="linenumber">57</context>
+    </context-group>
+</trans-unit>
+
+ <trans-unit id="4878289479934881081" datatype="html">
+        <source>صرافی‌ها</source>
+        <target>Exchangers</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">81</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1136002264668446150" datatype="html">
+        <source>شماره همراه</source>
+        <target>Phone Number</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7822260681855905233" datatype="html">
+        <source>اطلاعات اتصال</source>
+        <target>Connection Info</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">112</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4470299060183300726" datatype="html">
+        <source>دسترسی</source>
+        <target>Access</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">121</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2132420445094136753" datatype="html">
+        <source>رمز عبور</source>
+        <target>Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/resource/pages/exchange-office/exchange-office.component.ts</context>
+          <context context-type="linenumber">130</context>
         </context-group>
       </trans-unit>
     </body>

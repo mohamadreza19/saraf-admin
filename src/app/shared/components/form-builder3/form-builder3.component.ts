@@ -126,7 +126,7 @@ export class FormBuilder3Component implements AfterViewInit {
           this.setStep(formIndex);
           this.scroll.scrollMainContentToTop();
         } else
-          this.snackBar.open(`فرم قبلی معتبر نیست`, '', {
+          this.snackBar.open($localize`فرم قبلی معتبر نیست`, '', {
             duration: 600,
           });
       } else this.setStep(formIndex);

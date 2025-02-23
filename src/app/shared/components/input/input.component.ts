@@ -29,6 +29,7 @@ import { matLockOutline } from '@ng-icons/material-icons/outline';
 import { SelectAddComponent } from './select-add/select-add.component';
 import { SharedModuleModule } from '../../modules/shared-module/shared-module.module';
 import { MapInputComponent } from './map-input/map-input.component';
+import { FilesInput2Component } from './files-input2/files-input2.component';
 @Component({
   selector: 'app-input',
 
@@ -55,6 +56,7 @@ import { MapInputComponent } from './map-input/map-input.component';
     SharedModuleModule,
     SelectAddComponent,
     MapInputComponent,
+    FilesInput2Component,
   ],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
@@ -62,7 +64,7 @@ import { MapInputComponent } from './map-input/map-input.component';
 })
 export class InputComponent implements AfterViewInit {
   constructor(private el: ElementRef<HTMLElement>) {
-    el.nativeElement.className = 'flex items-center ';
+    el.nativeElement.className = 'flex items-center border-0 p-0';
   }
   _iconUrl = '/assets/icons/material-icons/solid/download.svg';
   _iconUrlImage = '/assets/icons/material-icons/solid/image.svg';
@@ -78,26 +80,21 @@ export class InputComponent implements AfterViewInit {
   isCustomBoxOpen = false;
 
   ngAfterViewInit(): void {
-    // Set the default value (select the first option by default)
-    // console.log(this.formGroupDirective);
-    // console.log(this.control);
-    // if (this.control.label == 'واحد') {
-    //   console.log(this.control);
+    // if (this.control.type == 'phone-number') {
     //   setInterval(() => {
+    //     this.control.markAllAsTouched();
     //     console.log(this.control);
     //   }, 2100);
     // }
-
     if (this.control.show$) {
       this.control.show$.subscribe((val) => {
         this.onShowChange(val);
       });
     }
-
     // if (!this.control.value && this.control.options && this.control.options.length) {
     //   if (typeof this.control.selectedOptionIndex === 'number')
     //     this.control.setValue(this.control.options[this.control.selectedOptionIndex]);
-    //   // else this.control.setValue(this.control.options[0]);
+    //   else this.control.setValue(this.control.options[0]);
     // }
   }
   // ngOnInit(): void {

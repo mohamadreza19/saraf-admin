@@ -8,6 +8,14 @@
     "strict": true,
     "esModuleInterop": true,
     "noImplicitOverride": true,
+    "paths": {
+
+      "shared": [
+        "./dist/shared"
+      ]
+      
+      
+    },
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

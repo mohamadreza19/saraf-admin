@@ -1,21 +1,13 @@
 import {
-  afterNextRender,
-  AfterViewInit,
-  ChangeDetectorRef,
   Component,
   inject,
   Inject,
   LOCALE_ID,
-  OnInit,
-  PLATFORM_ID,
-  Renderer2,
-  TemplateRef,
-  ViewChild,
 } from '@angular/core';
 import { ThemeService } from './core/services/theme.service';
 
-import { LoadingService } from './core/services/loading.service';
 import { Title } from '@angular/platform-browser';
+import { LoadingService } from './core/services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +16,7 @@ import { Title } from '@angular/platform-browser';
 
   styleUrls: ['./app.component.scss'],
   // standalone: true,
-  // imports: [NgIf],
+  // imports: [],
 })
 export class AppComponent {
   isLoading$ = inject(LoadingService).loading$;

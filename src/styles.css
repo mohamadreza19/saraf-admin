@@ -1,9 +1,16 @@
-@import url('./assets/styles/Vazirmatn-font-face.css');
-@import url('./assets/styles/Vazirmatn-Variable-font-face.css');
+@import url('src/assets/styles/Vazirmatn-font-face.css');
+@import url('src/assets/styles/Vazirmatn-Variable-font-face.css');
+
+@import './assets/styles/apexchart.scss';
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+html[dir='rtl'] * {
+  font-family: Vazirmatn, monospace !important;
+  font-feature-settings: 'ss01';
+}
 
 @layer base {
   :root {
@@ -19,10 +26,6 @@
     --destructive-foreground: 0 0% 98%;
     --border: 214 32% 91%;
     --custom-border: rgb(233 236 239);
-  }
-  * {
-    font-family: Vazirmatn !important;
-    font-feature-settings: 'ss01';
   }
 
   .dark {
@@ -145,6 +148,11 @@
     @apply w-full rounded-md border border-border bg-background px-3 py-3 text-xs text-foreground placeholder-muted-foreground focus:z-10 focus:border-primary focus:outline-none focus:ring-primary;
   }
 
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
   [type='checkbox'],
   [type='radio'] {
     @apply h-4 w-4 rounded border-border bg-background text-primary focus:ring-2 focus:ring-primary;
@@ -169,4 +177,32 @@
 }
 
 /** Plugins **/
-@import './assets/styles/apexchart.scss';
+
+.cdk-overlay-container {
+  /* position: fixed !important; */
+}
+
+.my-custom-snackbar {
+  background-color: var(--primary-foreground);
+}
+.loading-bar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.filepond--panel-root {
+  background-color: hsl(var(--border)) !important;
+}
+
+.filepond--drop-label {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+.filepond--credits {
+  display: none !important;
+}
+.datepicker-outer-container {
+  position: absolute;
+}

@@ -1,0 +1,64 @@
+/* Style for the container */
+.stepper-container {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Prevent scrollbars from showing */
+.stepper-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Step Circle Styles */
+.bg-blue-600 {
+  background-color: #1d4ed8; /* Blue */
+}
+
+.bg-gray-200 {
+  background-color: #e5e7eb; /* Light Gray */
+}
+
+.text-white {
+  color: white;
+}
+
+.text-gray-600 {
+  color: #4b5563; /* Dark Gray */
+}
+
+.text-gray-500 {
+  color: #6b7280; /* Medium Gray */
+}
+
+.text-blue-600 {
+  color: #1d4ed8; /* Blue */
+}
+
+/* Hover/Active Effects */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.transition-all {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover\:scale-110:hover {
+  transform: scale(1.1);
+}
+
+/* Custom scrollbar hiding */
+.stepper-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .stepper-container {
+    flex-direction: column;
+  }
+}

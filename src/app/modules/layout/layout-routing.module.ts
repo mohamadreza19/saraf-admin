@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout.component';
+import { ReportComponent } from '../report/report.component';
 
 const routes: Routes = [
   {
@@ -9,9 +10,9 @@ const routes: Routes = [
     loadChildren: () => import('../dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
-    path: 'employee',
+    path: 'resource',
     component: LayoutComponent,
-    loadChildren: () => import('../employee/employee.module').then((m) => m.EmployeeModule),
+    loadChildren: () => import('../resource/resource.module').then((m) => m.ResourceModule),
   },
   {
     path: 'financial',
@@ -27,6 +28,11 @@ const routes: Routes = [
     path: 'admin',
     component: LayoutComponent,
     loadChildren: () => import('../admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'report',
+    component: LayoutComponent,
+    loadChildren: () => import('../report/report.module').then((m) => m.ReportModule),
   },
   {
     path: 'contact',

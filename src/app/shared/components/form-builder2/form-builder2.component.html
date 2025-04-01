@@ -1,0 +1,86 @@
+<div class="mx-auto flex w-full max-w-[1000px] flex-col">
+  <!-- Header Section with Light Modern Look -->
+
+  @if(showHeader){
+
+  <header class="form-header flex w-full flex-col gap-4 rounded-t-lg bg-white p-6 text-gray-800 shadow-md">
+    <p class="!text-2xl font-bold text-gray-800">{{ label }}</p>
+
+    <!-- Back URL Button -->
+    <div class="back-button">
+      <app-button (buttonClick)="goBack()" impact="light" tone="light" class="w-full sm:w-auto">
+        <span class="!text-base font-normal">
+          {{ 'بازگشت' }}
+        </span>
+      </app-button>
+    </div>
+
+    @if(showStepper && steps.length>1){
+    <div class="stepper-wrapper rounded-md p-1">
+      <com-stepper
+        (clickStep)="focus($event, 'stepper')"
+        [steps]="steps"
+        [currentStepIndex]="currentStepIndex"></com-stepper>
+    </div>
+    }
+  </header>
+  }
+  <!-- Border between Header and Form Section -->
+  <div class="mt-4"></div>
+
+  <!-- Form Section with Clean and Light Background -->
+
+  <div class="form-section min-h-[300px] rounded-b-lg bg-white p-8 shadow-inner">
+    <div class="w-full">
+      <!-- Loading section -->
+      <ng-container *ngIf="loading; else formSection">
+        <app-form-skeletons></app-form-skeletons>
+      </ng-container>
+      <!-- Form Section -->
+      <ng-template #formSection>
+        <ng-container #formSection *ngFor="let form of forms; index as formIndex">
+          <form
+            [formGroup]="form"
+            class="form-grid w-full grid grid-cols-1 md:grid-cols-2  gap-4 p-6 {{
+              formIndex !== currentStepIndex && '!hidden'
+            }}">
+            <ng-container *ngFor="let control of _getFormControlsAsArray(form)">
+              <ng-container *ngIf="_isFormControl(control); else defaultBlock">
+                <ng-container *ngIf="_getControlAsFormControl2(control).templateRef as template; else defaultBlock">
+                  <ng-container *ngTemplateOutlet="template; context: { control: control }"></ng-container>
+                </ng-container>
+
+                <ng-template #defaultBlock>
+                  <app-input [control]="_getControlAsFormControl2(control)"></app-input>
+                </ng-template>
+              </ng-container>
+
+              <ng-template #defaultBlock>
+                <app-input [control]="_getControlAsFormControl2(control)"></app-input>
+              </ng-template>
+            </ng-container>
+
+            <!-- Form Buttons (Next and Previous) -->
+            <div class="col-span-2 mt-4 flex flex-row-reverse justify-between">
+              <app-button
+                (buttonClick)="focus(formIndex, 'button-next')"
+                impact="bold"
+                tone="primary"
+                class="w-full sm:w-auto">
+                {{ form.submitText }}
+              </app-button>
+              <app-button
+                *ngIf="formIndex > 0"
+                (buttonClick)="prevStep(formIndex)"
+                impact="light"
+                tone="light"
+                class="w-full sm:w-auto">
+                {{ 'قبلی' }}
+              </app-button>
+            </div>
+          </form>
+        </ng-container>
+      </ng-template>
+    </div>
+  </div>
+</div>

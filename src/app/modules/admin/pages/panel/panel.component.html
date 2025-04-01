@@ -1,0 +1,13 @@
+<div class="w-full">
+  <app-header-buttons (primaryClick)="primaryNavigate()" (lightClick)="lightNavigate()"></app-header-buttons>
+
+  <div class="mt-10 w-full">
+    @if (tableConfig) {
+
+    <app-table1 [tableConfig]="tableConfig"></app-table1>
+    }
+  </div>
+</div>
+<ng-template #activeBtn>
+  <input type="checkbox" checked />
+</ng-template>

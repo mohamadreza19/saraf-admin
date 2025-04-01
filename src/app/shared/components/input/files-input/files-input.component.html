@@ -2,12 +2,7 @@
   (drop)="_drop($event)"
   (dragover)="_fileOver($event)"
   style="aspect-ratio: 1 / 1"
-  class="relative flex w-full flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-border px-2 py-2 pb-8">
-  <section
-    *ngIf="this.control.errors"
-    class="absolute top-1/4 w-4/5 rounded-md bg-background bg-opacity-10 p-4 text-sm text-red-400 shadow-md backdrop-blur-md backdrop-filter">
-    {{ this.control.errors[0] }}
-  </section>
+  class="relative mx-auto flex w-full max-w-52 flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-border px-2 py-2 pb-8">
   <img
     *ngIf="fileUrlToShow"
     [src]="fileUrlToShow.src"
@@ -15,7 +10,7 @@
     style="aspect-ratio: 1 / 1" />
   <label *ngIf="!fileUrlToShow" class="fill-border text-muted-foreground">
     {{ control.label }}
-    <svg-icon src="{{ _iconUrl }}" [svgClass]="'h-5 w-5 mx-auto'"> </svg-icon>
+    <img *ngIf="fileUrlToShow" [src]="_iconUrl" class="mx-auto h-5 w-5" />
   </label>
 
   <div class="absolute bottom-2 left-1/2 flex h-1/4 w-4/5 -translate-x-1/2 transform rounded-md bg-border">
@@ -29,7 +24,7 @@
         [ngClass]="{
           '!bg-primary text-background': fileIndex == fileUrlToShow.index
         }"
-        class="flex h-fit gap-x-1 text-nowrap rounded-md bg-muted-foreground p-1 text-xs font-light text-muted">
+        class="flex h-fit w-full justify-center gap-x-1 text-nowrap rounded-md bg-muted-foreground p-1 text-xs font-light text-muted">
         <p class="truncate" style="direction: ltr">
           <!-- <svg-icon src="{{ _iconUrlImage }}" [svgClass]="'h-2 w-2 mx-auto'"> </svg-icon> -->
           {{ file.name }}

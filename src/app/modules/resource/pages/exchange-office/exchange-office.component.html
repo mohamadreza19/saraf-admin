@@ -1,0 +1,22 @@
+<div class="w-full">
+ <app-header-buttons (primaryClick)="navAdd()"
+ (lightClick)="navDash()"
+ />
+
+  <div class="w-full mt-5 ">
+    
+    @if(tableConfig){
+      <app-table1  [tableConfig]="tableConfig"
+    
+    [list]="(pg.normalizedData$ | async)!"
+    [pagination]="(pg.pagination$ | async)!"
+    (onPage)="pg.onPageChange($event)"
+    ></app-table1>
+    }
+
+</div>
+
+
+<ng-template #statusTem let-index="index" let-selected="selected" let-onStatusChange="onStatusChange">
+  <app-switch [name]="index" [selected]="selected" (onChangeStatus)="onStatusChange($event)"></app-switch>
+</ng-template>

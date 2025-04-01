@@ -2,8 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Locale } from 'src/app/core/constants/locale.enum';
+
 export const environment = {
   production: false,
+  apiUrl: 'http://185.110.191.40:2020',
+  // apiUrl: 'api',
+
+  locale: Locale.FA,
 };
 
 /*

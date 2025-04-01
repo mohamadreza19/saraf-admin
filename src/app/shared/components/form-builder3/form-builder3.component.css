@@ -1,0 +1,102 @@
+/* Container Styles */
+.form-builder-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: linear-gradient(to bottom, #f9fafb, #ffffff); /* Light gray to white gradient */
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+/* Header Styles */
+.form-header {
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #ffffff; /* White background for header */
+  color: #333333; /* Darker gray for text */
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-header p {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #4b5563; /* Slightly darker gray for title */
+}
+
+/* Stepper Styles */
+.stepper-wrapper {
+  background: linear-gradient(to right, rgb(235, 245, 255), rgb(230, 240, 250));
+  /* Light pastel lime to light pastel teal gradient */
+  /* Soft pastel green-blue gradient */
+  padding: 5px;
+  border-radius: 8px;
+}
+
+/* Border between Header and Form Section */
+.header-border {
+  border-top: 2px solid #e5e7eb; /* Light gray border to separate header */
+  margin-top: 1rem;
+}
+
+/* Form Section Styles */
+.form-section {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Form Grid for Input Controls */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media screen and (min-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Button Styles */
+.app-button {
+  min-width: 140px;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+}
+
+.app-button[impact='bold'] {
+  background-color: #60a5fa; /* Light Blue */
+  color: white;
+}
+
+.app-button[impact='light'] {
+  background-color: #f3f4f6; /* Light Gray */
+  color: #60a5fa; /* Light Blue */
+  border: 1px solid #60a5fa;
+}
+
+.app-button:hover {
+  opacity: 0.9;
+}
+
+.app-button[impact='bold']:hover {
+  background-color: #3b82f6; /* Slightly darker Blue */
+}
+
+.app-button[impact='light']:hover {
+  background-color: #e5e7eb;
+}
+
+/* Responsive Form */
+@media screen and (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}

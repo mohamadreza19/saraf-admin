@@ -6,6 +6,8 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 import { ThemeService } from '../../../../../core/services/theme.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { NavbarNotificationComponent } from '../navbar-notification/navbar-notification.component';
+import { UserProfileResponse, UserApiService } from 'src/app/shared/apis/user-api.service';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-profile-menu',
@@ -38,19 +40,20 @@ import { NavbarNotificationComponent } from '../navbar-notification/navbar-notif
 })
 export class ProfileMenuComponent implements OnInit {
   public isOpen = false;
+  public profile!: UserProfileResponse;
   public profileMenu = [
     {
-      title: 'Your Profile',
+      title: $localize`پروفایل`,
       icon: './assets/icons/heroicons/outline/user-circle.svg',
       link: '/profile',
     },
     {
-      title: 'Settings',
+      title: $localize`تنظیمات`,
       icon: './assets/icons/heroicons/outline/cog-6-tooth.svg',
       link: '/settings',
     },
     {
-      title: 'Log out',
+      title: $localize`خروج`,
       icon: './assets/icons/heroicons/outline/logout.svg',
       link: '/auth',
     },
@@ -89,9 +92,11 @@ export class ProfileMenuComponent implements OnInit {
 
   public themeMode = ['light', 'dark'];
 
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService, private user: UserApiService) {}
 
-  ngOnInit(): void {}
+  async ngOnInit() {
+    this.profile = (await lastValueFrom(this.user.getProfile())).data;
+  }
 
   public toggleMenu(): void {
     this.isOpen = !this.isOpen;

@@ -5,17 +5,19 @@
 
     <!-- end Single Card -->
     <!-- Single Card -->
-    <div nft-chart-card [name]="'مبلغ کل درآمد فروش پنل'" class="md:col-span-2 xl:col-span-1"></div>
-    <div nft-chart-card [name]="'تعداد مشتریان خارج'" type="person" class="md:col-span-2 xl:col-span-1"></div>
-    <div nft-chart-card [name]="'تعداد مشتریان ایران'" type="person" class="md:col-span-2 xl:col-span-1"></div>
+    <div class="col-span-full flex gap-4">
+      <div nft-chart-card [name]="titleOne" class="flex-1 md:col-span-2 xl:col-span-1" i18n="@@titleOne">Title One</div>
+      <div nft-chart-card [name]="'تعداد مشتریان خارج'" type="person" class="flex-1 md:col-span-2 xl:col-span-1" i18n="@@foreignCustomers">تعداد مشتریان خارج</div>
+      <div nft-chart-card [name]="'تعداد مشتریان ایران'" type="person" class="flex-1 md:col-span-2 xl:col-span-1" i18n="@@iranianCustomers">تعداد مشتریان ایران</div>
+    </div>
+
     <!-- end Single Card -->
     <!-- Auctions Table -->
-    <div view-exchange-table [label]="table1Label" [body]="table1Body" [keys]="table1Keys" [itemIconUrls]="table1IconsUrl" [forbiddenKeysInItem]="table1ForbiddenKeysInItem"   class="md:col-span-2 xl:col-span-3"></div>
-    <div view-exchange-table [label]="table2Label" [body]="table2Body" [keys]="table2Keys" [itemIconUrls]="[]"  [forbiddenKeysInItem]="[]"  class="md:col-span-2 xl:col-span-3"></div>
-    <div view-exchange-table [label]="table3Label" [body]="table3Body" [keys]="table3Keys" [itemIconUrls]="[]"  [forbiddenKeysInItem]="[]"  class="md:col-span-2 xl:col-span-3"></div>
-    <div view-exchange-table [label]="table4Label" [body]="table4Body" [keys]="table4Keys" [itemIconUrls]="[]"  [forbiddenKeysInItem]="[]"  class="md:col-span-2 xl:col-span-3"></div>
-    <div class="md:col-span-2 xl:col-span-2" view-map></div>
-    <div nft-chart-card [name]="'صرافیها'"  type="person"  class="md:col-span-2 xl:col-span-2"></div>
-
+    <div view-exchange-table [label]="table1Label" [body]="table1Body" [keys]="table1Keys" [itemIconUrls]="table1IconsUrl" [forbiddenKeysInItem]="table1ForbiddenKeysInItem" class="col-span-full" i18n="@@table1Label">Table 1 Label</div>
+    <div view-exchange-table [label]="table2Label" [body]="table2Body" [keys]="table2Keys" [itemIconUrls]="[]" [forbiddenKeysInItem]="[]" class="col-span-full" i18n="@@table2Label">Table 2 Label</div>
+    <div view-exchange-table [label]="table3Label" [body]="table3Body" [keys]="table3Keys" [itemIconUrls]="[]" [forbiddenKeysInItem]="[]" class="col-span-full" i18n="@@table3Label">Table 3 Label</div>
+    <div view-exchange-table [label]="table4Label" [body]="table4Body" [keys]="table4Keys" [itemIconUrls]="[]" [forbiddenKeysInItem]="[]" class="col-span-full" i18n="@@table4Label">Table 4 Label</div>
+    <div class="md:col-span-2 xl:col-span-2" view-map i18n="@@mapView">Map View</div>
+    <div nft-chart-card [name]="'صرافیها'" type="person" class="md:col-span-2 xl:col-span-2" i18n="@@exchanges">صرافیها</div>
   </div>
 </div>

@@ -1,0 +1,13 @@
+<div class="relative flex w-full">
+  <input
+    style="direction: ltr"
+    type="number"
+    class="w-full rounded-md border border-border px-3 py-3 ps-[100px]"
+    [formControl]="control" />
+
+  <select class="absolute end-0 z-10 w-24 ps-7" (change)="onCountryChange($event)" [formControl]="preCodeControl">
+    <option class="" *ngFor="let country of preCodeControl.options" [value]="country">
+      {{ country }}
+    </option>
+  </select>
+</div>

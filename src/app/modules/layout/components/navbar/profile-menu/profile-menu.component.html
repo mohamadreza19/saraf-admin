@@ -1,12 +1,13 @@
-<div class="relative ml-3">
+@if(profile){
+<div class="relative ml-3 max-h-10">
   <!-- Profile Button -->
   <button (click)="toggleMenu()" class="relative flex rounded-full bg-card text-sm" type="button">
     <span class="sr-only">Open user menu</span>
     <img
       clickOutside
       (clickOutside)="isOpen = false"
-      class="h-[44px] w-[44px] rounded-md"
-      src="https://avatars.githubusercontent.com/u/12519008?v=4"
+      class="max-h-10 w-[44px] rounded-md rounded-r-md border border-border"
+      [src]="profile.picture"
       alt="" />
   </button>
   <!-- Dropdown -->
@@ -17,11 +18,11 @@
     class="absolute end-0 z-20 mt-2 w-60 origin-top-right transform rounded-md bg-background py-4 shadow-custom ring-1 ring-transparent ring-opacity-5 transition focus:outline-none">
     <div class="flext-row flex items-center px-4 pb-4">
       <div class="w-10 shrink-0">
-        <img class="rounded-md" src="https://avatars.githubusercontent.com/u/12519008?v=4" alt="" />
+        <img class="rounded-md" [src]="profile.picture" alt="" />
       </div>
       <div class="overflow-hidden px-2 text-sm font-semibold text-foreground">
-        Luciano Oliveira
-        <p class="truncate text-ellipsis text-xs font-semibold text-muted-foreground">me&#64;lanno.dev</p>
+        {{ profile.name }}
+        <p class="truncate text-ellipsis text-xs font-semibold text-muted-foreground">{{ profile.email }}</p>
       </div>
     </div>
 
@@ -78,3 +79,5 @@
     </div>
   </div>
 </div>
+
+}

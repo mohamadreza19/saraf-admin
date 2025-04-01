@@ -1,0 +1,92 @@
+<div class="">
+  <app-form-builder3
+    label="ثبت صرافی"
+    [showStepper]="true"
+    [currentStep]="service.formStep$ | async"
+    [formArray]="service.formArray"
+    (formFocus)="service.formFocus($event)"
+    (backClick)="service.backNavigate($event)"
+    (lastFormSubmit)="service.submit($event)"></app-form-builder3>
+
+  <ng-template #preReceiptTemplate let-control="control">
+    <div class="col-span-full">
+      <p class="mb-10 w-full border-b border-border pb-5 text-lg text-muted-foreground">پیش فاکتور</p>
+
+      <!-- Modern Table Layout -->
+      <table class="w-full border-collapse border border-border text-start text-sm text-muted-foreground">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="border border-border px-4 py-2">عنوان</th>
+            <th class="border border-border px-4 py-2">مقدار</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border border-border px-4 py-2">مبلغ کل</td>
+            <td class="border border-border px-4 py-2">{{ control.value.total | number }}</td>
+          </tr>
+          <tr>
+            <td class="border border-border px-4 py-2">تخفیف</td>
+            <td class="border border-border px-4 py-2">{{ control.value.discount | number }}</td>
+          </tr>
+          <tr>
+            <td class="border border-border px-4 py-2">واحد پولی</td>
+            <td class="border border-border px-4 py-2">{{ control.value.currencyUnit }}</td>
+          </tr>
+          <tr>
+            <td class="border border-border px-4 py-2 font-bold">مبلغ کل قابل پرداخت</td>
+            <td class="border border-border px-4 py-2 font-bold">{{ control.value.availablePrice | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
+
+  <ng-template
+    #formTemplate
+    #addDocsTemplate
+    let-docFormArray="docFormArray"
+    let-add="add"
+    let-remove="remove"
+    let-docTypeControl="docTypeControl">
+    <div class="col-span-full">
+      <p class="mb-10 w-full border-b border-border pb-5 text-lg text-muted-foreground">لیست مدارک</p>
+      <div>
+        <section
+          class="w-full max-w-[600px] border-b border-border py-5"
+          *ngFor="let docForm of docFormArray.controls; index as Index">
+          <div class="grid w-full grid-cols-2 gap-5">
+            <app-input *ngFor="let control of _valuesOfObject(docForm.controls)" [control]="control"></app-input>
+          </div>
+          <div class="ms-auto w-fit pt-5">
+            <app-button (buttonClick)="remove(Index)" tone="danger">حذف</app-button>
+          </div>
+        </section>
+      </div>
+      <div class="flex items-center justify-between pt-5">
+        <app-input [control]="docTypeControl"></app-input>
+        <app-button (buttonClick)="add()">افزودن مدرک</app-button>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #addModuleTemplate let-moduleFormArray="moduleFormArray" let-add="add" let-remove="remove">
+    <div class="col-span-full">
+      <p class="mb-10 w-full border-b border-border pb-5 text-lg text-muted-foreground">لیست ماژول های درخواستی</p>
+      <div>
+        <section
+          class="w-full max-w-[600px] border-b border-border py-5"
+          *ngFor="let formModule of moduleFormArray.controls; index as Index">
+          <div class="grid w-full grid-cols-2 gap-5">
+            <app-input *ngFor="let control of _valuesOfObject(formModule.controls)" [control]="control"></app-input>
+          </div>
+          <div class="ms-auto w-fit pt-5">
+            <app-button [disabled]="Index == 0" (buttonClick)="remove(Index)" tone="danger">حذف</app-button>
+          </div>
+        </section>
+      </div>
+      <div class="pt-5">
+        <app-button (buttonClick)="add()">افزودن ماژول</app-button>
+      </div>
+    </div>
+  </ng-template>
+</div>

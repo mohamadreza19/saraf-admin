@@ -1,12 +1,36 @@
-<div class="w-full">
-  <app-header-buttons (primaryClick)="navigateToAddCurrency()" (lightClick)="backToDash()"></app-header-buttons>
+<div class="flex w-full flex-col gap-10">
+  <app-header-buttons (primaryClick)="navAdd()" (lightClick)="backToDash()"></app-header-buttons>
 
-  <div
-    view-exchange-table
-    [label]="table1Label"
-    [body]="table1Body"
-    [showEdit]="true"
-    [keys]="table1Keys"
-    [itemIconUrls]="table1IconsUrl"
-    [forbiddenKeysInItem]="table1ForbiddenKeysInItem"></div>
+  @if(tableConfig){
+
+  <app-table1
+    [tableConfig]="tableConfig"
+    [list]="(pg.normalizedData$ | async)!"
+    [pagination]="(pg.pagination$ | async)!"
+    (onPage)="pg.onPageChange($event)"></app-table1>
+  }
 </div>
+
+<ng-template
+  #coefficientRegistration
+  let-onEachBaseCoefficientChange="onEachBaseCoefficientChange"
+  let-baseCoefficient="baseCoefficient"
+  let-index="index">
+  <input
+    (input)="onEachBaseCoefficientChange($event, index)"
+    type="text"
+    class="w-14 rounded-md border border-border text-center"
+    [value]="baseCoefficient" />
+</ng-template>
+
+<ng-template
+  #baseCurrency
+  let-isBase="isBase"
+  let-onEachBaseCurrencyChange="onEachBaseCurrencyChange"
+  let-index="index">
+  <input (input)="onEachBaseCurrencyChange($event, index)" type="checkbox" [checked]="isBase" [disabled]="isBase" />
+</ng-template>
+
+<ng-template #activeTemplate let-selected="selected" let-index="index" let-statusChange="statusChange">
+  <app-switch (onChangeStatus)="statusChange($event)" [selected]="selected" [name]="index"></app-switch>
+</ng-template>

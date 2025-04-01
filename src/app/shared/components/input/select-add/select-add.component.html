@@ -1,0 +1,84 @@
+<div class="w-full">
+  <!-- Input box with search -->
+  <div class="relative">
+    <!-- If a customer is selected, show the selected customer with a remove icon -->
+
+    <div
+      (click)="handleOpenDropDown()"
+      *ngIf="selectedItems.length"
+      class="flex max-h-[42px] items-center rounded-md border border-border px-3 py-3">
+      <section *ngFor="let selectedItem of selectedItems; index as i">
+        <span class="mr-2 text-sm font-medium text-gray-700">{{ selectedItem }}</span>
+        <!-- Remove Icon -->
+        <button (click)="removeSelectedItem(i)" class="rounded-full p-1 text-red-500 hover:bg-red-200">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </section>
+    </div>
+
+    <!-- If no customer is selected, show the input field -->
+    <input
+      (click)="handleOpenDropDown()"
+      *ngIf="!selectedItems.length"
+      [(ngModel)]="searchTerm"
+      (input)="filterItems()"
+      type="text"
+      class="w-full rounded-md border border-border px-3 py-3" />
+
+    <!-- Dropdown Menu -->
+    <div
+      *ngIf="isDropDownOpen"
+      class="absolute end-0 start-0 z-20 mt-2 rounded-lg border border-gray-200 bg-white shadow-lg">
+      <!-- Add Customer Button -->
+
+      <!-- Add Miscellaneous Customer Button -->
+      <button
+        (click)="handleOpenAddItem()"
+        class="flex w-full items-center gap-2 px-4 py-3 text-gray-700 transition-colors hover:bg-purple-50 focus:outline-none">
+        <div class="ms-3 flex h-6 w-6 items-center justify-center rounded-full bg-purple-500 text-white">
+          <!-- Unique Plus Icon for Miscellaneous -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </div>
+        <span class="text-sm font-medium"> افزودن</span>
+      </button>
+
+      <!-- Divider -->
+      <div class="my-2 border-t"></div>
+
+      <!-- Customers List -->
+      <div class="max-h-[400px] space-y-2 overflow-auto scrollbar-thin">
+        <!-- Filtered Customers -->
+        <div
+          *ngFor="let item of items"
+          class="flex items-center justify-between px-4 py-2 transition-colors hover:bg-gray-100">
+          <div class="flex items-center gap-2">
+            <!-- Person Icon -->
+            <div class="ms-3 flex h-6 w-6 items-center justify-center rounded-full bg-blue-500 text-white">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5.121 17.804A11.96 11.96 0 0112 16c2.21 0 4.283.597 6.028 1.621M15 10a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+            </div>
+            <span class="text-sm font-medium text-gray-700">{{ item }}</span>
+          </div>
+          <!-- Select Customer Button -->
+          <button (click)="handleSelectItem(item)" class="ml-4 text-blue-500 hover:underline">انتخاب</button>
+        </div>
+
+        <div *ngIf="!items.length" class="overflow-hidden py-5 text-center text-red-700">خالی !</div>
+      </div>
+    </div>
+  </div>
+</div>

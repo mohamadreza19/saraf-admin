@@ -1,10 +1,18 @@
 <section
-*ngIf="show"
-  class="relative col-span-1 w-full"
+  [id]="control.label"
+  class="relative col-span-1 w-full h-[calc(100%+16px)]  {{
+    control.type == 'checkbox' && 'flex-row-reverse justify-end '
+  }}
+
+  "
   [ngClass]="{
-    ' flex items-center pt-[30px]': control.type == 'radio' || control.type == 'checkbox'
+    ' flex items-center pt-[15px]': control.type == 'radio' || control.type == 'checkbox'
   }">
-  <label *ngIf="control.type !== 'radio' && control.type !== 'files'" class="m-2 block text-xs font-bold text-muted-foreground"
+  <label
+    *ngIf="control.type !== 'radio'"
+    class="m-2 block text-xs font-bold text-muted-foreground    {{
+      control.type == 'files' || (control.type == 'radio-checkbox' && 'invisible')
+    }}"
     >{{ control.label }}
   </label>
 
@@ -12,28 +20,43 @@
   <ng-template #textInput>
     <input type="text" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
   </ng-template>
+  <ng-template #numberInput>
+    <input type="number" class="w-full rounded-md border border-border px-3 py-3" [formControl]="control" />
+  </ng-template>
+  <ng-template #amount>
+    <app-amount-input [control]="control"></app-amount-input>
+  </ng-template>
+  <ng-template #phoneNumber>
+    <app-phone-number-input [control]="control"></app-phone-number-input>
+  </ng-template>
+
+  <ng-template #searchSelect>
+    <app-search-select-input [control]="control"></app-search-select-input>
+  </ng-template>
+
   <ng-template #searchInput>
-
     <div class="relative">
-      <div class="flex h-full w-fit absolute items-center">
-
-        <svg-icon  svgClass="w-5 h-5 " src="assets/icons/material-icons/outline/search.svg" class="h-4 w-4 mr-2"></svg-icon>
+      <div class="absolute flex h-full w-fit items-center">
+        <ng-icon class="ms-4 text-xl text-muted-foreground" name="matSearchOutline"></ng-icon>
       </div>
 
-
-        <input class="w-full rounded-md border border-border px-3 ps-8 py-3"  type="text"  [formControl]="control" />
+      <input class="w-full rounded-md border border-border px-3 py-3 ps-10" type="text" [formControl]="control" />
     </div>
   </ng-template>
 
-
   <ng-template #filesInput>
-    <app-files-input [control]="control"/>
+    <app-files-input2 [control]="control"></app-files-input2>
+    <!-- <app-files-input [control]="control"/> -->
+  </ng-template>
+  <ng-template #readOnlyImg>
+    <img class="rounded-md border border-border" [src]="control.value" />
   </ng-template>
 
   <ng-template #multiSelectInput>
     <div (clickOutside)="closeCustomBox()">
-      <div class="flex w-full gap-2 overflow-x-auto rounded-md border border-border px-5 py-2 scrollbar-none">
+      <div class="flex w-full flex-wrap gap-2 rounded-md border border-border px-5 py-2">
         <p
+          i18n
           (click)="openCustomBox()"
           class="cursor-pointer border-e border-muted-foreground py-[2px] pe-5 text-sm text-muted-foreground">
           انتخاب
@@ -73,24 +96,37 @@
       </label>
     </div>
   </ng-template>
-  <!-- Radio Button Template -->
+  <!-- Checkbox Button Template -->
   <ng-template #checkbox>
-    <div class="ms-2 flex items-center gap-2" *ngFor="let option of control.options; index as i">
+    <div class="ms-2 flex items-center gap-2">
       <input type="checkbox" class="scale-[.70] rounded-md border border-border px-3 py-3" [formControl]="control" />
-      <label class="text-sm text-muted-foreground">
-        {{ option }}
-      </label>
+    </div>
+  </ng-template>
+  <!-- Radio-Checkbox Button Template -->
+  <ng-template #radioCheckbox>
+    <div class="flex items-center gap-2">
+      <section class="ms-2 flex items-center gap-2" *ngFor="let option of control.options">
+        <input
+          *ngIf="control.label"
+          [name]="control.label"
+          [value]="option === control.label ? true : false"
+          type="radio"
+          class="scale-[.70] rounded-md border border-border px-3 py-3"
+          [formControl]="control" />
+        <!-- Bind the formControl to the group -->
+        <label class="text-xs font-bold text-muted-foreground">{{ option }}</label>
+      </section>
     </div>
   </ng-template>
 
   <!-- Select Template -->
   <ng-template #selectInput>
-    <select class="w-full rounded-md border border-border px-3 ps-6 py-3" [formControl]="control">
-      <option *ngFor="let option of control.options">
-        {{option}}
+    <select class="w-full rounded-md border border-border px-3 py-3 ps-6" [formControl]="control">
+      <option *ngIf="!control.value">انتخاب کنید</option>
+      <option [selected]="option === control.value" *ngFor="let option of control.options">
+        {{ option }}
       </option>
     </select>
-
   </ng-template>
 
   <ng-template #dateInput>
@@ -99,19 +135,53 @@
     </ng-persian-datepicker>
   </ng-template>
 
+  <ng-template #password>
+    <div class="relative">
+      <div (click)="togglePassword()" class="absolute end-3 flex h-full w-fit items-center">
+        <ng-icon class="ms-4 text-xl text-muted-foreground" name="matLockOutline"></ng-icon>
+      </div>
+      <input
+        #passwordInput
+        type="password"
+        class="w-full rounded-md border border-border px-3 py-3"
+        [formControl]="control" />
+    </div>
+  </ng-template>
+
+  <ng-template #selectAdd>
+    <app-select-add [control]="control"></app-select-add>
+  </ng-template>
+  <ng-template #map>
+    <app-map-input [control]="control"></app-map-input>
+  </ng-template>
+
   <!-- Render the Appropriate Template -->
   <ng-container [ngSwitch]="control.type">
     <ng-container *ngSwitchCase="'text'" [ngTemplateOutlet]="textInput"></ng-container>
+    <ng-container *ngSwitchCase="'number'" [ngTemplateOutlet]="numberInput"></ng-container>
+    <ng-container *ngSwitchCase="'password'" [ngTemplateOutlet]="password"></ng-container>
+    <ng-container *ngSwitchCase="'phone-number'" [ngTemplateOutlet]="phoneNumber"></ng-container>
+    <ng-container *ngSwitchCase="'amount'" [ngTemplateOutlet]="amount"></ng-container>
+    <ng-container *ngSwitchCase="'search-select'" [ngTemplateOutlet]="searchSelect"></ng-container>
     <ng-container *ngSwitchCase="'search'" [ngTemplateOutlet]="searchInput"></ng-container>
     <ng-container *ngSwitchCase="'files'" [ngTemplateOutlet]="filesInput"></ng-container>
+    <ng-container *ngSwitchCase="'readonly-img'" [ngTemplateOutlet]="readOnlyImg"></ng-container>
     <ng-container *ngSwitchCase="'multi-select'" [ngTemplateOutlet]="multiSelectInput"></ng-container>
+    <ng-container *ngSwitchCase="'map'" [ngTemplateOutlet]="map"></ng-container>
     <ng-container *ngSwitchCase="'email'" [ngTemplateOutlet]="emailInput"></ng-container>
     <ng-container *ngSwitchCase="'radio'" [ngTemplateOutlet]="radioInput"></ng-container>
     <ng-container *ngSwitchCase="'checkbox'" [ngTemplateOutlet]="checkbox"></ng-container>
+    <ng-container *ngSwitchCase="'radio-checkbox'" [ngTemplateOutlet]="radioCheckbox"></ng-container>
     <ng-container *ngSwitchCase="'select'" [ngTemplateOutlet]="selectInput"></ng-container>
     <ng-container *ngSwitchCase="'date'" [ngTemplateOutlet]="dateInput"></ng-container>
+
+    <ng-container *ngSwitchCase="'select-add'" [ngTemplateOutlet]="selectAdd"></ng-container>
     <ng-container *ngSwitchDefault>
       <p class="text-red-500">Unknown input type</p>
     </ng-container>
   </ng-container>
+
+  <span class="text-xs text-red-500">
+    {{ control | errorMessage }}
+  </span>
 </section>

@@ -1,0 +1,10 @@
+@if(mapOption){
+<div class="mx-auto h-72 w-72 rounded-md bg-[#EAEDF2] p-1">
+  <div
+    class="h-full w-full"
+    leaflet
+    [leafletOptions]="mapOption"
+    [leafletLayers]="layers"
+    (leafletMapReady)="onMapReady($event)"></div>
+</div>
+}

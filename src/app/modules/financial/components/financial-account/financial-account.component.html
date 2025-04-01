@@ -1,0 +1,22 @@
+<div class="flex w-full flex-col justify-center rounded-md border border-border bg-background px-4 py-3 pt-2">
+  <!-- Header -->
+  <div
+    class="relative flex items-center justify-between border-b border-border p-2 pt-3 text-center text-muted-foreground">
+    <p class="text-nowrap">لیست حساب ها</p>
+    <app-button impact="bold" (buttonClick)="openAddModal()">افزودن</app-button>
+  </div>
+  <!-- Financial Account List -->
+
+  <div class="pt-5">
+    <!-- irBankAccountList -->
+
+    <app-table1 [tableConfig]="irBankAccountTableConfig" (deleteClick)="handleTable1ItemsRemove($event)"></app-table1>
+    <!-- InternationalBankAccountList -->
+    <app-table1
+      [tableConfig]="internationalBankAccountTableConfig"
+      (deleteClick)="handleTable2ItemsRemove($event)"></app-table1>
+    <app-table1
+      [tableConfig]="cryptocurrencyBankAccountTableConfig"
+      (deleteClick)="handleTable3ItemsRemove($event)"></app-table1>
+  </div>
+</div>

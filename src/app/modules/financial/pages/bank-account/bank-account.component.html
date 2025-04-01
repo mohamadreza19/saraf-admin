@@ -1,0 +1,61 @@
+<div *ngIf="irCurTypeId && cryptoCurTypeId && visaCurTypeId && materCurTypeId">
+  <div class="w-full">
+    <div class="flex min-h-screen flex-col items-center bg-gray-100 p-6">
+      <h1 class="mb-6 text-2xl font-bold text-muted-foreground" i18n="@@account-management-title">مدیریت حساب‌ها</h1>
+
+      <div class="grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
+        <!-- Iranian Bank Accounts -->
+        <a
+          routerLink="ir"
+          [queryParams]="generateParam(irCurTypeId, languageId)"
+          class="flex flex-col items-center rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+          <div class="mb-4 text-4xl text-blue-500">🏦</div>
+          <h2 class="text-xl font-bold text-muted-foreground" i18n="@@iranian-bank-accounts">حساب‌های بانکی ایرانی</h2>
+          <p class="mt-2 text-center text-muted-foreground" i18n="@@iranian-bank-description">
+            مدیریت و مشاهده حساب‌های بانکی داخلی
+          </p>
+        </a>
+
+        <!-- International Bank Accounts (Visa & Master) -->
+        <div class="flex flex-col items-center rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+          <div class="mb-4 text-4xl text-green-500">💳</div>
+          <h2 class="text-xl font-bold text-muted-foreground" i18n="@@international-bank-accounts">
+            حساب‌های بین‌المللی
+          </h2>
+          <p class="mt-2 text-center text-muted-foreground" i18n="@@international-bank-description">
+            مدیریت کارت‌های ویزا و مسترکارت
+          </p>
+          <div class="mt-4 flex gap-2 space-x-6">
+            <a
+              routerLink="visa-global"
+              [queryParams]="generateParam(visaCurTypeId, languageId)"
+              class="font-semibold text-primary"
+              i18n="@@visa-card"
+              >ویزا کارت</a
+            >
+
+            <a
+              routerLink="master-global"
+              [queryParams]="generateParam(materCurTypeId, languageId)"
+              class="font-semibold text-primary"
+              i18n="@@master-card"
+              >مسترکارت</a
+            >
+          </div>
+        </div>
+
+        <!-- Cryptocurrency Accounts -->
+        <a
+          routerLink="crypto"
+          [queryParams]="generateParam(cryptoCurTypeId, languageId)"
+          class="flex flex-col items-center rounded-lg bg-white p-6 shadow-md hover:shadow-lg">
+          <div class="mb-4 text-4xl text-orange-500">₿</div>
+          <h2 class="text-xl font-bold text-muted-foreground" i18n="@@crypto-wallet">کیف پول رمز ارز</h2>
+          <p class="mt-2 text-center text-muted-foreground" i18n="@@crypto-wallet-description">
+            مدیریت دارایی‌های دیجیتال
+          </p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

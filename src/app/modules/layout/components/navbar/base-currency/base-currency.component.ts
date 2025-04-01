@@ -1,5 +1,10 @@
 import { NgClass, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpParams } from '@angular/common/http';
+import { Component, inject, LOCALE_ID, OnInit } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { Locale } from 'src/app/core/constants/locale.enum';
+import { CurrencyApiService, CurrencyResponse } from 'src/app/shared/apis/currency-api.service';
+import { Language, LanguageApiService } from 'src/app/shared/apis/language-api.service';
 
 @Component({
   selector: 'app-base-currency',
@@ -8,25 +13,44 @@ import { Component } from '@angular/core';
   templateUrl: './base-currency.component.html',
   styleUrl: './base-currency.component.scss',
 })
-export class BaseCurrencyComponent {
+export class BaseCurrencyComponent implements OnInit {
+  lanApi = inject(LanguageApiService);
+  currencyApi = inject(CurrencyApiService);
   imgUrl = 'https://cdn-icons-png.flaticon.com/512/1490/1490853.png';
+  localeId = inject(LOCALE_ID);
 
-  items = [
-    {
-      id: 1,
-      value: 'دلار',
-      logo: 'https://cdn-icons-png.flaticon.com/512/1490/1490853.png',
-    },
-    {
-      id: 2,
-      value: 'یورو',
-      logo: 'https://cdn-icons-png.flaticon.com/512/1490/1490850.png',
-    },
-  ];
+  items: CurrencyResponse[] = [];
 
-  selectedItem = this.items[0];
+  selectedItem!: CurrencyResponse;
 
   showSelectBox: boolean = false;
+  async ngOnInit() {
+    let mountedLanguage: Language | undefined;
+
+    const languages = await lastValueFrom(this.lanApi.getAllLanguages());
+
+    switch (this.localeId) {
+      case Locale.FA:
+        mountedLanguage = languages.find((l) => l.title == 'Persian');
+        break;
+      case Locale.EN:
+        mountedLanguage = languages.find((l) => l.title == 'English');
+        break;
+    }
+
+    if (mountedLanguage) {
+      const params = new HttpParams().set('page', 1).set('limit', 999);
+      const response = await lastValueFrom(this.currencyApi.getAll(mountedLanguage.id, params));
+
+      this.items = response.data.totalItems as CurrencyResponse[];
+
+      this.items.forEach((cur) => {
+        if (cur.baseCurrency) {
+          this.selectedItem = cur;
+        }
+      });
+    }
+  }
 
   open() {
     this.showSelectBox = true;
@@ -35,7 +59,8 @@ export class BaseCurrencyComponent {
   close() {
     this.showSelectBox = false;
   }
-  handleSelect(baseCurrency: any) {
+  async handleSelect(baseCurrency: CurrencyResponse) {
+    await lastValueFrom(this.currencyApi.patchBase(baseCurrency.id));
     this.selectedItem = baseCurrency;
     this.close();
   }

@@ -1,0 +1,18 @@
+<div class="flex w-full flex-col gap-10">
+  <app-header-buttons (primaryClick)="clickP()" (lightClick)="clickL()"> </app-header-buttons>
+
+  @if(tableConfig){
+
+  <app-table1 [tableConfig]="tableConfig"></app-table1>
+  }
+</div>
+
+<ng-template #statusTemplate>
+  <input class="mx-10" checked type="checkbox" />
+</ng-template>
+
+<ng-template #privilegesTemplate let-row="row">
+  <!-- <div>
+    <p class="text-nowrap text-sm text-red-700">بدون دسترسی</p>
+  </div> -->
+</ng-template>

@@ -1,0 +1,4 @@
+<div class="flex gap-3 rounded-md bg-border p-1">
+  <input (click)="toggleSelection()" [name]="name" type="radio" [checked]="selected" [value]="true" />
+  <input (click)="toggleSelection()" [name]="name" type="radio" [checked]="!selected" class="off" [value]="false" />
+</div>

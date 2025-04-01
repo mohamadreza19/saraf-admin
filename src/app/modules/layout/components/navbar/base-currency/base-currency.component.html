@@ -1,6 +1,6 @@
-<div class="relative flex items-center rounded-md bg-card p-2">
+<div class="relative flex max-h-10 items-center rounded-md bg-card p-2">
   <section class="flex cursor-default items-center text-muted-foreground">
-    <p class="text-xs font-bold">ارز مبنا</p>
+    <p i18n class="text-xs font-bold">ارز مبنا</p>
     <span class="mx-1">:</span>
   </section>
 
@@ -8,8 +8,8 @@
     (click)="open()"
     *ngIf="selectedItem"
     class="flex cursor-pointer items-center gap-1 rounded-sm bg-card p-1 text-border">
-    <img [src]="selectedItem.logo" class="h-6 w-6 rounded-sm" />
-    <p class="text-xl text-muted-foreground">{{ selectedItem.value }}</p>
+    <img [src]="selectedItem.icon" class="h-6 w-6 rounded-sm" />
+    <p class="text-title-md text-muted-foreground">{{ selectedItem.title }}</p>
   </section>
 
   <div *ngIf="showSelectBox" class="absolute start-0 top-[110%] flex w-full flex-col bg-border p-1 pb-0">
@@ -17,8 +17,8 @@
       *ngFor="let baseCurrency of items"
       (click)="handleSelect(baseCurrency)"
       class="bg flex cursor-pointer items-center gap-2 border-b border-b-muted p-3">
-      <img [src]="baseCurrency.logo" class="h-6 w-6 rounded-sm" />
-      <p class="text-xl text-muted-foreground">{{ baseCurrency.value }}</p>
+      <img [src]="baseCurrency.icon" class="h-6 w-6 rounded-sm" />
+      <p class="text-xl text-muted-foreground">{{ baseCurrency.title }}</p>
     </section>
   </div>
 </div>

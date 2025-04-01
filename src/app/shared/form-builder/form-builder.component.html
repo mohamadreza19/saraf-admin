@@ -38,7 +38,7 @@
           <form class="grid grid-cols-2 gap-3 p-3" [formGroup]="forms[formIndex]">
             <app-input
               *ngFor="let control of _getFormControllers(forms[formIndex].controls)"
-              [control]="control"></app-input>
+              [control]="_getControlAsFormControl2(control)"></app-input>
 
             <div class="col-span-2 flex w-full justify-between">
               <app-button (buttonClick)="formNextStep(forms[formIndex], formIndex)" impact="bold" tone="primary">

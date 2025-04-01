@@ -1,0 +1,12 @@
+<div class="mb-10"><app-header-buttons (primaryClick)="navAdd()" (lightClick)="navDash()"></app-header-buttons></div>
+
+@if(tableConfig){<app-table1
+  [tableConfig]="tableConfig"
+  [list]="(pg.normalizedData$ | async)!"
+  [pagination]="(pg.pagination$ | async)!"
+  (onPage)="pg.onPageChange($event)"></app-table1
+>}
+
+<ng-template #activeTem let-index="index" let-onStatusChange="onStatusChange" let-selected="selected">
+  <app-switch [name]="index" [selected]="selected" (onChangeStatus)="onStatusChange($event, index)"></app-switch>
+</ng-template>

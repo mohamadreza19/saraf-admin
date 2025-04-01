@@ -1,12 +1,17 @@
 <div class="w-full">
-  <app-header-buttons (primaryClick)="navigateToAddBank()" (lightClick)="navigateToDash()"></app-header-buttons>
+  <app-header-buttons (primaryClick)="navAdd()" (lightClick)="navDash()"></app-header-buttons>
 
-  <div
-    view-exchange-table
-    [label]="table1Label"
-    [body]="table1Body"
-    [showEdit]="true"
-    [keys]="table1Keys"
-    [itemIconUrls]="table1IconsUrl"
-    [forbiddenKeysInItem]="table1ForbiddenKeysInItem"></div>
+  @if (tableConfig) {
+
+  <div class="mt-10 w-full">
+    <app-table1
+      [list]="(pg.normalizedData$ | async)!"
+      [tableConfig]="tableConfig"
+      [pagination]="(pg.pagination$ | async)!"></app-table1>
+  </div>
+  }
+
+  <ng-template #activeTem let-index="index" let-onStatusChange="onStatusChange" let-selected="selected">
+    <app-switch [name]="index" [selected]="selected" (onChangeStatus)="onStatusChange($event, index)"></app-switch>
+  </ng-template>
 </div>
